@@ -72,4 +72,19 @@
     XCTAssertEqual(group.contacts.count, 0u);
 }
 
+- (void)testGroupsWithDifferentContactsAreNotEqual {
+    XBContact *c1 = [[XBContact alloc] init];
+    XBContact *c2 = [[XBContact alloc] init];
+    c1.contactID = @"c1";
+    c2.contactID = @"c2";
+
+    XBGroup *g1 = [[XBGroup alloc] initWithName:@"test"];
+    XBGroup *g2 = [[XBGroup alloc] initWithName:@"test"];
+
+    [g1 addContact:c1];
+    [g2 addContact:c2];
+
+    XCTAssertNotEqualObjects(g1, g2);
+}
+
 @end

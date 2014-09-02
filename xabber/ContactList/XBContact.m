@@ -59,16 +59,14 @@
         return YES;
     if (contact == nil)
         return NO;
-    if (_groups != contact->_groups && ![_groups isEqual:contact->_groups])
-        return NO;
-    if (self.name != contact.name && ![self.name isEqualToString:contact.name])
+    if (self.contactID != contact.contactID && ![self.contactID isEqualToString:contact.contactID])
         return NO;
     return YES;
 }
 
 - (NSUInteger)hash {
     NSUInteger hash = [_groups hash];
-    hash = hash * 31u + [self.name hash];
+    hash = hash * 31u + [self.contactID hash];
     return hash;
 }
 

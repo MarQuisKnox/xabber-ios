@@ -10,7 +10,7 @@
 
 @interface XBContact : NSObject
 
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *contactID;
 
 @property (nonatomic, readonly) NSArray *groups;
 

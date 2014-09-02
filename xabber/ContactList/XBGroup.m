@@ -45,6 +45,15 @@
     [contact removeGroupFromList:self];
 }
 
+#pragma mark Private
+
+- (void)addContactToList:(XBContact *)contact {
+    [_contacts addObject:contact];
+}
+
+- (void)removeContactFromList:(XBContact *)contact {
+    [_contacts removeObject:contact];
+}
 
 #pragma mark Equality
 
@@ -62,7 +71,7 @@
         return YES;
     if (group == nil)
         return NO;
-    if (_contacts != group->_contacts && ![_contacts isEqual:group->_contacts])
+    if (_contacts != group->_contacts && ![_contacts isEqualToArray:group->_contacts])
         return NO;
     if (self.name != group.name && ![self.name isEqualToString:group.name])
         return NO;
@@ -75,13 +84,4 @@
     return hash;
 }
 
-#pragma mark Private
-
-- (void)addContactToList:(XBContact *)contact {
-    [_contacts addObject:contact];
-}
-
-- (void)removeContactFromList:(XBContact *)contact {
-    [_contacts removeObject:contact];
-}
 @end
