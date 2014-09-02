@@ -28,7 +28,7 @@
     [super tearDown];
 }
 
-- (void)testAddAccountToGroup {
+- (void)testAddContactToGroup {
     XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
     XBContact *contact = [[XBContact alloc] init];
 
@@ -38,7 +38,7 @@
     XCTAssertEqualObjects(contact.groups, @[group]);
 }
 
-- (void)testAddAccountToGroupAndDealloc {
+- (void)testRemoveContactFromGroup {
     XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
     XBContact *contact = [[XBContact alloc] init];
 
@@ -50,7 +50,7 @@
     XCTAssertEqual(contact.groups.count, 0u);
 }
 
-- (void)testAddGroupToAccount {
+- (void)testAddGroupToContact {
     XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
     XBContact *contact = [[XBContact alloc] init];
 
@@ -60,7 +60,7 @@
     XCTAssertEqualObjects(contact.groups, @[group]);
 }
 
-- (void)testAddGroupToAccountAndDealloc {
+- (void)testRemoveGroupFromContact {
     XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
     XBContact *contact = [[XBContact alloc] init];
 
