@@ -4,6 +4,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SystemConfiguration/SystemConfiguration.h>
+#import "XBAccount.h"
 
 @class XBGroup;
 
@@ -11,6 +13,16 @@
 @interface XBContact : NSObject
 
 @property (nonatomic, strong) NSString *contactID;
+
+@property (nonatomic, strong) NSString *contactName;
+
+@property (nonatomic, assign) BOOL isOnline;
+
+@property (nonatomic, assign) XBAccountStatus status;
+
+@property (nonatomic, strong) NSString *statusText;
+
+@property (nonatomic, strong) XBAccount *account;
 
 @property (nonatomic, readonly) NSArray *groups;
 

@@ -12,13 +12,11 @@
 
 @property (nonatomic, strong) NSString *name;
 
-@property (nonatomic, readonly) NSArray *contacts;
-
 - (instancetype)initWithName:(NSString *)name;
 
-- (void)addContact:(XBContact *)contact;
+- (void)addToContact:(XBContact *)contact;
 
-- (void)removeContact:(XBContact *)contact;
+- (void)removeFromContact:(XBContact *)contact;
 
 - (BOOL)isEqual:(id)other;
 

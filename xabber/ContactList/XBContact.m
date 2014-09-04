@@ -3,8 +3,8 @@
 // Copyright (c) 2014 Redsolution LLC. All rights reserved.
 //
 
-#import "XBContact+Private.h"
-#import "XBGroup+Private.h"
+#import "XBContact.h"
+#import "XBGroup.h"
 
 @interface XBContact() {
     NSMutableArray *_groups;
@@ -32,15 +32,15 @@
 }
 
 - (void)addGroup:(XBGroup *)group {
-    [self addGroupToList:group];
-
-    [group addContactToList:self];
+    if (![self.groups containsObject:group]) {
+        [_groups addObject:group];
+    }
 }
 
 - (void)removeGroup:(XBGroup *)group {
-    [self removeGroupFromList:group];
-
-    [group removeContactFromList:self];
+    if ([self.groups containsObject:group]) {
+        [_groups removeObject:group];
+    }
 }
 
 #pragma mark Equality
@@ -61,22 +61,27 @@
         return NO;
     if (self.contactID != contact.contactID && ![self.contactID isEqualToString:contact.contactID])
         return NO;
+    if (self.contactName != contact.contactName && ![self.contactName isEqualToString:contact.contactName])
+        return NO;
+    if (self.isOnline != contact.isOnline)
+        return NO;
+    if (self.status != contact.status)
+        return NO;
+    if (self.statusText != contact.statusText && ![self.statusText isEqualToString:contact.statusText])
+        return NO;
+    if (self.account != contact.account && ![self.account isEqualToAccount:contact.account])
+        return NO;
     return YES;
 }
 
 - (NSUInteger)hash {
-    NSUInteger hash = [_groups hash];
-    hash = hash * 31u + [self.contactID hash];
+    NSUInteger hash = [self.contactID hash];
+    hash = hash * 31u + [self.contactName hash];
+    hash = hash * 31u + self.isOnline;
+    hash = hash * 31u + (NSUInteger) self.status;
+    hash = hash * 31u + [self.statusText hash];
+    hash = hash * 31u + [self.account hash];
     return hash;
 }
 
-#pragma mark Private
-
-- (void)addGroupToList:(XBGroup *)group {
-    [_groups addObject:group];
-}
-
-- (void)removeGroupFromList:(XBGroup *)group {
-    [_groups removeObject:group];
-}
 @end

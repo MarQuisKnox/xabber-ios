@@ -17,11 +17,13 @@
 		75DCE79E43BD92C9AB570663 /* mogen.sh in Resources */ = {isa = PBXBuildFile; fileRef = 75DCE9235B36DF8083D25ECA /* mogen.sh */; };
 		75DCE8B35AFF2F1848A859AE /* XBGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE5B6F16CF859AE7F310C /* XBGroup.m */; };
 		75DCE8D8DF418719894E2084 /* AccountConnectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCECC77ED2B754ED2DF249 /* AccountConnectorTests.m */; };
+		75DCE8FF9D9B0C2475EC962F /* ContactListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCEC94204D038EE13E42D3 /* ContactListTests.m */; };
 		75DCE93BD1E1D88C84714D60 /* XBAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE2E5958345301F5FB5B6 /* XBAccount.m */; };
 		75DCE9A2CACC2E1827D6CBE6 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 75DCE904070B7C93366CF1B9 /* .travis.yml */; };
 		75DCE9D4F122C8E3BB07125F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 75DCED47E6E3DC91302E4215 /* .gitignore */; };
 		75DCE9DB4183ABEB2BD980FD /* XMPPPresence+XBEquality.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE1AE3570B5B13C2B700D /* XMPPPresence+XBEquality.m */; };
 		75DCEB83DF5C824D7CE5B3A7 /* XMPPConnectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE73E0BE2D2A0FA4CD645 /* XMPPConnectorTests.m */; };
+		75DCEE2ED27D89898EA3F4B4 /* XBContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE9A4DE3673AB789F615E /* XBContactList.m */; };
 		75DCEE627A4AEA9076A55EE8 /* mogend.sh in Resources */ = {isa = PBXBuildFile; fileRef = 75DCE13BBDB715407F1B73AA /* mogend.sh */; };
 		A41DB9F119A2168A00B3AB93 /* xabber.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A41DB9EF19A2168A00B3AB93 /* xabber.xcdatamodeld */; };
 		A41DB9F719A218F500B3AB93 /* XBXMPPCoreDataAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = A41DB9F419A218F500B3AB93 /* XBXMPPCoreDataAccount.m */; };
@@ -87,7 +89,6 @@
 		75DCE2E5958345301F5FB5B6 /* XBAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccount.m; sourceTree = "<group>"; };
 		75DCE48EA075773D65EA2DA2 /* XBXMPPConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBXMPPConnector.h; sourceTree = "<group>"; };
 		75DCE4A385E2C649E16EA677 /* XBXMPPConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBXMPPConnector.m; sourceTree = "<group>"; };
-		75DCE4F8775095530F676BEB /* XBContact+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XBContact+Private.h"; sourceTree = "<group>"; };
 		75DCE5538A18D8CE3D0F00E6 /* XMPPFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
 		75DCE5B6F16CF859AE7F310C /* XBGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBGroup.m; sourceTree = "<group>"; };
 		75DCE6950CE1F00AE1310EFE /* XBContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBContact.m; sourceTree = "<group>"; };
@@ -96,18 +97,20 @@
 		75DCE7BDBED11F4610A7D73E /* XBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBError.h; sourceTree = "<group>"; };
 		75DCE904070B7C93366CF1B9 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = file.yml; path = .travis.yml; sourceTree = "<group>"; };
 		75DCE9235B36DF8083D25ECA /* mogen.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = mogen.sh; sourceTree = "<group>"; };
+		75DCE9A4DE3673AB789F615E /* XBContactList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBContactList.m; sourceTree = "<group>"; };
+		75DCE9ADA7CC1833B8D513F7 /* XBContactList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBContactList.h; sourceTree = "<group>"; };
 		75DCE9F6C4CB12DD07B040AE /* XBGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBGroup.h; sourceTree = "<group>"; };
 		75DCEA9DE81E1325F821F7FB /* XBConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBConnector.h; sourceTree = "<group>"; };
 		75DCEAA6D0D70640CC681139 /* XBContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBContact.h; sourceTree = "<group>"; };
 		75DCEADDBFE9F030B66635EF /* XBAccountFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountFactory.m; sourceTree = "<group>"; };
 		75DCEB2BD63DFA9BB5FA1A87 /* XBAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountManager.m; sourceTree = "<group>"; };
 		75DCEBA4AB61EAD736243C5F /* XBAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountManager.h; sourceTree = "<group>"; };
+		75DCEC94204D038EE13E42D3 /* ContactListTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactListTests.m; sourceTree = "<group>"; };
 		75DCECC77ED2B754ED2DF249 /* AccountConnectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountConnectorTests.m; sourceTree = "<group>"; };
 		75DCED47E6E3DC91302E4215 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		75DCED516A2BF3745537CB36 /* XBAuthTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAuthTest.m; sourceTree = "<group>"; };
 		75DCED66D62ECECB1000DBB5 /* XBAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccount.h; sourceTree = "<group>"; };
 		75DCED6B494282AAA76811B9 /* XMPPPresence+XBEquality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XMPPPresence+XBEquality.h"; sourceTree = "<group>"; };
-		75DCEE974EEF3725D60773C2 /* XBGroup+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XBGroup+Private.h"; sourceTree = "<group>"; };
 		75DCEEA7F17D23658AF445DB /* AccountTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountTests.m; sourceTree = "<group>"; };
 		8F8CDA0B349E4FB68FC4D371 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		944A0A7921684A89A96C5394 /* libPods-xabberTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-xabberTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -197,12 +200,12 @@
 		75DCE72545F2E40CACD069B5 /* ContactList */ = {
 			isa = PBXGroup;
 			children = (
+				75DCE9A4DE3673AB789F615E /* XBContactList.m */,
+				75DCE9ADA7CC1833B8D513F7 /* XBContactList.h */,
 				75DCE6950CE1F00AE1310EFE /* XBContact.m */,
 				75DCEAA6D0D70640CC681139 /* XBContact.h */,
 				75DCE5B6F16CF859AE7F310C /* XBGroup.m */,
 				75DCE9F6C4CB12DD07B040AE /* XBGroup.h */,
-				75DCEE974EEF3725D60773C2 /* XBGroup+Private.h */,
-				75DCE4F8775095530F676BEB /* XBContact+Private.h */,
 			);
 			path = ContactList;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				75DCE52C7223F0D399B20C35 /* CoreData */,
 				75DCEC5FA353F5424C46CC00 /* Connector */,
 				75DCE7BDBED11F4610A7D73E /* XBError.h */,
+				75DCE72545F2E40CACD069B5 /* ContactList */,
 			);
 			path = xabber;
 			sourceTree = "<group>";
@@ -337,6 +341,7 @@
 				75DCE73E0BE2D2A0FA4CD645 /* XMPPConnectorTests.m */,
 				75DCEBA5202F56CDDDA0E0E9 /* Test Categories */,
 				75DCE138C6FFE18EED996C96 /* ContactsAndGroupsTests.m */,
+				75DCEC94204D038EE13E42D3 /* ContactListTests.m */,
 			);
 			path = xabberTests;
 			sourceTree = "<group>";
@@ -549,6 +554,7 @@
 				75DCE8D8DF418719894E2084 /* AccountConnectorTests.m in Sources */,
 				75DCEB83DF5C824D7CE5B3A7 /* XMPPConnectorTests.m in Sources */,
 				75DCE455763D0C27DEEB0A47 /* ContactsAndGroupsTests.m in Sources */,
+				75DCE8FF9D9B0C2475EC962F /* ContactListTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

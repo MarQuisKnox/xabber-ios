@@ -32,9 +32,8 @@
     XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
     XBContact *contact = [[XBContact alloc] init];
 
-    [group addContact:contact];
+    [group addToContact:contact];
 
-    XCTAssertEqualObjects(group.contacts, @[contact]);
     XCTAssertEqualObjects(contact.groups, @[group]);
 }
 
@@ -42,11 +41,18 @@
     XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
     XBContact *contact = [[XBContact alloc] init];
 
-    [group addContact:contact];
+    [group addToContact:contact];
+    [group removeFromContact:contact];
 
-    [group removeContact:contact];
+    XCTAssertEqual(contact.groups.count, 0u);
+}
 
-    XCTAssertEqual(group.contacts.count, 0u);
+- (void)testRemoveFromContactNotExistingGroup {
+    XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
+    XBContact *contact = [[XBContact alloc] init];
+
+    [group removeFromContact:contact];
+
     XCTAssertEqual(contact.groups.count, 0u);
 }
 
@@ -56,7 +62,6 @@
 
     [contact addGroup:group];
 
-    XCTAssertEqualObjects(group.contacts, @[contact]);
     XCTAssertEqualObjects(contact.groups, @[group]);
 }
 
@@ -65,26 +70,20 @@
     XBContact *contact = [[XBContact alloc] init];
 
     [contact addGroup:group];
-
     [contact removeGroup:group];
 
     XCTAssertEqual(contact.groups.count, 0u);
-    XCTAssertEqual(group.contacts.count, 0u);
 }
 
-- (void)testGroupsWithDifferentContactsAreNotEqual {
-    XBContact *c1 = [[XBContact alloc] init];
-    XBContact *c2 = [[XBContact alloc] init];
-    c1.contactID = @"c1";
-    c2.contactID = @"c2";
-
+- (void)testRemoveGroupNotFromContact {
     XBGroup *g1 = [[XBGroup alloc] initWithName:@"test"];
-    XBGroup *g2 = [[XBGroup alloc] initWithName:@"test"];
+    XBGroup *g2 = [[XBGroup alloc] initWithName:@"test1"];
+    XBContact *contact = [[XBContact alloc] init];
 
-    [g1 addContact:c1];
-    [g2 addContact:c2];
+    [contact addGroup:g1];
+    [contact removeGroup:g2];
 
-    XCTAssertNotEqualObjects(g1, g2);
+    XCTAssertEqual(contact.groups.count, 1u);
 }
 
 @end
