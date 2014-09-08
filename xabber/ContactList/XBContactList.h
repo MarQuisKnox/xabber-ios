@@ -8,27 +8,19 @@
 @class XBAccount;
 @class XBGroup;
 @class XBContact;
+@class XMPPRosterCoreDataStorage;
 
 
 @interface XBContactList : NSObject
 
+@property(nonatomic, weak) XMPPRosterCoreDataStorage *storage;
+
+- (instancetype)initWithStorage:(XMPPRosterCoreDataStorage *)storage;
+
 - (NSArray *)contacts;
-
-- (NSArray *)contactsForAccount:(XBAccount *)account;
-
-- (NSArray *)contactsForGroupWithName:(NSString *)groupName;
-
-- (NSArray *)contactsForGroup:(XBGroup *)group;
-
-- (void)addContact:(XBContact *)contact;
-
-- (void)removeContact:(XBContact *)contact;
 
 - (NSArray *)groups;
 
-- (XBGroup *)groupByName:(NSString *)groupName;
++ (instancetype)contactListWithStorage:(XMPPRosterCoreDataStorage *)storage;
 
-- (void)addGroup:(XBGroup *)group;
-
-- (void)removeGroup:(XBGroup *)group;
 @end

@@ -3,47 +3,88 @@
 // Copyright (c) 2014 Redsolution LLC. All rights reserved.
 //
 
+#import <XMPPFramework/XMPPUserCoreDataStorageObject.h>
+#import <XMPPFramework/XMPPResourceCoreDataStorageObject.h>
+#import <XMPPFramework/XMPPGroupCoreDataStorageObject.h>
 #import "XBContact.h"
-#import "XBGroup.h"
+#import "XBAccountManager.h"
 
 @interface XBContact() {
-    NSMutableArray *_groups;
+    NSMutableSet *_groups;
+
+    __weak XBAccount *_account;
 }
+- (XBContactStatus)contactStatusByUser:(XMPPUserCoreDataStorageObject *)user;
+
+- (void)updateGroupsByUser:(XMPPUserCoreDataStorageObject *)user;
 @end
 
 
 @implementation XBContact
-- (id)init {
+- (instancetype)initWithXMPPUser:(XMPPUserCoreDataStorageObject *)user {
     self = [super init];
     if (self) {
         [self commonInit];
+        [self updateContactWithXMPPUser:user];
     }
 
     return self;
 }
 
-
 - (void)commonInit {
-    _groups = [NSMutableArray array];
+    _groups = [NSMutableSet set];
 }
 
-- (NSArray *)groups {
+#pragma mark Public
+
+- (NSSet *)groups {
     return _groups;
 }
 
-- (void)addGroup:(XBGroup *)group {
-    if (![self.groups containsObject:group]) {
-        [_groups addObject:group];
-    }
+- (void)updateContactWithXMPPUser:(XMPPUserCoreDataStorageObject *)user {
+    _contactName = user.displayName;
+    _isOnline = user.isOnline;
+    _status = [self contactStatusByUser:user];
+    _statusText = user.primaryResource.status;
+
+    _account = [[XBAccountManager sharedInstance] findAccountByJID:user.streamBareJidStr];
+
+    [self updateGroupsByUser:user];
 }
 
-- (void)removeGroup:(XBGroup *)group {
-    if ([self.groups containsObject:group]) {
-        [_groups removeObject:group];
+#pragma mark Private
+
+- (XBContactStatus)contactStatusByUser:(XMPPUserCoreDataStorageObject *)user {
+    if (!user.primaryResource || !user.isOnline) {
+        return XBContactStatusUnavailable;
     }
+
+    if ([user.primaryResource.show isEqualToString:@"chat"]) {
+        return XBContactStatusChat;
+    }
+
+    if ([user.primaryResource.show isEqualToString:@"away"]) {
+        return XBContactStatusAway;
+    }
+
+    if ([user.primaryResource.show isEqualToString:@"xa"]) {
+        return XBContactStatusXA;
+    }
+
+    if ([user.primaryResource.show isEqualToString:@"dnd"]) {
+        return XBContactStatusDnD;
+    }
+
+    return XBContactStatusAvailable;
 }
 
-#pragma mark Equality
+- (void)updateGroupsByUser:(XMPPUserCoreDataStorageObject *)user {
+    [_groups removeAllObjects];
+
+    for (XMPPGroupCoreDataStorageObject *group in user.groups) {
+        [_groups addObject:group.name];
+    }
+}
 
 - (BOOL)isEqual:(id)other {
     if (other == self)
@@ -59,7 +100,7 @@
         return YES;
     if (contact == nil)
         return NO;
-    if (self.contactID != contact.contactID && ![self.contactID isEqualToString:contact.contactID])
+    if (_groups != contact->_groups && ![_groups isEqualToSet:contact->_groups])
         return NO;
     if (self.contactName != contact.contactName && ![self.contactName isEqualToString:contact.contactName])
         return NO;
@@ -75,7 +116,7 @@
 }
 
 - (NSUInteger)hash {
-    NSUInteger hash = [self.contactID hash];
+    NSUInteger hash = [_groups hash];
     hash = hash * 31u + [self.contactName hash];
     hash = hash * 31u + self.isOnline;
     hash = hash * 31u + (NSUInteger) self.status;

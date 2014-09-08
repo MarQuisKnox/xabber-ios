@@ -4,13 +4,22 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "XBConnector.h"
+#import "XBAccount.h"
 
 @class XBAccount;
 @class XMPPStream;
 
-@interface XBXMPPConnector : NSObject <XBConnector>
-@property(nonatomic, readonly) XMPPStream *xmppStream;
+@interface XBXMPPConnector : NSObject
+@property (nonatomic, readonly) XMPPStream *xmppStream;
+@property (nonatomic, weak) XBAccount* account;
+
+- (BOOL)isLoggedIn;
+
+- (void)loginWithCompletion:(void (^)(NSError *error))completionHandler;
+
+- (void)logoutWithCompletion:(void(^)(NSError *error))completionHandler;
+
+- (void)setNewStatus:(XBAccountStatus)status;
 
 - (BOOL)isEqual:(id)other;
 

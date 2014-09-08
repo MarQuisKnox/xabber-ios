@@ -28,62 +28,62 @@
     [super tearDown];
 }
 
-- (void)testAddContactToGroup {
-    XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
-    XBContact *contact = [[XBContact alloc] init];
-
-    [group addToContact:contact];
-
-    XCTAssertEqualObjects(contact.groups, @[group]);
-}
-
-- (void)testRemoveContactFromGroup {
-    XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
-    XBContact *contact = [[XBContact alloc] init];
-
-    [group addToContact:contact];
-    [group removeFromContact:contact];
-
-    XCTAssertEqual(contact.groups.count, 0u);
-}
-
-- (void)testRemoveFromContactNotExistingGroup {
-    XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
-    XBContact *contact = [[XBContact alloc] init];
-
-    [group removeFromContact:contact];
-
-    XCTAssertEqual(contact.groups.count, 0u);
-}
-
-- (void)testAddGroupToContact {
-    XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
-    XBContact *contact = [[XBContact alloc] init];
-
-    [contact addGroup:group];
-
-    XCTAssertEqualObjects(contact.groups, @[group]);
-}
-
-- (void)testRemoveGroupFromContact {
-    XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
-    XBContact *contact = [[XBContact alloc] init];
-
-    [contact addGroup:group];
-    [contact removeGroup:group];
-
-    XCTAssertEqual(contact.groups.count, 0u);
-}
-
-- (void)testRemoveGroupNotFromContact {
-    XBGroup *g1 = [[XBGroup alloc] initWithName:@"test"];
-    XBGroup *g2 = [[XBGroup alloc] initWithName:@"test1"];
-    XBContact *contact = [[XBContact alloc] init];
-
-    [contact addGroup:g1];
-    [contact removeGroup:g2];
-
-    XCTAssertEqual(contact.groups.count, 1u);
-}
+//- (void)testAddContactToGroup {
+//    XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
+//    XBContact *contact = [[XBContact alloc] init];
+//
+//    [group addToContact:contact];
+//
+//    XCTAssertEqualObjects(contact.groups, @[group]);
+//}
+//
+//- (void)testRemoveContactFromGroup {
+//    XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
+//    XBContact *contact = [[XBContact alloc] init];
+//
+//    [group addToContact:contact];
+//    [group removeFromContact:contact];
+//
+//    XCTAssertEqual(contact.groups.count, 0u);
+//}
+//
+//- (void)testRemoveFromContactNotExistingGroup {
+//    XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
+//    XBContact *contact = [[XBContact alloc] init];
+//
+//    [group removeFromContact:contact];
+//
+//    XCTAssertEqual(contact.groups.count, 0u);
+//}
+//
+//- (void)testAddGroupToContact {
+//    XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
+//    XBContact *contact = [[XBContact alloc] init];
+//
+//    [contact addGroup:group];
+//
+//    XCTAssertEqualObjects(contact.groups, @[group]);
+//}
+//
+//- (void)testRemoveGroupFromContact {
+//    XBGroup *group = [[XBGroup alloc] initWithName:@"test"];
+//    XBContact *contact = [[XBContact alloc] init];
+//
+//    [contact addGroup:group];
+//    [contact removeGroup:group];
+//
+//    XCTAssertEqual(contact.groups.count, 0u);
+//}
+//
+//- (void)testRemoveGroupNotFromContact {
+//    XBGroup *g1 = [[XBGroup alloc] initWithName:@"test"];
+//    XBGroup *g2 = [[XBGroup alloc] initWithName:@"test1"];
+//    XBContact *contact = [[XBContact alloc] init];
+//
+//    [contact addGroup:g1];
+//    [contact removeGroup:g2];
+//
+//    XCTAssertEqual(contact.groups.count, 1u);
+//}
 
 @end

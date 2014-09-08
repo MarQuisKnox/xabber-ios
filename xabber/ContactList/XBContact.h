@@ -8,27 +8,34 @@
 #import "XBAccount.h"
 
 @class XBGroup;
+@class XMPPUserCoreDataStorageObject;
 
+typedef enum {
+    XBContactStatusAvailable,
+    XBContactStatusChat,
+    XBContactStatusAway,
+    XBContactStatusXA,
+    XBContactStatusDnD,
+    XBContactStatusUnavailable,
+} XBContactStatus;
 
 @interface XBContact : NSObject
 
-@property (nonatomic, strong) NSString *contactID;
+@property (nonatomic, readonly) NSString *contactName;
 
-@property (nonatomic, strong) NSString *contactName;
+@property (nonatomic, readonly) BOOL isOnline;
 
-@property (nonatomic, assign) BOOL isOnline;
+@property (nonatomic, readonly) XBContactStatus status;
 
-@property (nonatomic, assign) XBAccountStatus status;
+@property (nonatomic, readonly) NSString *statusText;
 
-@property (nonatomic, strong) NSString *statusText;
+@property (nonatomic, readonly, weak) XBAccount *account;
 
-@property (nonatomic, strong) XBAccount *account;
+- (instancetype)initWithXMPPUser:(XMPPUserCoreDataStorageObject *)user;
 
-@property (nonatomic, readonly) NSArray *groups;
+- (NSSet *)groups;
 
-- (void)addGroup:(XBGroup *)group;
-
-- (void)removeGroup:(XBGroup *)group;
+- (void)updateContactWithXMPPUser:(XMPPUserCoreDataStorageObject *)user;
 
 - (BOOL)isEqual:(id)other;
 

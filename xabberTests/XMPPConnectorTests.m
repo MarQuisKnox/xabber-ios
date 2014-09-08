@@ -67,7 +67,7 @@
 
 - (void)testCouldNotConnect {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
-    acc.accountID = @"test";
+    acc.accountJID = @"test";
     acc.password = @"password";
     NSError *testError = [NSError errorWithDomain:@""
                                              code:-1
@@ -85,7 +85,7 @@
 
 - (void)testStreamNotAuthenticate {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
-    acc.accountID = @"test";
+    acc.accountJID = @"test";
     acc.password = @"password";
     NSError *testError = [NSError errorWithDomain:@""
                                              code:-1
@@ -107,7 +107,7 @@
 
 - (void)testXMPPStreamDidAuthenticated {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
-    acc.accountID = @"test";
+    acc.accountJID = @"test";
     acc.password = @"password";
     acc.status = XBAccountStatusAvailable;
 

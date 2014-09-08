@@ -9,8 +9,7 @@
 #import <XCTest/XCTest.h>
 #import <SSKeychain/SSKeychainQuery.h>
 #import "OCMock.h"
-#import "XBConnector.h"
-#import "XBAccount.h"
+#import "XBXMPPConnector.h"
 
 @interface AccountConnectorTests : XCTestCase {
     id mockConnector;
@@ -25,7 +24,7 @@
 {
     [super setUp];
 
-    mockConnector = OCMProtocolMock(@protocol(XBConnector));
+    mockConnector = OCMClassMock([XBXMPPConnector class]);
     mockDelegate = OCMProtocolMock(@protocol(XBAccountDelegate));
 }
 

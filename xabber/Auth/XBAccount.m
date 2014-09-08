@@ -4,28 +4,33 @@
 //
 
 #import <SSKeychain/SSKeychain.h>
+#import <XMPPFramework/XMPPStream.h>
 #import "XBAccount.h"
 #import "XBXMPPCoreDataAccount.h"
-#import "XBConnector.h"
+#import "XBXMPPConnector.h"
 
 
 static NSString *const XBKeychainServiceName = @"xabberService";
 
 @interface XBAccount() {
-    id<XBConnector> _connector;
+    XBXMPPConnector *_connector;
 }
 @end
 
 @implementation XBAccount
 
-- (instancetype)initWithConnector:(id <XBConnector>)connector coreDataAccount:(XBXMPPCoreDataAccount *)account {
+- (XMPPStream *)stream {
+    return _connector.xmppStream;
+}
+
+- (instancetype)initWithConnector:(XBXMPPConnector *)connector coreDataAccount:(XBXMPPCoreDataAccount *)account {
     self = [super init];
     if (self) {
         _connector = connector;
         _connector.account = self;
         if (account) {
             [self loadFromCoreDataAccount:account];
-            [self loadPasswordWithAccountID:self.accountID];
+            [self loadPasswordWithAccountID:self.accountJID];
             _isNew = NO;
         }
         else {
@@ -38,15 +43,15 @@ static NSString *const XBKeychainServiceName = @"xabberService";
     return self;
 }
 
-+ (instancetype)accountWithConnector:(id <XBConnector>)connector coreDataAccount:(XBXMPPCoreDataAccount *)account {
++ (instancetype)accountWithConnector:(XBXMPPConnector *)connector coreDataAccount:(XBXMPPCoreDataAccount *)account {
     return [[self alloc] initWithConnector:connector coreDataAccount:account];
 }
 
-- (instancetype)initWithConnector:(id <XBConnector>)connector {
+- (instancetype)initWithConnector:(XBXMPPConnector *)connector {
     return [self initWithConnector:connector coreDataAccount:nil];
 }
 
-+ (instancetype)accountWithConnector:(id <XBConnector>)connector {
++ (instancetype)accountWithConnector:(XBXMPPConnector *)connector {
     return [[self alloc] initWithConnector:connector];
 }
 
@@ -70,7 +75,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
     __block XBXMPPCoreDataAccount *account;
 
     if (_isNew) {
-        account = [XBXMPPCoreDataAccount MR_findFirstByAttribute:@"accountID" withValue:self.accountID];
+        account = [XBXMPPCoreDataAccount MR_findFirstByAttribute:@"accountJID" withValue:self.accountJID];
 
         if (account) {
             return NO;
@@ -86,16 +91,16 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 
 - (BOOL)savePassword {
     if (!self.password) {
-        NSString *oldPassword = [SSKeychain passwordForService:XBKeychainServiceName account:self.accountID];
+        NSString *oldPassword = [SSKeychain passwordForService:XBKeychainServiceName account:self.accountJID];
 
         if (!oldPassword) {
             return YES;
         }
 
-        return [SSKeychain deletePasswordForService:XBKeychainServiceName account:self.accountID];
+        return [SSKeychain deletePasswordForService:XBKeychainServiceName account:self.accountJID];
     }
 
-    return [SSKeychain setPassword:self.password forService:XBKeychainServiceName account:self.accountID];
+    return [SSKeychain setPassword:self.password forService:XBKeychainServiceName account:self.accountJID];
 }
 
 #pragma mark Load
@@ -105,11 +110,11 @@ static NSString *const XBKeychainServiceName = @"xabberService";
         return NO;
     }
 
-    self.accountID = account.accountID;
+    self.accountJID = account.accountID;
     self.autoLogin = [account.autoLogin boolValue];
     self.status = (XBAccountStatus) [account.status integerValue];
     self.host = account.host;
-    self.port = (int16_t) [account.port integerValue];
+    self.port = (UInt16) [account.port integerValue];
 
     return YES;
 }
@@ -141,7 +146,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 }
 
 - (BOOL)deleteCoreData {
-    XBXMPPCoreDataAccount *account = [XBXMPPCoreDataAccount MR_findFirstByAttribute:@"accountID" withValue:self.accountID];
+    XBXMPPCoreDataAccount *account = [XBXMPPCoreDataAccount MR_findFirstByAttribute:@"accountJID" withValue:self.accountJID];
 
     if (account) {
         return [account MR_deleteEntity];
@@ -152,7 +157,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 
 - (BOOL)deletePassword {
     if (self.password) {
-        return [SSKeychain deletePasswordForService:XBKeychainServiceName account:self.accountID];
+        return [SSKeychain deletePasswordForService:XBKeychainServiceName account:self.accountJID];
     }
 
     return YES;
@@ -221,8 +226,8 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 - (NSDictionary *)dumpToDictionary {
     NSMutableDictionary *data = [NSMutableDictionary dictionaryWithCapacity:5];
 
-    if (self.accountID) {
-        data[@"accountID"] = self.accountID;
+    if (self.accountJID) {
+        data[@"accountJID"] = self.accountJID;
     }
 
     if (self.autoLogin) {
@@ -260,7 +265,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
         return YES;
     if (account == nil)
         return NO;
-    if (self.accountID != account.accountID && ![self.accountID isEqualToString:account.accountID])
+    if (self.accountJID != account.accountJID && ![self.accountJID isEqualToString:account.accountJID])
         return NO;
     if (self.password != account.password && ![self.password isEqualToString:account.password])
         return NO;
@@ -282,7 +287,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 }
 
 - (NSUInteger)hash {
-    NSUInteger hash = [self.accountID hash];
+    NSUInteger hash = [self.accountJID hash];
     hash = hash * 31u + [self.password hash];
     hash = hash * 31u + self.autoLogin;
     hash = hash * 31u + (NSUInteger) self.status;

@@ -32,7 +32,7 @@
 - (void)tearDown
 {
     for (XBAccount *account in manager.accounts) {
-        [manager deleteAccountWithID:account.accountID];
+        [manager deleteAccountWithID:account.accountJID];
     }
 
     [MagicalRecord cleanUp];
@@ -42,7 +42,7 @@
 
 - (void)testAccountAdd {
     XBAccount *account = [XBAccount accountWithConnector:nil];
-    account.accountID = @"accountName";
+    account.accountJID = @"accountName";
     [account save];
 
     [manager addAccount:account];
@@ -58,7 +58,7 @@
 
 - (void)testTryToAddNotSavedAccount {
     XBAccount *account = [XBAccount accountWithConnector:nil];
-    account.accountID = @"accountName";
+    account.accountJID = @"accountName";
 
     [manager addAccount:account];
 
@@ -67,23 +67,23 @@
 
 - (void)testAccountFind {
     XBAccount *account = [XBAccount accountWithConnector:nil];
-    account.accountID = @"accountName";
+    account.accountJID = @"accountName";
     [account save];
 
     [manager addAccount:account];
 
-    XBAccount *foundAccount = [manager findAccountByID:@"accountName"];
+    XBAccount *foundAccount = [manager findAccountByJID:@"accountName"];
 
     XCTAssertEqualObjects(account, foundAccount);
 }
 
 - (void)testTryToFindNotExistingAccount {
-    XCTAssertNil([manager findAccountByID:@"accountName"]);
+    XCTAssertNil([manager findAccountByJID:@"accountName"]);
 }
 
 - (void)testAccountDeleteByID {
     XBAccount *account = [XBAccount accountWithConnector:nil];
-    account.accountID = @"accountName";
+    account.accountJID = @"accountName";
     [account save];
 
     [manager addAccount:account];
@@ -94,7 +94,7 @@
 
 - (void)testTryToDeleteAccountByNotExistingID {
     XBAccount *account = [XBAccount accountWithConnector:nil];
-    account.accountID = @"accountName";
+    account.accountJID = @"accountName";
     [account save];
 
     [manager addAccount:account];
@@ -105,7 +105,7 @@
 
 - (void)testDeleteAccount {
     XBAccount *account = [XBAccount accountWithConnector:nil];
-    account.accountID = @"accountName";
+    account.accountJID = @"accountName";
     [account save];
 
     [manager addAccount:account];
@@ -116,9 +116,9 @@
 
 - (void)testDeleteNotExistingAccount {
     XBAccount *account = [XBAccount accountWithConnector:nil];
-    account.accountID = @"accountName";
+    account.accountJID = @"accountName";
     XBAccount *account2 = [XBAccount accountWithConnector:nil];
-    account2.accountID = @"accountName";
+    account2.accountJID = @"accountName";
     [account save];
 
     [manager addAccount:account];

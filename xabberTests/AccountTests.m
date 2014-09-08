@@ -33,7 +33,7 @@
 
 - (void)testAccountSave {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
-    acc.accountID = @"account";
+    acc.accountJID = @"account";
 
     [acc save];
 
@@ -42,7 +42,7 @@
 
 - (void)testAccountIsNew {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
-    acc.accountID = @"account";
+    acc.accountJID = @"account";
 
     XCTAssertTrue(acc.isNew);
 }
@@ -62,7 +62,7 @@
 
 - (void)testLoadedFromCoreDataAccountNotNew {
     XBAccount *acc1 = [XBAccount accountWithConnector:nil];
-    acc1.accountID = @"account";
+    acc1.accountJID = @"account";
     [acc1 save];
 
     XBAccount *acc2 = [XBAccount accountWithConnector:nil coreDataAccount:[XBXMPPCoreDataAccount MR_findFirstByAttribute:@"accountID" withValue:@"account"]];
@@ -72,7 +72,7 @@
 
 - (void)testNotCreatingDuplicates {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
-    acc.accountID = @"account";
+    acc.accountJID = @"account";
 
     [acc save];
     [acc save];
@@ -82,7 +82,7 @@
 
 - (void)testDefaults {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
-    acc.accountID = @"account";
+    acc.accountJID = @"account";
 
     XCTAssertTrue(acc.autoLogin);
     XCTAssertEqual(acc.port, (UInt16)5222);
@@ -93,7 +93,7 @@
 
 - (void)testRestoreFromCoreData {
     XBAccount *acc1 = [XBAccount accountWithConnector:nil];
-    acc1.accountID = @"account";
+    acc1.accountJID = @"account";
     acc1.password = @"123";
     acc1.host = @"example.com";
 
@@ -106,19 +106,19 @@
 
 - (void)testCannotSaveIfAccountIDAlreadyUsed {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
-    acc.accountID = @"account";
+    acc.accountJID = @"account";
 
     [acc save];
 
     XBAccount *acc2 = [XBAccount accountWithConnector:nil];
-    acc2.accountID = @"account";
+    acc2.accountJID = @"account";
 
     XCTAssertFalse([acc2 save]);
 }
 
 - (void)testDeleteAccount {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
-    acc.accountID = @"account";
+    acc.accountJID = @"account";
 
     [acc save];
 
@@ -131,7 +131,7 @@
 
 - (void)testDeleteNotSavedAccount {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
-    acc.accountID = @"account";
+    acc.accountJID = @"account";
 
     XCTAssertFalse([acc delete]);
     XCTAssertFalse(acc.isDeleted);
@@ -139,9 +139,9 @@
 
 - (void)testCompareAccountsWithEqualData {
     XBAccount *acc1 = [XBAccount accountWithConnector:nil];
-    acc1.accountID = @"account";
+    acc1.accountJID = @"account";
     XBAccount *acc2 = [XBAccount accountWithConnector:nil];
-    acc2.accountID = @"account";
+    acc2.accountJID = @"account";
 
     [acc1 save];
 

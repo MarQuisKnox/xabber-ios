@@ -43,7 +43,7 @@
 }
 
 - (void)deleteAccountWithID:(NSString *)accountID {
-    XBAccount *account = [self findAccountByID:accountID];
+    XBAccount *account = [self findAccountByJID:accountID];
 
     [account delete];
 
@@ -61,9 +61,9 @@
     return _accounts;
 }
 
-- (XBAccount *)findAccountByID:(NSString *)accountID {
+- (XBAccount *)findAccountByJID:(NSString *)accountJID {
     return [[_accounts filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(XBAccount *account, NSDictionary *bindings){
-        return [account.accountID isEqualToString:accountID];
+        return [account.accountJID isEqualToString:accountJID];
     }]] firstObject];
 }
 

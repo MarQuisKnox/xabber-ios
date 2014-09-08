@@ -21,5 +21,5 @@
 
 - (NSArray *)accounts;
 
-- (XBAccount *)findAccountByID:(NSString *)accountID;
+- (XBAccount *)findAccountByJID:(NSString *)accountJID;
 @end

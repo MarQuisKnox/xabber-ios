@@ -70,7 +70,7 @@
         return;
     }
 
-    if (self.account.accountID == nil || self.account.password == nil) {
+    if (self.account.accountJID == nil || self.account.password == nil) {
         DDLogError(@"Login or password are empty");
         [self completeWithError:[NSError errorWithDomain:XBXabberErrorDomain
                                                     code:XBLoginValidationError
@@ -80,7 +80,7 @@
 
     self.xmppStream.hostName = self.account.host;
     self.xmppStream.hostPort = (UInt16) self.account.port;
-    self.xmppStream.myJID = [XMPPJID jidWithString:self.account.accountID];
+    self.xmppStream.myJID = [XMPPJID jidWithString:self.account.accountJID];
 
     NSError *error = nil;
     if (![self.xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error])
@@ -159,7 +159,7 @@
     // or setup your own using raw SQLite, or create your own storage mechanism.
     // You can do it however you like! It's your application.
     // But you do need to provide the roster with some storage facility.
-    _xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
+    _xmppRosterStorage = [XMPPRosterCoreDataStorage sharedInstance];
     _xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:_xmppRosterStorage];
     _xmppRoster.autoFetchRoster = YES;
     _xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = YES;

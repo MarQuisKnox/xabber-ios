@@ -3,116 +3,93 @@
 // Copyright (c) 2014 Redsolution LLC. All rights reserved.
 //
 
+#import <XMPPFramework/XMPPRosterCoreDataStorage.h>
 #import "XBContactList.h"
 #import "XBAccount.h"
 #import "XBGroup.h"
 #import "XBContact.h"
+#import "XMPPCoreDataStorageProtected.h"
 
 
-@interface XBContactList () {
-    NSMutableArray *_contacts;
-    NSMutableArray *_groups;
+@interface XBContactList () <NSFetchedResultsControllerDelegate> {
+    NSFetchedResultsController *usersController;
+    NSFetchedResultsController *groupsController;
 }
 @end
 
 @implementation XBContactList
-- (id)init {
+
+- (instancetype)initWithStorage:(XMPPRosterCoreDataStorage *)storage {
     self = [super init];
     if (self) {
+        self.storage = storage;
         [self commonInit];
     }
 
     return self;
 }
 
++ (instancetype)contactListWithStorage:(XMPPRosterCoreDataStorage *)storage {
+    return [[self alloc] initWithStorage:storage];
+}
 
 - (void)commonInit {
-    _contacts = [NSMutableArray array];
-    _groups = [NSMutableArray array];
+    usersController = [XMPPUserCoreDataStorageObject MR_fetchAllGroupedBy:nil
+                                                            withPredicate:nil
+                                                                 sortedBy:@"displayName"
+                                                                ascending:YES
+                                                                 delegate:self];
+    groupsController = [XMPPGroupCoreDataStorageObject MR_fetchAllGroupedBy:nil
+                                                              withPredicate:nil
+                                                                   sortedBy:@"name"
+                                                                  ascending:YES
+                                                                   delegate:self];
 }
 
 - (NSArray *)contacts {
-    return _contacts;
-}
+    NSArray *fetchedUsers = usersController.fetchedObjects;
+    
+    __block NSMutableArray *contacts = [NSMutableArray array];
 
-- (NSArray *)contactsForAccount:(XBAccount *)account {
-    NSPredicate *contactsForAccount = [NSPredicate predicateWithFormat:@"account = %@", account];
+    [fetchedUsers enumerateObjectsUsingBlock:^(XMPPUserCoreDataStorageObject *user, NSUInteger idx, BOOL *stop) {
+        [contacts addObject:[[XBContact alloc] initWithXMPPUser:user]];
+    }];
 
-    return [self.contacts filteredArrayUsingPredicate:contactsForAccount];
-}
-
-- (XBContact *)contactForAccount:(XBAccount *)account withID:(NSString *)contactID {
-    NSPredicate *contactsForAccountAndID = [NSPredicate predicateWithFormat:@"account = %@ AND contactID = %@", account, contactID];
-
-    NSArray *filteredContacts = [self.contacts filteredArrayUsingPredicate:contactsForAccountAndID];
-
-    if (filteredContacts.count != 0) {
-        return filteredContacts.firstObject;
-    }
-
-    return nil;
-}
-
-- (NSArray *)contactsForGroupWithName:(NSString *)groupName {
-    XBGroup *group = [self groupByName:groupName];
-
-    return [self contactsForGroup:group];
-}
-
-- (NSArray *)contactsForGroup:(XBGroup *)group {
-    if ([self.groups containsObject:group]) {
-        NSPredicate *filterContactsInGroup = [NSPredicate predicateWithFormat:@"%@ IN groups", group];
-
-        return [self.contacts filteredArrayUsingPredicate:filterContactsInGroup];
-    }
-
-    return nil;
-}
-
-- (void)addContact:(XBContact *)contact {
-    if (![self.contacts containsObject:contact]) {
-        [_contacts addObject:contact];
-    }
-}
-
-- (void)removeContact:(XBContact *)contact {
-    if ([self.contacts containsObject:contact]) {
-        [_contacts removeObject:contact];
-    }
+    return contacts;
 }
 
 - (NSArray *)groups {
-    return _groups;
+    NSArray *fetchedGroups = groupsController.fetchedObjects;
+
+    __block NSMutableArray *groups = [NSMutableArray array];
+
+    [fetchedGroups enumerateObjectsUsingBlock:^(XMPPGroupCoreDataStorageObject *group, NSUInteger idx, BOOL *stop){
+        [groups addObject:group.name];
+    }];
+
+    return groups;
 }
 
-- (XBGroup *)groupByName:(NSString *)groupName {
-    NSPredicate *filterGroupsByName = [NSPredicate predicateWithFormat:@"name = %@", groupName];
+#pragma mark NSFetchedResultsControllerDelegate
 
-    NSArray *filteredGroups = [_groups filteredArrayUsingPredicate:filterGroupsByName];
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
 
-    if (filteredGroups.count != 0) {
-        return filteredGroups.firstObject;
-    }
+}
 
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+
+}
+
+- (NSString *)controller:(NSFetchedResultsController *)controller sectionIndexTitleForSectionName:(NSString *)sectionName {
     return nil;
-}
-
-- (void)addGroup:(XBGroup *)group {
-    if (![self.groups containsObject:group]) {
-        [_groups addObject:group];
-    }
-}
-
-- (void)removeGroup:(XBGroup *)group {
-    NSArray *contacts = [self contactsForGroupWithName:group.name];
-
-    if (contacts) {
-        for (XBContact *contact in contacts) {
-            [contact removeGroup:group];
-        }
-    }
-
-    [_groups removeObject:group];
 }
 
 
