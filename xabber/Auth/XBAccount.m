@@ -75,7 +75,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
     __block XBXMPPCoreDataAccount *account;
 
     if (_isNew) {
-        account = [XBXMPPCoreDataAccount MR_findFirstByAttribute:@"accountJID" withValue:self.accountJID];
+        account = [XBXMPPCoreDataAccount MR_findFirstByAttribute:@"accountID" withValue:self.accountJID];
 
         if (account) {
             return NO;
@@ -146,7 +146,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 }
 
 - (BOOL)deleteCoreData {
-    XBXMPPCoreDataAccount *account = [XBXMPPCoreDataAccount MR_findFirstByAttribute:@"accountJID" withValue:self.accountJID];
+    XBXMPPCoreDataAccount *account = [XBXMPPCoreDataAccount MR_findFirstByAttribute:@"accountID" withValue:self.accountJID];
 
     if (account) {
         return [account MR_deleteEntity];
@@ -227,7 +227,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
     NSMutableDictionary *data = [NSMutableDictionary dictionaryWithCapacity:5];
 
     if (self.accountJID) {
-        data[@"accountJID"] = self.accountJID;
+        data[@"accountID"] = self.accountJID;
     }
 
     if (self.autoLogin) {
