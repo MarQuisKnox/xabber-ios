@@ -7,6 +7,6 @@
 
 @protocol XBValidator <NSObject>
 
-- (BOOL)validateData:(id)data error:(NSError **)error;
+@required - (BOOL)validateData:(id *)data error:(NSError **)error;
 
 @end
