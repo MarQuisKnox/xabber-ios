@@ -61,7 +61,7 @@
 
     if (maxLength && [*data length] > maxLength) {
         *error = [NSError errorWithDomain:XBXabberErrorDomain
-                                     code:XBValidationStringTooShort
+                                     code:XBValidationStringTooLong
                                  userInfo:@{
                                          NSLocalizedDescriptionKey: [NSString stringWithFormat:NSLocalizedString(@"validation: string too short", @"String must be shorter then %d characters long"), maxLength]
                                  }];
