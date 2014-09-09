@@ -1,0 +1,5 @@
+/****************************************************************************/
+/* Localization file */
+
+
+"validation: object must not be nil" = "Object must not be equal to nil";
