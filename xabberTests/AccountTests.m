@@ -150,10 +150,18 @@
 
 - (void)testAccountValidation {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
-    acc.accountJID = @"account";
+    acc.accountJID = @"account@example.com";
     acc.password = @"123";
 
     XCTAssertTrue(acc.isValid);
+}
+
+- (void)testValidationAccountWithIncorrectJID {
+    XBAccount *acc = [XBAccount accountWithConnector:nil];
+    acc.accountJID = @"account";
+    acc.password = @"123";
+
+    XCTAssertFalse(acc.isValid);
 }
 
 - (void)testValidateAccountWithoutJID {
@@ -166,6 +174,24 @@
 - (void)testValidateAccountWithoutPassword {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
     acc.accountJID = @"account";
+
+    XCTAssertFalse(acc.isValid);
+}
+
+- (void)testValidateZeroPortValue {
+    XBAccount *acc = [XBAccount accountWithConnector:nil];
+    acc.accountJID = @"account";
+    acc.password = @"123";
+    acc.port = 0;
+
+    XCTAssertFalse(acc.isValid);
+}
+
+- (void)testValidateTooBigPortValue {
+    XBAccount *acc = [XBAccount accountWithConnector:nil];
+    acc.accountJID = @"account";
+    acc.password = @"123";
+    acc.port = 655536;
 
     XCTAssertFalse(acc.isValid);
 }

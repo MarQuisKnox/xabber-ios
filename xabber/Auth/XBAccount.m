@@ -8,6 +8,10 @@
 #import "XBAccount.h"
 #import "XBXMPPCoreDataAccount.h"
 #import "XBXMPPConnector.h"
+#import "XBEmailValidator.h"
+#import "XBStringLengthValidator.h"
+#import "XBMinValueValidator.h"
+#import "XBMaxValueValidator.h"
 
 
 static NSString *const XBKeychainServiceName = @"xabberService";
@@ -230,9 +234,11 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 - (BOOL)isValid {
     NSArray *validatingProperties = @[@"accountJID", @"password", @"autoLogin", @"status", @"host", @"port"];
 
+    NSError *error = nil;
+
     for (NSString *propertyKeyPath in validatingProperties) {
         id value = [self valueForKeyPath:propertyKeyPath];
-        if (![self validateValue:&value forKeyPath:propertyKeyPath error:nil]) {
+        if (![self validateValue:&value forKeyPath:propertyKeyPath error:&error]) {
             return NO;
         }
     }
@@ -241,35 +247,15 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 }
 
 - (BOOL)validateAccountJID:(id *)value error:(NSError * __autoreleasing *)error {
-    if (value == NULL) {
-        return NO;
-    }
+    XBEmailValidator *emailValidator = [[XBEmailValidator alloc] init];
 
-    if (![*value isKindOfClass:[NSString class]]) {
-        return NO;
-    }
-
-    if ([*value length] == 0) {
-        return NO;
-    }
-
-    return YES;
+    return [emailValidator validateData:value error:error];
 }
 
 - (BOOL)validatePassword:(id *)value error:(NSError * __autoreleasing *)error {
-    if (value == NULL) {
-        return NO;
-    }
+    XBStringLengthValidator *lengthValidator = [XBStringLengthValidator validatorWithMinLength:1];
 
-    if (![*value isKindOfClass:[NSString class]]) {
-        return NO;
-    }
-
-    if ([*value length] == 0) {
-        return NO;
-    }
-
-    return YES;
+    return [lengthValidator validateData:value error:error];
 }
 
 - (BOOL)validateAutoLogin:(id *)value error:(NSError * __autoreleasing *)error {
@@ -285,6 +271,21 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 }
 
 - (BOOL)validatePort:(id *)value error:(NSError * __autoreleasing *)error {
+    if (*value == nil) {
+        *value = @0;
+    }
+
+    NSArray *validators = @[
+            [XBMinValueValidator validatorWithMinValue:1],
+            [XBMaxValueValidator validatorWithMaxValue:65536]
+    ];
+
+    for (id <XBValidator> validator in validators) {
+        if (![validator validateData:value error:error]) {
+            return NO;
+        }
+    }
+
     return YES;
 }
 
