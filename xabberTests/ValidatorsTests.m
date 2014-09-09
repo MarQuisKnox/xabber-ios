@@ -11,6 +11,8 @@
 #import "XBClassValidator.h"
 #import "XBStringLengthValidator.h"
 #import "XBEmailValidator.h"
+#import "XBMinValueValidator.h"
+#import "XBMaxValueValidator.h"
 
 @interface ValidatorsTests : XCTestCase
 
@@ -83,7 +85,7 @@
     XCTAssertNil(v);
 }
 
-- (void)testValidateStringLengthNilInitialParameters {
+- (void)testValidateStringLengthInitialParametersEqualToZero {
     XBStringLengthValidator *v = [XBStringLengthValidator validatorWithMinLength:0 maxLength:0];
 
     XCTAssertNil(v);
@@ -91,6 +93,15 @@
 
 - (void)testValidateStringLength {
     XBStringLengthValidator *v = [XBStringLengthValidator validatorWithMinLength:1 maxLength:4];
+
+    NSError *e = nil;
+    NSString *test = @"123";
+
+    XCTAssertTrue([v validateData:&test error:&e]);
+}
+
+- (void)testValidateStringLengthEqualToMinAndMaxValues {
+    XBStringLengthValidator *v = [XBStringLengthValidator validatorWithMinLength:3 maxLength:3];
 
     NSError *e = nil;
     NSString *test = @"123";
@@ -132,6 +143,62 @@
 
     NSError *e = nil;
     NSString *test = @"example.com";
+
+    XCTAssertFalse([v validateData:&test error:&e]);
+    XCTAssertNotNil(e);
+}
+
+- (void)testValidateNumberMinValue {
+    XBMinValueValidator *v = [XBMinValueValidator validatorWithMinValue:3];
+
+    NSError *e = nil;
+    NSNumber *test = @4;
+
+    XCTAssertTrue([v validateData:&test error:&e]);
+}
+
+- (void)testValidateNumberEqualToMinValue {
+    XBMinValueValidator *v = [XBMinValueValidator validatorWithMinValue:4];
+
+    NSError *e = nil;
+    NSNumber *test = @4;
+
+    XCTAssertTrue([v validateData:&test error:&e]);
+}
+
+- (void)testValidateNumberLessThenMinValue {
+    XBMinValueValidator *v = [XBMinValueValidator validatorWithMinValue:10];
+
+    NSError *e = nil;
+    NSNumber *test = @4;
+
+    XCTAssertFalse([v validateData:&test error:&e]);
+    XCTAssertNotNil(e);
+}
+
+- (void)testValidateNumberMaxValue {
+    XBMaxValueValidator *v = [XBMaxValueValidator validatorWithMaxValue:5];
+
+    NSError *e = nil;
+    NSNumber *test = @4;
+
+    XCTAssertTrue([v validateData:&test error:&e]);
+}
+
+- (void)testValidateNumberEqualToMaxValue {
+    XBMaxValueValidator *v = [XBMaxValueValidator validatorWithMaxValue:4];
+
+    NSError *e = nil;
+    NSNumber *test = @4;
+
+    XCTAssertTrue([v validateData:&test error:&e]);
+}
+
+- (void)testValidateNumberGreaterThenMaxValue {
+    XBMaxValueValidator *v = [XBMaxValueValidator validatorWithMaxValue:3];
+
+    NSError *e = nil;
+    NSNumber *test = @4;
 
     XCTAssertFalse([v validateData:&test error:&e]);
     XCTAssertNotNil(e);

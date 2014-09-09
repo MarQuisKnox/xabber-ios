@@ -7,3 +7,5 @@
 "validation: string too short" = "String must be at least %d characters long";
 "validation: string too short" = "String must be shorter then %d characters long";
 "validation: incorrect email" = "Incorrect email string";
+"validate: number too small" = "Number must be greater then or equal to %d";
+"validate: number too big" = "Number must be less then or equal to %d";
