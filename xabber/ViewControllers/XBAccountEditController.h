@@ -8,6 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XBAccountEditController : UITableViewController
+@class XBAccount;
 
+@interface XBAccountEditController : UITableViewController
+@property (weak, nonatomic) IBOutlet UITextField *username;
+@property (weak, nonatomic) IBOutlet UITextField *password;
+@property (weak, nonatomic) IBOutlet UISwitch *autoLogin;
+
+@property (weak, nonatomic) IBOutlet UITextField *hostname;
+@property (weak, nonatomic) IBOutlet UITextField *port;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+
+@property (nonatomic, strong) XBAccount *account;
+
+- (IBAction)editDone:(UIBarButtonItem *)sender;
+- (IBAction)editCancel:(UIBarButtonItem *)sender;
+
+- (IBAction)fieldChanged:(id)sender;
 @end
