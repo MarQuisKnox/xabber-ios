@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		75DCE455763D0C27DEEB0A47 /* ContactsAndGroupsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE138C6FFE18EED996C96 /* ContactsAndGroupsTests.m */; };
+		75DCE23E07F00280D157045F /* XBRequiredValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCEB5711EFD30FAAA386FA /* XBRequiredValidator.m */; };
 		75DCE48C14BBBBDA5642E52F /* XBXMPPConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE4A385E2C649E16EA677 /* XBXMPPConnector.m */; };
 		75DCE4B321E2B9D44627B51D /* AccountTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCEEA7F17D23658AF445DB /* AccountTests.m */; };
 		75DCE501A6AFCFC5583CE3E4 /* XBContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE6950CE1F00AE1310EFE /* XBContact.m */; };
@@ -98,6 +99,7 @@
 		75DCE9A4DE3673AB789F615E /* XBContactList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBContactList.m; sourceTree = "<group>"; };
 		75DCE9ADA7CC1833B8D513F7 /* XBContactList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBContactList.h; sourceTree = "<group>"; };
 		75DCE9F6C4CB12DD07B040AE /* XBGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBGroup.h; sourceTree = "<group>"; };
+		75DCEAA2F7C599948E74460D /* XBValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBValidator.h; sourceTree = "<group>"; };
 		75DCEAA6D0D70640CC681139 /* XBContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBContact.h; sourceTree = "<group>"; };
 		75DCEB2BD63DFA9BB5FA1A87 /* XBAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountManager.m; sourceTree = "<group>"; };
 		75DCEBA4AB61EAD736243C5F /* XBAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountManager.h; sourceTree = "<group>"; };
@@ -213,6 +215,14 @@
 				75DCE13BBDB715407F1B73AA /* mogend.sh */,
 			);
 			path = Scripts;
+			sourceTree = "<group>";
+		};
+		75DCE96D77E155A0DFC1CD69 /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				75DCEAA2F7C599948E74460D /* XBValidator.h */,
+			);
+			path = Validators;
 			sourceTree = "<group>";
 		};
 		75DCEBA5202F56CDDDA0E0E9 /* Test Categories */ = {
@@ -534,6 +544,7 @@
 				75DCEE2ED27D89898EA3F4B4 /* XBContactList.m in Sources */,
 				75DCE501A6AFCFC5583CE3E4 /* XBContact.m in Sources */,
 				75DCE8B35AFF2F1848A859AE /* XBGroup.m in Sources */,
+				75DCE23E07F00280D157045F /* XBRequiredValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
