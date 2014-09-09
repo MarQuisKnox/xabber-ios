@@ -5,10 +5,7 @@
 
 #import <XMPPFramework/XMPPRosterCoreDataStorage.h>
 #import "XBContactList.h"
-#import "XBAccount.h"
-#import "XBGroup.h"
 #import "XBContact.h"
-#import "XMPPCoreDataStorageProtected.h"
 
 
 @interface XBContactList () <NSFetchedResultsControllerDelegate> {
@@ -68,6 +65,12 @@
     }];
 
     return groups;
+}
+
+- (XBContact *)contactForIndexPath:(NSIndexPath *)indexPath {
+
+
+    return nil;
 }
 
 #pragma mark NSFetchedResultsControllerDelegate

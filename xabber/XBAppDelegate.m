@@ -8,7 +8,6 @@
 
 #import "XBAppDelegate.h"
 
-#import "XBMasterViewController.h"
 #import "SSKeychain.h"
 
 @implementation XBAppDelegate
@@ -26,10 +25,10 @@
         splitViewController.delegate = (id)navigationController.topViewController;
         
         UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
-        XBMasterViewController *controller = (XBMasterViewController *)masterNavigationController.topViewController;
+//        XBMasterViewController *controller = (XBMasterViewController *)masterNavigationController.topViewController;
     } else {
         UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-        XBMasterViewController *controller = (XBMasterViewController *)navigationController.topViewController;
+//        XBMasterViewController *controller = (XBMasterViewController *)navigationController.topViewController;
     }
     return YES;
 }
