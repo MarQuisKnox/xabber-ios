@@ -15,6 +15,17 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 @interface XBAccount() {
     XBXMPPConnector *_connector;
 }
+- (BOOL)validateAccountJID:(id *)value error:(NSError *__autoreleasing *)error;
+
+- (BOOL)validatePassword:(id *)value error:(NSError *__autoreleasing *)error;
+
+- (BOOL)validateAutoLogin:(id *)value error:(NSError *__autoreleasing *)error;
+
+- (BOOL)validateStatus:(id *)value error:(NSError *__autoreleasing *)error;
+
+- (BOOL)validateHost:(id *)value error:(NSError *__autoreleasing *)error;
+
+- (BOOL)validatePort:(id *)value error:(NSError *__autoreleasing *)error;
 @end
 
 @implementation XBAccount
@@ -214,6 +225,68 @@ static NSString *const XBKeychainServiceName = @"xabberService";
     return _connector.isLoggedIn;
 }
 
+#pragma mark Validation
+
+- (BOOL)isValid {
+    NSArray *validatingProperties = @[@"accountJID", @"password", @"autoLogin", @"status", @"host", @"port"];
+
+    for (NSString *propertyKeyPath in validatingProperties) {
+        id value = [self valueForKeyPath:propertyKeyPath];
+        if (![self validateValue:&value forKeyPath:propertyKeyPath error:nil]) {
+            return NO;
+        }
+    }
+
+    return YES;
+}
+
+- (BOOL)validateAccountJID:(id *)value error:(NSError * __autoreleasing *)error {
+    if (value == NULL) {
+        return NO;
+    }
+
+    if (![*value isKindOfClass:[NSString class]]) {
+        return NO;
+    }
+
+    if ([*value length] == 0) {
+        return NO;
+    }
+
+    return YES;
+}
+
+- (BOOL)validatePassword:(id *)value error:(NSError * __autoreleasing *)error {
+    if (value == NULL) {
+        return NO;
+    }
+
+    if (![*value isKindOfClass:[NSString class]]) {
+        return NO;
+    }
+
+    if ([*value length] == 0) {
+        return NO;
+    }
+
+    return YES;
+}
+
+- (BOOL)validateAutoLogin:(id *)value error:(NSError * __autoreleasing *)error {
+    return YES;
+}
+
+- (BOOL)validateStatus:(id *)value error:(NSError * __autoreleasing *)error {
+    return YES;
+}
+
+- (BOOL)validateHost:(id *)value error:(NSError * __autoreleasing *)error {
+    return YES;
+}
+
+- (BOOL)validatePort:(id *)value error:(NSError * __autoreleasing *)error {
+    return YES;
+}
 
 #pragma mark Private
 

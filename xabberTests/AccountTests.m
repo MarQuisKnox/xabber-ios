@@ -148,4 +148,26 @@
     XCTAssertNotEqualObjects(acc1, acc2);
 }
 
+- (void)testAccountValidation {
+    XBAccount *acc = [XBAccount accountWithConnector:nil];
+    acc.accountJID = @"account";
+    acc.password = @"123";
+
+    XCTAssertTrue(acc.isValid);
+}
+
+- (void)testValidateAccountWithoutJID {
+    XBAccount *acc = [XBAccount accountWithConnector:nil];
+    acc.password = @"123";
+
+    XCTAssertFalse(acc.isValid);
+}
+
+- (void)testValidateAccountWithoutPassword {
+    XBAccount *acc = [XBAccount accountWithConnector:nil];
+    acc.accountJID = @"account";
+
+    XCTAssertFalse(acc.isValid);
+}
+
 @end
