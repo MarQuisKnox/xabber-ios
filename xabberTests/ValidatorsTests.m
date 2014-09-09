@@ -10,6 +10,7 @@
 #import "XBRequiredValidator.h"
 #import "XBClassValidator.h"
 #import "XBStringLengthValidator.h"
+#import "XBEmailValidator.h"
 
 @interface ValidatorsTests : XCTestCase
 
@@ -112,6 +113,25 @@
 
     NSError *e = nil;
     NSString *test = @"123";
+
+    XCTAssertFalse([v validateData:&test error:&e]);
+    XCTAssertNotNil(e);
+}
+
+- (void)testValidateEmail {
+    XBEmailValidator *v = [[XBEmailValidator alloc] init];
+
+    NSError *e = nil;
+    NSString *test = @"test@example.com";
+
+    XCTAssertTrue([v validateData:&test error:&e]);
+}
+
+- (void)testValidateIncorrectEmail {
+    XBEmailValidator *v = [[XBEmailValidator alloc] init];
+
+    NSError *e = nil;
+    NSString *test = @"example.com";
 
     XCTAssertFalse([v validateData:&test error:&e]);
     XCTAssertNotNil(e);

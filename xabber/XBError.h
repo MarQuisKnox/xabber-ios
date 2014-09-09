@@ -14,5 +14,6 @@ enum {
     XBValidationIncorrectClass,
     XBValidationStringTooShort,
     XBValidationStringTooLong,
+    XBValidationIncorrectEmail,
 };
 

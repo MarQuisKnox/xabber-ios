@@ -6,3 +6,4 @@
 "validation: incorrect class" = "Object must be instance of %@ class";
 "validation: string too short" = "String must be at least %d characters long";
 "validation: string too short" = "String must be shorter then %d characters long";
+"validation: incorrect email" = "Incorrect email string";
