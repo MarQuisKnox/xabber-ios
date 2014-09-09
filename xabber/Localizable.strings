@@ -3,3 +3,6 @@
 
 
 "validation: object must not be nil" = "Object must not be equal to nil";
+"validation: incorrect class" = "Object must be instance of %@ class";
+"validation: string too short" = "String must be at least %d characters long";
+"validation: string too short" = "String must be shorter then %d characters long";

@@ -9,6 +9,10 @@
 static NSString *const XBXabberErrorDomain = @"XBXabberErrorDomain";
 
 enum {
-    XBLoginValidationError
+    XBLoginValidationError,
+    XBValidationObjectIsNilError,
+    XBValidationIncorrectClass,
+    XBValidationStringTooShort,
+    XBValidationStringTooLong,
 };
 
