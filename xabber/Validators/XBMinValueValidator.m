@@ -34,7 +34,7 @@
         *error = [NSError errorWithDomain:XBXabberErrorDomain
                                      code:XBValidationValueTooSmall
                                  userInfo:@{
-                                         NSLocalizedDescriptionKey: [NSString stringWithFormat:NSLocalizedString(@"validate: number too small", @"Number must be greater or equal to %d"), minValue]
+                                         NSLocalizedDescriptionKey: [NSString stringWithFormat:NSLocalizedString(@"validation: number too small", @"Number must be greater or equal to %d"), minValue]
                                  }];
 
         return NO;

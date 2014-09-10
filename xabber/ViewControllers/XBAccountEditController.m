@@ -30,7 +30,7 @@
     [super viewDidLoad];
 
     if (self.account.isNew) {
-        self.title = @"New account";
+        self.title = NSLocalizedString(@"ui: new account", @"New account");
     }
 
     self.doneButton.enabled = self.account.isValid;

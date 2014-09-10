@@ -1,5 +1,10 @@
-/****************************************************************************/
-/* Localization file */
+/* 
+  Localizable.strings
+  xabber
+
+  Created by Dmitry Sobolev on 10/09/14.
+  Copyright (c) 2014 Redsolution LLC. All rights reserved.
+*/
 
 
 "validation: object must not be nil" = "Object must not be equal to nil";
@@ -7,5 +12,6 @@
 "validation: string too short" = "String must be at least %d characters long";
 "validation: string too short" = "String must be shorter then %d characters long";
 "validation: incorrect email" = "Incorrect email string";
-"validate: number too small" = "Number must be greater then or equal to %d";
-"validate: number too big" = "Number must be less then or equal to %d";
+"validation: number too small" = "Number must be greater then or equal to %d";
+"validation: number too big" = "Number must be less then or equal to %d";
+"ui: new account" = "New account";

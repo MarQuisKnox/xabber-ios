@@ -36,7 +36,7 @@
         *error = [NSError errorWithDomain:XBXabberErrorDomain
                                      code:XBValidationValueTooBig
                                  userInfo:@{
-                                         NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"validate: number too big", @"Number must be less then or equal to %d"), maxValue]
+                                         NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"validation: number too big", @"Number must be less then or equal to %d"), maxValue]
                                  }];
 
         return NO;

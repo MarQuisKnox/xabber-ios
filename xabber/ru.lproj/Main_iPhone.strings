@@ -1,0 +1,72 @@
+
+/* Class = "IBUILabel"; text = "Password"; ObjectID = "0oG-KF-PMV"; */
+"0oG-KF-PMV.text" = "Password";
+
+/* Class = "IBUINavigationItem"; title = "Accounts"; ObjectID = "0xP-rh-ekK"; */
+"0xP-rh-ekK.title" = "Accounts";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "2pz-XF-uhl"; */
+"2pz-XF-uhl.text" = "Title";
+
+/* Class = "IBUITextField"; placeholder = "5222"; ObjectID = "4I7-QA-QUc"; */
+"4I7-QA-QUc.placeholder" = "5222";
+
+/* Class = "IBUINavigationItem"; title = "Edit account"; ObjectID = "6W7-7E-gpC"; */
+"6W7-7E-gpC.title" = "Edit account";
+
+/* Class = "IBUILabel"; text = "Subtitle"; ObjectID = "7Os-0n-1uV"; */
+"7Os-0n-1uV.text" = "Subtitle";
+
+/* Class = "IBUILabel"; text = "Hostname"; ObjectID = "AID-pG-Jm6"; */
+"AID-pG-Jm6.text" = "Hostname";
+
+/* Class = "IBUIViewController"; title = "Detail"; ObjectID = "Ah7-4n-0Wa"; */
+"Ah7-4n-0Wa.title" = "Detail";
+
+/* Class = "IBUIBarButtonItem"; title = "Accounts"; ObjectID = "DIS-WT-zF2"; */
+"DIS-WT-zF2.title" = "Accounts";
+
+/* Class = "IBUITextField"; placeholder = "Required"; ObjectID = "J3p-a1-tWP"; */
+"J3p-a1-tWP.placeholder" = "Required";
+
+/* Class = "IBUILabel"; text = "Detail view content goes here"; ObjectID = "Lei-5M-9Gs"; */
+"Lei-5M-9Gs.text" = "Detail view content goes here";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "ObK-LG-doU"; */
+"ObK-LG-doU.text" = "Title";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Account info"; ObjectID = "P0g-P8-D5D"; */
+"P0g-P8-D5D.headerTitle" = "Account info";
+
+/* Class = "IBUILabel"; text = "Username"; ObjectID = "Wzl-LL-AbM"; */
+"Wzl-LL-AbM.text" = "Username";
+
+/* Class = "IBUILabel"; text = "Auto login"; ObjectID = "XRc-M1-0qo"; */
+"XRc-M1-0qo.text" = "Auto login";
+
+/* Class = "IBUITextField"; placeholder = "user@example.com"; ObjectID = "Y8C-bW-Vil"; */
+"Y8C-bW-Vil.placeholder" = "user@example.com";
+
+/* Class = "IBUITextField"; placeholder = "example.com"; ObjectID = "ade-TW-dfQ"; */
+"ade-TW-dfQ.placeholder" = "example.com";
+
+/* Class = "IBUINavigationItem"; title = "Detail"; ObjectID = "cra-N8-TIN"; */
+"cra-N8-TIN.title" = "Detail";
+
+/* Class = "IBUIBarButtonItem"; title = "Close"; ObjectID = "m55-6r-Ifj"; */
+"m55-6r-Ifj.title" = "Close";
+
+/* Class = "IBUITableViewController"; title = "Master"; ObjectID = "pGg-6v-bdr"; */
+"pGg-6v-bdr.title" = "Master";
+
+/* Class = "IBUINavigationItem"; title = "Contacts"; ObjectID = "tQt-TN-PWz"; */
+"tQt-TN-PWz.title" = "Contacts";
+
+/* Class = "IBUILabel"; text = "Add contact"; ObjectID = "uPb-We-TRP"; */
+"uPb-We-TRP.text" = "Add contact";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Server info"; ObjectID = "vdN-mI-Cay"; */
+"vdN-mI-Cay.headerTitle" = "Server info";
+
+/* Class = "IBUILabel"; text = "Port"; ObjectID = "wmL-Oc-JJa"; */
+"wmL-Oc-JJa.text" = "Port";

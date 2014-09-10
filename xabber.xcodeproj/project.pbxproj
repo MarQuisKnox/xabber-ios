@@ -24,7 +24,6 @@
 		75DCE9A2CACC2E1827D6CBE6 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 75DCE904070B7C93366CF1B9 /* .travis.yml */; };
 		75DCE9D4F122C8E3BB07125F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 75DCED47E6E3DC91302E4215 /* .gitignore */; };
 		75DCE9DB4183ABEB2BD980FD /* XMPPPresence+XBEquality.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE1AE3570B5B13C2B700D /* XMPPPresence+XBEquality.m */; };
-		75DCEA10C9E23A8B4DC0AB01 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75DCEC372A52D5776C36301A /* Localizable.strings */; };
 		75DCEB83DF5C824D7CE5B3A7 /* XMPPConnectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE73E0BE2D2A0FA4CD645 /* XMPPConnectorTests.m */; };
 		75DCEC8A990C6D4A5573994E /* XBMaxValueValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCED9701ACF8BEA21AE48C /* XBMaxValueValidator.m */; };
 		75DCEE2ED27D89898EA3F4B4 /* XBContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE9A4DE3673AB789F615E /* XBContactList.m */; };
@@ -49,6 +48,7 @@
 		A421DC09199E02D000F857E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A421DC07199E02D000F857E2 /* InfoPlist.strings */; };
 		A43500F319BDA95C00485EE4 /* XBAccountEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = A43500F219BDA95C00485EE4 /* XBAccountEditController.m */; };
 		A43500F619BDC92700485EE4 /* XBAccountsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A43500F519BDC92700485EE4 /* XBAccountsController.m */; };
+		A48BFFA019C02B7F00CB502C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A48BFFA219C02B7F00CB502C /* Localizable.strings */; };
 		B6543416F91040A5923464F8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA53C965164949F69C2EA7E8 /* libPods.a */; };
 		CC5E7FD9F980480B8952BDB6 /* libPods-xabberTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 944A0A7921684A89A96C5394 /* libPods-xabberTests.a */; };
 /* End PBXBuildFile section */
@@ -112,7 +112,6 @@
 		75DCEB2BD63DFA9BB5FA1A87 /* XBAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountManager.m; sourceTree = "<group>"; };
 		75DCEB5711EFD30FAAA386FA /* XBRequiredValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBRequiredValidator.m; sourceTree = "<group>"; };
 		75DCEBA4AB61EAD736243C5F /* XBAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountManager.h; sourceTree = "<group>"; };
-		75DCEC372A52D5776C36301A /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		75DCECC77ED2B754ED2DF249 /* AccountConnectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountConnectorTests.m; sourceTree = "<group>"; };
 		75DCED2989A8CF77616FB53B /* XBRequiredValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBRequiredValidator.h; sourceTree = "<group>"; };
 		75DCED47E6E3DC91302E4215 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
@@ -156,6 +155,11 @@
 		A43500F219BDA95C00485EE4 /* XBAccountEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountEditController.m; sourceTree = "<group>"; };
 		A43500F419BDC92700485EE4 /* XBAccountsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountsController.h; sourceTree = "<group>"; };
 		A43500F519BDC92700485EE4 /* XBAccountsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountsController.m; sourceTree = "<group>"; };
+		A48BFF9519C0277200CB502C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
+		A48BFF9619C0277200CB502C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main_iPad.strings; sourceTree = "<group>"; };
+		A48BFF9819C0277200CB502C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A48BFFA119C02B7F00CB502C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A48BFFA319C02BB400CB502C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA53C965164949F69C2EA7E8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC98CB24FF864D288EE32C38 /* Pods-xabberTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xabberTests.xcconfig"; path = "Pods/Pods-xabberTests.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -363,7 +367,7 @@
 				A421DBDE199E02D000F857E2 /* InfoPlist.strings */,
 				A421DBE1199E02D000F857E2 /* main.m */,
 				A421DBE3199E02D000F857E2 /* xabber-Prefix.pch */,
-				75DCEC372A52D5776C36301A /* Localizable.strings */,
+				A48BFFA219C02B7F00CB502C /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -457,6 +461,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = A421DBC7199E02D000F857E2;
 			productRefGroup = A421DBD1199E02D000F857E2 /* Products */;
@@ -478,11 +483,11 @@
 				A421DBF7199E02D000F857E2 /* Images.xcassets in Resources */,
 				A421DBE9199E02D000F857E2 /* Main_iPhone.storyboard in Resources */,
 				A421DBE0199E02D000F857E2 /* InfoPlist.strings in Resources */,
+				A48BFFA019C02B7F00CB502C /* Localizable.strings in Resources */,
 				75DCE9D4F122C8E3BB07125F /* .gitignore in Resources */,
 				75DCE79E43BD92C9AB570663 /* mogen.sh in Resources */,
 				75DCEE627A4AEA9076A55EE8 /* mogend.sh in Resources */,
 				75DCE9A2CACC2E1827D6CBE6 /* .travis.yml in Resources */,
-				75DCEA10C9E23A8B4DC0AB01 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,6 +618,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A421DBDF199E02D000F857E2 /* en */,
+				A48BFF9819C0277200CB502C /* ru */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -621,6 +627,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A421DBE8199E02D000F857E2 /* Base */,
+				A48BFF9519C0277200CB502C /* ru */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -629,6 +636,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A421DBEB199E02D000F857E2 /* Base */,
+				A48BFF9619C0277200CB502C /* ru */,
 			);
 			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
@@ -639,6 +647,15 @@
 				A421DC08199E02D000F857E2 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A48BFFA219C02B7F00CB502C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A48BFFA119C02B7F00CB502C /* Base */,
+				A48BFFA319C02BB400CB502C /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
