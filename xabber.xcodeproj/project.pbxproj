@@ -48,7 +48,7 @@
 		A421DC09199E02D000F857E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A421DC07199E02D000F857E2 /* InfoPlist.strings */; };
 		A43500F319BDA95C00485EE4 /* XBAccountEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = A43500F219BDA95C00485EE4 /* XBAccountEditController.m */; };
 		A43500F619BDC92700485EE4 /* XBAccountsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A43500F519BDC92700485EE4 /* XBAccountsController.m */; };
-		A48BFFA019C02B7F00CB502C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A48BFFA219C02B7F00CB502C /* Localizable.strings */; };
+		A48BFFA619C06EB200CB502C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A48BFFA219C02B7F00CB502C /* Localizable.strings */; };
 		B6543416F91040A5923464F8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA53C965164949F69C2EA7E8 /* libPods.a */; };
 		CC5E7FD9F980480B8952BDB6 /* libPods-xabberTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 944A0A7921684A89A96C5394 /* libPods-xabberTests.a */; };
 /* End PBXBuildFile section */
@@ -160,6 +160,7 @@
 		A48BFF9819C0277200CB502C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A48BFFA119C02B7F00CB502C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A48BFFA319C02BB400CB502C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A48BFFA519C06EA500CB502C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA53C965164949F69C2EA7E8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC98CB24FF864D288EE32C38 /* Pods-xabberTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xabberTests.xcconfig"; path = "Pods/Pods-xabberTests.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -479,11 +480,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A48BFFA619C06EB200CB502C /* Localizable.strings in Resources */,
 				A421DBEC199E02D000F857E2 /* Main_iPad.storyboard in Resources */,
 				A421DBF7199E02D000F857E2 /* Images.xcassets in Resources */,
 				A421DBE9199E02D000F857E2 /* Main_iPhone.storyboard in Resources */,
 				A421DBE0199E02D000F857E2 /* InfoPlist.strings in Resources */,
-				A48BFFA019C02B7F00CB502C /* Localizable.strings in Resources */,
 				75DCE9D4F122C8E3BB07125F /* .gitignore in Resources */,
 				75DCE79E43BD92C9AB570663 /* mogen.sh in Resources */,
 				75DCEE627A4AEA9076A55EE8 /* mogend.sh in Resources */,
@@ -654,6 +655,7 @@
 			children = (
 				A48BFFA119C02B7F00CB502C /* Base */,
 				A48BFFA319C02BB400CB502C /* ru */,
+				A48BFFA519C06EA500CB502C /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -677,7 +679,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dmitry Sobolev (23E3KBMURF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmitry Sobolev (23E3KBMURF)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -695,6 +698,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "274397be-f0df-4901-a364-c80caebe68da";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -716,7 +720,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dmitry Sobolev (23E3KBMURF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmitry Sobolev (23E3KBMURF)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -727,6 +732,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PROVISIONING_PROFILE = "274397be-f0df-4901-a364-c80caebe68da";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
