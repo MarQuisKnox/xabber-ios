@@ -72,12 +72,12 @@
         <scene sceneID="InT-M0-k7b">
             <objects>
                 <tableViewController id="A2c-JF-eB9" customClass="XBAccountsController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="RJM-3S-Xxo">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="RJM-3S-Xxo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="accountCell" textLabel="ObK-LG-doU" detailTextLabel="7Os-0n-1uV" style="IBUITableViewCellStyleSubtitle" id="7yn-wu-Jo0">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="accountCell" editingAccessoryType="disclosureIndicator" textLabel="ObK-LG-doU" detailTextLabel="7Os-0n-1uV" style="IBUITableViewCellStyleSubtitle" id="7yn-wu-Jo0">
                                 <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7yn-wu-Jo0" id="XnR-5u-Idg">
@@ -128,7 +128,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Accounts" id="0xP-rh-ekK">
-                        <barButtonItem key="leftBarButtonItem" title="Done" id="m55-6r-Ifj">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="m55-6r-Ifj">
                             <connections>
                                 <action selector="closeAccounts:" destination="A2c-JF-eB9" id="NN8-Wo-SgB"/>
                             </connections>
