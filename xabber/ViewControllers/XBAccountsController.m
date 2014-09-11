@@ -68,7 +68,7 @@
     if ([self isAccountCell:indexPath]) {
         XBAccount *account = self.accountManager.accounts[(NSUInteger) indexPath.row];
         cell.textLabel.text = account.accountJID;
-        cell.detailTextLabel.text = account.isLoggedIn ? @"Online": @"Offline";
+        cell.detailTextLabel.text = [self stateLabelByAccount:account];
     }
 
     return cell;
@@ -147,6 +147,29 @@
 
 - (BOOL)isAccountCell:(NSIndexPath *)indexPath {
     return indexPath.row < self.accountManager.accounts.count;
+}
+
+- (NSString *)stateLabelByAccount:(XBAccount *)account {
+    NSString *labelText = nil;
+
+    switch (account.state) {
+        case XBConnectionStateOffline:
+            labelText = @"Offline";
+            break;
+        case XBConnectionStateConnecting:
+            labelText = @"Connecting...";
+            break;
+        case XBConnectionStateOnline:
+            labelText = @"Online";
+            break;
+        case XBConnectionStateDisconnecting:
+            labelText = @"Disconnecting...";
+            break;
+        default:
+            labelText = @"";
+    }
+
+    return labelText;
 }
 
 @end

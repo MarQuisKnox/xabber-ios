@@ -79,7 +79,7 @@
     NSArray *enabledAccounts = [self.accounts filteredArrayUsingPredicate:enabledAccountsPredicate];
 
     for (XBAccount *account in enabledAccounts) {
-        if (!account.isLoggedIn) {
+        if (account.state == XBConnectionStateOffline) {
             [account login];
         }
     }

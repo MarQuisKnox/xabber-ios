@@ -4,20 +4,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#include "XBTypes.h"
 
 @class XBXMPPCoreDataAccount;
 @protocol XBAccountDelegate;
 @class XBXMPPConnector;
 @class XMPPStream;
 
-
-typedef enum {
-    XBAccountStatusAvailable,
-    XBAccountStatusChat,
-    XBAccountStatusAway,
-    XBAccountStatusXA,
-    XBAccountStatusDnD
-} XBAccountStatus;
 
 static NSString *const XBAccountFieldValueChanged = @"XBAccountFieldValueChanged";
 static NSString *const XBAccountSaved = @"XBAccountSaved";
@@ -54,9 +47,9 @@ static NSString *const XBAccountSaved = @"XBAccountSaved";
 
 - (void)logout;
 
-- (BOOL)isLoggedIn;
-
 - (BOOL)isValid;
+
+- (XBConnectionState)state;
 
 #pragma mark Equality
 

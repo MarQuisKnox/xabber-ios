@@ -13,6 +13,7 @@
 #import "XMPPModule.h"
 #import "XBError.h"
 #import "XMPPPresence+XBEquality.h"
+#import "XBAccount.h"
 
 @interface XMPPConnectorTests : XCTestCase {
     id mockXMPPStream;
@@ -121,11 +122,14 @@
         XCTAssertNil(e);
     }];
 
-    XCTAssertFalse([mockConnector isLoggedIn]);
+    XCTAssertEqual([mockConnector state], XBConnectionStateConnecting);
+
+    OCMStub([mockXMPPStream isDisconnected]).andReturn(NO);
+    OCMStub([mockXMPPStream isAuthenticated]).andReturn(YES);
 
     [mockConnector xmppStreamDidAuthenticate:mockXMPPStream];
 
-    XCTAssertTrue([mockConnector isLoggedIn]);
+    XCTAssertEqual([mockConnector state], XBConnectionStateOnline);
 }
 
 - (void)testSetStatusAvailable {

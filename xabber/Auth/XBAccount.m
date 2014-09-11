@@ -7,11 +7,11 @@
 #import <XMPPFramework/XMPPStream.h>
 #import "XBAccount.h"
 #import "XBXMPPCoreDataAccount.h"
-#import "XBXMPPConnector.h"
 #import "XBEmailValidator.h"
 #import "XBStringLengthValidator.h"
 #import "XBMinValueValidator.h"
 #import "XBMaxValueValidator.h"
+#import "XBXMPPConnector.h"
 
 
 static NSString *const XBKeychainServiceName = @"xabberService";
@@ -25,6 +25,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
     XBAccountStatus _status;
     NSString *_host;
     NSUInteger _port;
+
 }
 - (BOOL)validateAccountJID:(id *)value error:(NSError *__autoreleasing *)error;
 
@@ -278,7 +279,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
         [self.delegate accountWillLogout:self];
     }
 
-    if (!_connector.isLoggedIn) {
+    if (self.state != XBConnectionStateOnline) {
         [self.delegate account:self
          didNotLogoutWithError:[NSError errorWithDomain:@"xabberErrorDomain" code:1 userInfo:@{NSLocalizedDescriptionKey: @"Account already logged out"}]];
     }
@@ -298,10 +299,6 @@ static NSString *const XBKeychainServiceName = @"xabberService";
     }];
 }
 
-- (BOOL)isLoggedIn {
-    return _connector.isLoggedIn;
-}
-
 #pragma mark Validation
 
 - (BOOL)isValid {
@@ -318,6 +315,11 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 
     return YES;
 }
+
+- (XBConnectionState)state {
+    return _connector.state;
+}
+
 
 - (BOOL)validateAccountJID:(id *)value error:(NSError * __autoreleasing *)error {
     XBEmailValidator *emailValidator = [[XBEmailValidator alloc] init];
