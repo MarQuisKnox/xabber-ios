@@ -128,14 +128,15 @@
 }
 
 - (void)testAccountManagerPostNotificationOnAdd {
-    OCObserverMockObject *observerMock = [OCMockObject observerMock];
-    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:XBAccountManagerAccountAdded object:nil];
-    [[observerMock expect] notificationWithName:XBAccountManagerAccountAdded object:[OCMArg any]];
-
     XBAccount *account = [XBAccount accountWithConnector:nil];
     account.accountJID = @"accountName@example.com";
     account.password = @"accountName";
     [account save];
+
+    OCObserverMockObject *observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:XBAccountManagerAccountAdded object:nil];
+    [[observerMock expect] notificationWithName:XBAccountManagerAccountAdded object:[OCMArg any]
+                                       userInfo:@{@"account": account}];
 
     [manager addAccount:account];
 
@@ -144,16 +145,18 @@
 }
 
 - (void)testAccountManagerPostNotificationOnDelete {
-    OCObserverMockObject *observerMock = [OCMockObject observerMock];
-    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:XBAccountManagerAccountDeleted object:nil];
-    [[observerMock expect] notificationWithName:XBAccountManagerAccountDeleted object:[OCMArg any]];
-
     XBAccount *account = [XBAccount accountWithConnector:nil];
     account.accountJID = @"accountName@example.com";
     account.password = @"accountName";
     [account save];
 
     [manager addAccount:account];
+
+    OCObserverMockObject *observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:XBAccountManagerAccountDeleted object:nil];
+    [[observerMock expect] notificationWithName:XBAccountManagerAccountDeleted object:[OCMArg any]
+                                       userInfo:@{@"account": account}];
+
     [manager deleteAccount:account];
 
     OCMVerifyAll(observerMock);
@@ -161,16 +164,18 @@
 }
 
 - (void)testAccountManagerPostNotificationOnDeleteByJID {
-    OCObserverMockObject *observerMock = [OCMockObject observerMock];
-    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:XBAccountManagerAccountDeleted object:nil];
-    [[observerMock expect] notificationWithName:XBAccountManagerAccountDeleted object:[OCMArg any]];
-
     XBAccount *account = [XBAccount accountWithConnector:nil];
     account.accountJID = @"accountName@example.com";
     account.password = @"accountName";
     [account save];
 
     [manager addAccount:account];
+
+    OCObserverMockObject *observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:XBAccountManagerAccountDeleted object:nil];
+    [[observerMock expect] notificationWithName:XBAccountManagerAccountDeleted object:[OCMArg any]
+                                       userInfo:@{@"account": account}];
+
     [manager deleteAccountWithID:@"accountName@example.com"];
 
     OCMVerifyAll(observerMock);

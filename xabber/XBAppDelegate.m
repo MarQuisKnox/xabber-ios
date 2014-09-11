@@ -9,6 +9,8 @@
 #import "XBAppDelegate.h"
 
 #import "SSKeychain.h"
+#import "XBAccountManager.h"
+#import "XBAccount.h"
 
 @implementation XBAppDelegate
 
@@ -30,9 +32,27 @@
         UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
 //        XBMasterViewController *controller = (XBMasterViewController *)navigationController.topViewController;
     }
+
+    [[XBAccountManager sharedInstance] loginToEnabledAccounts];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginToNewAccount:) name:XBAccountManagerAccountAdded object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutFromRemovedAccount:) name:XBAccountManagerAccountDeleted object:nil];
+
     return YES;
 }
-							
+
+- (void)logoutFromRemovedAccount:(NSNotification *)notification {
+    XBAccount *account = notification.userInfo[@"account"];
+
+    [account logout];
+}
+
+- (void)loginToNewAccount:(NSNotification *)notification {
+    XBAccount *account = notification.userInfo[@"account"];
+
+    [account login];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -82,5 +102,9 @@
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
+
+#pragma mark Login
+
+
 
 @end

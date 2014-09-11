@@ -44,7 +44,7 @@
     if (account && !account.isNew) {
         [_accounts addObject:account];
 
-        [self postNotificationWithName:XBAccountManagerAccountAdded];
+        [self postNotificationWithName:XBAccountManagerAccountAdded account:account];
     }
 }
 
@@ -59,7 +59,7 @@
         [account delete];
         [_accounts removeObject:account];
 
-        [self postNotificationWithName:XBAccountManagerAccountDeleted];
+        [self postNotificationWithName:XBAccountManagerAccountDeleted account:account];
     }
 }
 
@@ -100,12 +100,13 @@
      XBAccount *account = notification.userInfo[@"account"];
 
     if ([self.accounts containsObject:account]) {
-        [self postNotificationWithName:XBAccountManagerAccountChanged];
+        [self postNotificationWithName:XBAccountManagerAccountChanged account:account];
     }
 }
 
-- (void)postNotificationWithName:(NSString *)notificationName {
-    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil userInfo:nil];
+- (void)postNotificationWithName:(NSString *)notificationName account:(XBAccount *)account {
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil
+                                                      userInfo:@{@"account": account}];
 }
 
 @end
