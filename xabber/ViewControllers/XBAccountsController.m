@@ -14,6 +14,7 @@
 
 @interface XBAccountsController ()
 
+- (BOOL)isAccountCell:(NSIndexPath *)indexPath;
 @end
 
 @implementation XBAccountsController
@@ -33,7 +34,11 @@
     
     self.accountManager = [XBAccountManager sharedInstance];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.tableView.allowsSelectionDuringEditing = YES;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountManagerChanged:)
+                                                 name:XBAccountManagerAccountAdded object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountManagerChanged:)
+                                                 name:XBAccountManagerAccountChanged object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,64 +61,39 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellIdentifier = @"accountCell";
 
-    if (indexPath.row == self.accountManager.accounts.count) {
-        cellIdentifier = @"newAccountCell";
-    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellReusableIdentifier:indexPath]
+                                                            forIndexPath:indexPath];
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-
-    if (indexPath.row < self.accountManager.accounts.count) {
+    if ([self isAccountCell:indexPath]) {
         XBAccount *account = self.accountManager.accounts[(NSUInteger) indexPath.row];
         cell.textLabel.text = account.accountJID;
         cell.detailTextLabel.text = account.isLoggedIn ? @"Online": @"Offline";
     }
-    
+
     return cell;
 }
 
-// Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == self.accountManager.accounts.count) {
-        return NO;
-    }
-    return YES;
+    return [self isAccountCell:indexPath];
 }
 
-/*
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        if ([self isAccountCell:indexPath]) {
+            [self removeAccountFromTableView:tableView indexPath:indexPath];
+        }
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.tableView.isEditing && indexPath.row < self.accountManager.accounts.count) {
+    if (self.tableView.isEditing && [self isAccountCell:indexPath]) {
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         [self performSegueWithIdentifier:@"edit_account" sender:cell];
+        self.tableView.editing = NO;
     }
 }
 
@@ -144,4 +124,29 @@
 - (IBAction)closeAccounts:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (void)accountManagerChanged:(NSNotification *)notification {
+    [self.tableView reloadData];
+}
+
+#pragma mark Private
+
+- (void)removeAccountFromTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
+    XBAccount *account = self.accountManager.accounts[(NSUInteger) indexPath.row];
+    [self.accountManager deleteAccount:account];
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (NSString *)cellReusableIdentifier:(NSIndexPath *)indexPath {
+    if ([self isAccountCell:indexPath]) {
+        return @"accountCell";
+    }
+
+    return @"newAccountCell";
+}
+
+- (BOOL)isAccountCell:(NSIndexPath *)indexPath {
+    return indexPath.row < self.accountManager.accounts.count;
+}
+
 @end

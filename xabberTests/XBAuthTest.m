@@ -7,11 +7,10 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "XBXMPPCoreDataAccount.h"
 #import "XBAccountManager.h"
 #import "OCMock/OCMock.h"
-#import "SSKeychain.h"
 #import "XBAccount.h"
+#import "OCObserverMockObject.h"
 
 @interface XBAuthTest : XCTestCase {
     XBAccountManager *manager;
@@ -41,13 +40,14 @@
 }
 
 - (void)testAccountAdd {
+    NSUInteger accountsBefore = manager.accounts.count;
     XBAccount *account = [XBAccount accountWithConnector:nil];
-    account.accountJID = @"accountName";
+    account.accountJID = @"accountName@example.com";
     [account save];
 
     [manager addAccount:account];
 
-    XCTAssertEqual([manager accounts].count, 1u);
+    XCTAssertEqual([manager accounts].count, accountsBefore + 1);
 }
 
 - (void)testTryAddNilAccount {
@@ -125,6 +125,56 @@
     [manager deleteAccount:account2];
 
     XCTAssertEqual(manager.accounts.count, 1u);
+}
+
+- (void)testAccountManagerPostNotificationOnAdd {
+    OCObserverMockObject *observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:XBAccountManagerAccountAdded object:nil];
+    [[observerMock expect] notificationWithName:XBAccountManagerAccountAdded object:[OCMArg any]];
+
+    XBAccount *account = [XBAccount accountWithConnector:nil];
+    account.accountJID = @"accountName@example.com";
+    account.password = @"accountName";
+    [account save];
+
+    [manager addAccount:account];
+
+    OCMVerifyAll(observerMock);
+    [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
+}
+
+- (void)testAccountManagerPostNotificationOnDelete {
+    OCObserverMockObject *observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:XBAccountManagerAccountDeleted object:nil];
+    [[observerMock expect] notificationWithName:XBAccountManagerAccountDeleted object:[OCMArg any]];
+
+    XBAccount *account = [XBAccount accountWithConnector:nil];
+    account.accountJID = @"accountName@example.com";
+    account.password = @"accountName";
+    [account save];
+
+    [manager addAccount:account];
+    [manager deleteAccount:account];
+
+    OCMVerifyAll(observerMock);
+    [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
+}
+
+- (void)testAccountManagerPostNotificationOnDeleteByJID {
+    OCObserverMockObject *observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:XBAccountManagerAccountDeleted object:nil];
+    [[observerMock expect] notificationWithName:XBAccountManagerAccountDeleted object:[OCMArg any]];
+
+    XBAccount *account = [XBAccount accountWithConnector:nil];
+    account.accountJID = @"accountName@example.com";
+    account.password = @"accountName";
+    [account save];
+
+    [manager addAccount:account];
+    [manager deleteAccountWithID:@"accountName@example.com"];
+
+    OCMVerifyAll(observerMock);
+    [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
 }
 
 @end

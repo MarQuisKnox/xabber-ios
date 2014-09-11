@@ -19,6 +19,9 @@ typedef enum {
     XBAccountStatusDnD
 } XBAccountStatus;
 
+static NSString *const XBAccountFieldValueChanged = @"XBAccountFieldValueChanged";
+static NSString *const XBAccountSaved = @"XBAccountSaved";
+
 @interface XBAccount : NSObject
 
 @property (nonatomic, strong) NSString *accountJID;

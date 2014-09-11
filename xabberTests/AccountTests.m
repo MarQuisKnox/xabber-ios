@@ -8,8 +8,10 @@
 
 #import <XCTest/XCTest.h>
 #import <SSKeychain/SSKeychain.h>
+#import <OCMock/OCMock.h>
 #import "XBAccount.h"
 #import "XBXMPPCoreDataAccount.h"
+#import "OCObserverMockObject.h"
 
 @interface AccountTests : XCTestCase
 
@@ -194,6 +196,105 @@
     acc.port = 655536;
 
     XCTAssertFalse(acc.isValid);
+}
+
+- (void)testNotificationOnSave {
+    XBAccount *account = [XBAccount accountWithConnector:nil];
+    account.accountJID = @"accountName@example.com";
+    account.password = @"accountName";
+
+    OCObserverMockObject *observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:XBAccountSaved object:nil];
+    [[observerMock expect] notificationWithName:XBAccountSaved object:[OCMArg any] userInfo:@{@"account": account}];
+
+    [account save];
+
+    OCMVerifyAll(observerMock);
+    [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
+}
+
+- (void)testNotificationOnChangeAccountJID {
+    XBAccount *account = [XBAccount accountWithConnector:nil];
+
+    OCObserverMockObject *observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:XBAccountFieldValueChanged object:nil];
+    [[observerMock expect] notificationWithName:XBAccountFieldValueChanged object:[OCMArg any]
+                                       userInfo:@{@"account": account, @"fieldName": @"accountJID"}];
+
+    account.accountJID = @"accountName@example.com";
+
+    OCMVerifyAll(observerMock);
+    [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
+}
+
+- (void)testNotificationOnChangePassword {
+    XBAccount *account = [XBAccount accountWithConnector:nil];
+
+    OCObserverMockObject *observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:XBAccountFieldValueChanged object:nil];
+    [[observerMock expect] notificationWithName:XBAccountFieldValueChanged object:[OCMArg any]
+                                       userInfo:@{@"account": account, @"fieldName": @"password"}];
+
+    account.password = @"accountName@example.com";
+
+    OCMVerifyAll(observerMock);
+    [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
+}
+
+- (void)testNotificationOnChangeAutoLogin {
+    XBAccount *account = [XBAccount accountWithConnector:nil];
+
+    OCObserverMockObject *observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:XBAccountFieldValueChanged object:nil];
+    [[observerMock expect] notificationWithName:XBAccountFieldValueChanged object:[OCMArg any]
+                                       userInfo:@{@"account": account, @"fieldName": @"autoLogin"}];
+
+    account.autoLogin = NO;
+
+    OCMVerifyAll(observerMock);
+    [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
+}
+
+- (void)testNotificationOnChangeStatus {
+    XBAccount *account = [XBAccount accountWithConnector:nil];
+
+    OCObserverMockObject *observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:XBAccountFieldValueChanged object:nil];
+    [[observerMock expect] notificationWithName:XBAccountFieldValueChanged object:[OCMArg any]
+                                       userInfo:@{@"account": account, @"fieldName": @"status"}];
+
+    account.status = XBAccountStatusXA;
+
+    OCMVerifyAll(observerMock);
+    [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
+}
+
+- (void)testNotificationOnChangeHost {
+    XBAccount *account = [XBAccount accountWithConnector:nil];
+
+    OCObserverMockObject *observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:XBAccountFieldValueChanged object:nil];
+    [[observerMock expect] notificationWithName:XBAccountFieldValueChanged object:[OCMArg any]
+                                       userInfo:@{@"account": account, @"fieldName": @"host"}];
+
+    account.host = @"example.com";
+
+    OCMVerifyAll(observerMock);
+    [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
+}
+
+- (void)testNotificationOnChangePort {
+    XBAccount *account = [XBAccount accountWithConnector:nil];
+
+    OCObserverMockObject *observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:XBAccountFieldValueChanged object:nil];
+    [[observerMock expect] notificationWithName:XBAccountFieldValueChanged object:[OCMArg any]
+                                       userInfo:@{@"account": account, @"fieldName": @"port"}];
+
+    account.port = 5223;
+
+    OCMVerifyAll(observerMock);
+    [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
 }
 
 @end
