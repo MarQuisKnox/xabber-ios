@@ -7,11 +7,13 @@
 
 @class XBAccountManager;
 @class XBAccount;
+@protocol XBAccountsControllerDelegate;
 
 
 @interface XBAccountsController : NSObject
 
-@property (nonatomic, strong) XBAccountManager *accountManager ;
+@property (nonatomic, strong) XBAccountManager *accountManager;
+@property (nonatomic, weak) id <XBAccountsControllerDelegate> delegate;
 
 - (instancetype)initWithAccountManager:(XBAccountManager *)accountManager;
 
@@ -24,5 +26,11 @@
 - (XBAccount *)accountWithIndexPath:(NSIndexPath *)indexPath;
 
 - (BOOL)deleteAccountInIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
+@protocol XBAccountsControllerDelegate <NSObject>
+
+- (void)controllerDidChange:(XBAccountsController *)controller;
 
 @end

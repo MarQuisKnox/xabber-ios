@@ -14,6 +14,7 @@
     self = [super init];
     if (self) {
         self.accountManager = accountManager;
+        [self setObservers];
     }
 
     return self;
@@ -48,6 +49,22 @@
     }
 
     return NO;
+}
+
+#pragma mark Observers
+
+- (void)setObservers {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountChanges:) name:XBAccountFieldValueChanged object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountChanges:) name:XBAccountConnectionStateChanged object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountChanges:) name:XBAccountSaved object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountChanges:) name:XBAccountManagerAccountAdded object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountChanges:) name:XBAccountManagerAccountDeleted object:nil];
+}
+
+- (void)accountChanges:(NSNotification *)notification {
+    if ([self.delegate respondsToSelector:@selector(controllerDidChange:)]) {
+        [self.delegate controllerDidChange:self];
+    }
 }
 
 

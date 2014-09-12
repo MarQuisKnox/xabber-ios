@@ -9,7 +9,6 @@
 @class XBAccount;
 
 static NSString *const XBAccountManagerAccountAdded = @"XBAccountManagerAccountAdded";
-static NSString *const XBAccountManagerAccountChanged = @"XBAccountManagerAccountChanged";
 static NSString *const XBAccountManagerAccountDeleted = @"XBAccountManagerAccountDeleted";
 
 @interface XBAccountManager : NSObject

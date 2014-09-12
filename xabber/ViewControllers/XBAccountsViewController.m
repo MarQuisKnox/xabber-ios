@@ -13,7 +13,7 @@
 #import "XBAccountManager.h"
 #import "XBAccountsController.h"
 
-@interface XBAccountsViewController ()
+@interface XBAccountsViewController () <XBAccountsControllerDelegate>
 
 @end
 
@@ -33,12 +33,9 @@
     [super viewDidLoad];
     
     self.accountsController = [XBAccountsController controllerWithAccountManager:[XBAccountManager sharedInstance]];
+    self.accountsController.delegate = self;
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountManagerChanged:)
-                                                 name:XBAccountManagerAccountAdded object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountManagerChanged:)
-                                                 name:XBAccountManagerAccountChanged object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -125,7 +122,9 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)accountManagerChanged:(NSNotification *)notification {
+#pragma mark XBAccountControllerDelegate
+
+- (void)controllerDidChange:(XBAccountsController *)controller {
     [self.tableView reloadData];
 }
 
