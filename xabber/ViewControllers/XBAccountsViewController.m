@@ -1,23 +1,23 @@
 //
-//  XBAccountsController.m
+//  XBAccountsViewController.m
 //  xabber
 //
 //  Created by Dmitry Sobolev on 08/09/14.
 //  Copyright (c) 2014 Redsolution LLC. All rights reserved.
 //
 
-#import "XBAccountsController.h"
-#import "XBAccountEditController.h"
+#import "XBAccountsViewController.h"
+#import "XBAccountEditViewController.h"
 #import "XBAccount.h"
 #import "XBXMPPConnector.h"
 #import "XBAccountManager.h"
+#import "XBAccountsController.h"
 
-@interface XBAccountsController ()
+@interface XBAccountsViewController ()
 
-- (BOOL)isAccountCell:(NSIndexPath *)indexPath;
 @end
 
-@implementation XBAccountsController
+@implementation XBAccountsViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,7 +32,7 @@
 {
     [super viewDidLoad];
     
-    self.accountManager = [XBAccountManager sharedInstance];
+    self.accountsController = [XBAccountsController controllerWithAccountManager:[XBAccountManager sharedInstance]];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountManagerChanged:)
@@ -56,7 +56,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.accountManager.accounts.count + 1;
+    return self.accountsController.numberOfAccounts + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -65,8 +65,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellReusableIdentifier:indexPath]
                                                             forIndexPath:indexPath];
 
-    if ([self isAccountCell:indexPath]) {
-        XBAccount *account = self.accountManager.accounts[(NSUInteger) indexPath.row];
+    if ([self.accountsController isAccountIndexPath:indexPath]) {
+        XBAccount *account = [self.accountsController accountWithIndexPath:indexPath];
         cell.textLabel.text = account.accountJID;
         cell.detailTextLabel.text = [self stateLabelByAccount:account];
     }
@@ -75,13 +75,13 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self isAccountCell:indexPath];
+    return [self.accountsController isAccountIndexPath:indexPath];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        if ([self isAccountCell:indexPath]) {
+        if ([self.accountsController isAccountIndexPath:indexPath]) {
             [self removeAccountFromTableView:tableView indexPath:indexPath];
         }
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
@@ -90,7 +90,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.tableView.isEditing && [self isAccountCell:indexPath]) {
+    if (self.tableView.isEditing && [self.accountsController isAccountIndexPath:indexPath]) {
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         [self performSegueWithIdentifier:@"edit_account" sender:cell];
         self.tableView.editing = NO;
@@ -104,16 +104,16 @@
 {
     if ([segue.identifier isEqualToString:@"new_account"]) {
         UINavigationController *controller = segue.destinationViewController;
-        XBAccountEditController *editController = (XBAccountEditController *) controller.topViewController;
+        XBAccountEditViewController *editController = (XBAccountEditViewController *) controller.topViewController;
         editController.account = [XBAccount accountWithConnector:[[XBXMPPConnector alloc] init]];
     }
 
     if ([segue.identifier isEqualToString:@"edit_account"]) {
         UINavigationController *controller = segue.destinationViewController;
-        XBAccountEditController *editController = (XBAccountEditController *) controller.topViewController;
+        XBAccountEditViewController *editController = (XBAccountEditViewController *) controller.topViewController;
 
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        XBAccount *account = self.accountManager.accounts[(NSUInteger) indexPath.row];
+        XBAccount *account = [self.accountsController accountWithIndexPath:indexPath];
 
         editController.account = account;
     }
@@ -132,21 +132,16 @@
 #pragma mark Private
 
 - (void)removeAccountFromTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
-    XBAccount *account = self.accountManager.accounts[(NSUInteger) indexPath.row];
-    [self.accountManager deleteAccount:account];
+    [self.accountsController deleteAccountInIndexPath:indexPath];
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (NSString *)cellReusableIdentifier:(NSIndexPath *)indexPath {
-    if ([self isAccountCell:indexPath]) {
+    if ([self.accountsController isAccountIndexPath:indexPath]) {
         return @"accountCell";
     }
 
     return @"newAccountCell";
-}
-
-- (BOOL)isAccountCell:(NSIndexPath *)indexPath {
-    return indexPath.row < self.accountManager.accounts.count;
 }
 
 - (NSString *)stateLabelByAccount:(XBAccount *)account {

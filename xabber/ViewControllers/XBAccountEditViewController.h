@@ -1,5 +1,5 @@
 //
-//  XBAccountEditController.h
+//  XBAccountEditViewController.h
 //  xabber
 //
 //  Created by Dmitry Sobolev on 08/09/14.
@@ -10,7 +10,7 @@
 
 @class XBAccount;
 
-@interface XBAccountEditController : UITableViewController
+@interface XBAccountEditViewController : UITableViewController
 @property (weak, nonatomic) IBOutlet UITextField *username;
 @property (weak, nonatomic) IBOutlet UITextField *password;
 @property (weak, nonatomic) IBOutlet UISwitch *autoLogin;

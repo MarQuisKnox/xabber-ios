@@ -1,5 +1,5 @@
 //
-//  XBAccountsController.h
+//  XBAccountsViewController.h
 //  xabber
 //
 //  Created by Dmitry Sobolev on 08/09/14.
@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class XBAccountManager;
+@class XBAccountsController;
 
-@interface XBAccountsController : UITableViewController
+@interface XBAccountsViewController : UITableViewController
 
-@property (nonatomic, strong) XBAccountManager *accountManager;
+@property (nonatomic, strong) XBAccountsController *accountsController;
 
 - (IBAction)closeAccounts:(id)sender;
 @end

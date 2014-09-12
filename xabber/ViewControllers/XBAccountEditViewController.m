@@ -1,20 +1,20 @@
 //
-//  XBAccountEditController.m
+//  XBAccountEditViewController.m
 //  xabber
 //
 //  Created by Dmitry Sobolev on 08/09/14.
 //  Copyright (c) 2014 Redsolution LLC. All rights reserved.
 //
 
-#import "XBAccountEditController.h"
+#import "XBAccountEditViewController.h"
 #import "XBAccount.h"
 #import "XBAccountManager.h"
 
-@interface XBAccountEditController ()
+@interface XBAccountEditViewController ()
 
 @end
 
-@implementation XBAccountEditController
+@implementation XBAccountEditViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

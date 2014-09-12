@@ -71,7 +71,7 @@
         <!--Accounts Controller - Accounts-->
         <scene sceneID="InT-M0-k7b">
             <objects>
-                <tableViewController id="A2c-JF-eB9" customClass="XBAccountsController" sceneMemberID="viewController">
+                <tableViewController id="A2c-JF-eB9" customClass="XBAccountsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="RJM-3S-Xxo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -145,7 +145,7 @@
         <!--Account Edit Controller - Edit account-->
         <scene sceneID="j4U-QD-hQW">
             <objects>
-                <tableViewController id="9wa-XJ-h9I" customClass="XBAccountEditController" sceneMemberID="viewController">
+                <tableViewController id="9wa-XJ-h9I" customClass="XBAccountEditViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="R9g-QB-QB0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
