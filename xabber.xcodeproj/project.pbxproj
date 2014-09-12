@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		75DCE1FC1EF11EF8344633EB /* XBAccountFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCEADDBFE9F030B66635EF /* XBAccountFactory.m */; };
+		75DCE0308BF8F84696E83FAA /* XBStringLengthValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE943EDC5F6698DCE1547 /* XBStringLengthValidator.m */; };
+		75DCE213C93A60C708C2A02F /* XBEmailValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE540A21D3E7DD4890EBE /* XBEmailValidator.m */; };
+		75DCE23E07F00280D157045F /* XBRequiredValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCEB5711EFD30FAAA386FA /* XBRequiredValidator.m */; };
+		75DCE353CB594AF8EDEA7C3D /* XBMinValueValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCEA59D6BBB763F840005A /* XBMinValueValidator.m */; };
 		75DCE48C14BBBBDA5642E52F /* XBXMPPConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE4A385E2C649E16EA677 /* XBXMPPConnector.m */; };
 		75DCE4B321E2B9D44627B51D /* AccountTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCEEA7F17D23658AF445DB /* AccountTests.m */; };
+		75DCE4C79781FF1F5FCD34C7 /* ValidatorsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCEEBD0523FB54D0B1D6DE /* ValidatorsTests.m */; };
+		75DCE501A6AFCFC5583CE3E4 /* XBContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE6950CE1F00AE1310EFE /* XBContact.m */; };
+		75DCE5ABE93A4E98F45E4C1A /* XBClassValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCEA4ABA34835710E5A483 /* XBClassValidator.m */; };
 		75DCE5E059A0113482DA39CC /* XBAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCEB2BD63DFA9BB5FA1A87 /* XBAccountManager.m */; };
 		75DCE5E9B009952060DB1290 /* XBAuthTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCED516A2BF3745537CB36 /* XBAuthTest.m */; };
 		75DCE79E43BD92C9AB570663 /* mogen.sh in Resources */ = {isa = PBXBuildFile; fileRef = 75DCE9235B36DF8083D25ECA /* mogen.sh */; };
@@ -18,7 +24,10 @@
 		75DCE9A2CACC2E1827D6CBE6 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 75DCE904070B7C93366CF1B9 /* .travis.yml */; };
 		75DCE9D4F122C8E3BB07125F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 75DCED47E6E3DC91302E4215 /* .gitignore */; };
 		75DCE9DB4183ABEB2BD980FD /* XMPPPresence+XBEquality.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE1AE3570B5B13C2B700D /* XMPPPresence+XBEquality.m */; };
+		75DCEA5B4FA15D8980989C38 /* XBTypes.h in Resources */ = {isa = PBXBuildFile; fileRef = 75DCE4E8E6A5E52515DFF361 /* XBTypes.h */; };
 		75DCEB83DF5C824D7CE5B3A7 /* XMPPConnectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE73E0BE2D2A0FA4CD645 /* XMPPConnectorTests.m */; };
+		75DCEC8A990C6D4A5573994E /* XBMaxValueValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCED9701ACF8BEA21AE48C /* XBMaxValueValidator.m */; };
+		75DCEE2ED27D89898EA3F4B4 /* XBContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE9A4DE3673AB789F615E /* XBContactList.m */; };
 		75DCEE627A4AEA9076A55EE8 /* mogend.sh in Resources */ = {isa = PBXBuildFile; fileRef = 75DCE13BBDB715407F1B73AA /* mogend.sh */; };
 		A41DB9F119A2168A00B3AB93 /* xabber.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A41DB9EF19A2168A00B3AB93 /* xabber.xcdatamodeld */; };
 		A41DB9F719A218F500B3AB93 /* XBXMPPCoreDataAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = A41DB9F419A218F500B3AB93 /* XBXMPPCoreDataAccount.m */; };
@@ -32,14 +41,15 @@
 		A421DBE6199E02D000F857E2 /* XBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A421DBE5199E02D000F857E2 /* XBAppDelegate.m */; };
 		A421DBE9199E02D000F857E2 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A421DBE7199E02D000F857E2 /* Main_iPhone.storyboard */; };
 		A421DBEC199E02D000F857E2 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A421DBEA199E02D000F857E2 /* Main_iPad.storyboard */; };
-		A421DBF2199E02D000F857E2 /* XBMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A421DBF1199E02D000F857E2 /* XBMasterViewController.m */; };
-		A421DBF5199E02D000F857E2 /* XBDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A421DBF4199E02D000F857E2 /* XBDetailViewController.m */; };
 		A421DBF7199E02D000F857E2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A421DBF6199E02D000F857E2 /* Images.xcassets */; };
 		A421DBFE199E02D000F857E2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A421DBFD199E02D000F857E2 /* XCTest.framework */; };
 		A421DBFF199E02D000F857E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A421DBD3199E02D000F857E2 /* Foundation.framework */; };
 		A421DC00199E02D000F857E2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A421DBD7199E02D000F857E2 /* UIKit.framework */; };
 		A421DC01199E02D000F857E2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A421DBD9199E02D000F857E2 /* CoreData.framework */; };
 		A421DC09199E02D000F857E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A421DC07199E02D000F857E2 /* InfoPlist.strings */; };
+		A43500F319BDA95C00485EE4 /* XBAccountEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = A43500F219BDA95C00485EE4 /* XBAccountEditController.m */; };
+		A43500F619BDC92700485EE4 /* XBAccountsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A43500F519BDC92700485EE4 /* XBAccountsController.m */; };
+		A48BFFA619C06EB200CB502C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A48BFFA219C02B7F00CB502C /* Localizable.strings */; };
 		B6543416F91040A5923464F8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA53C965164949F69C2EA7E8 /* libPods.a */; };
 		CC5E7FD9F980480B8952BDB6 /* libPods-xabberTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 944A0A7921684A89A96C5394 /* libPods-xabberTests.a */; };
 /* End PBXBuildFile section */
@@ -78,27 +88,43 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		75DCE0901054B52E74BDBC07 /* XBMaxValueValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBMaxValueValidator.h; sourceTree = "<group>"; };
 		75DCE13BBDB715407F1B73AA /* mogend.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = mogend.sh; sourceTree = "<group>"; };
 		75DCE1AE3570B5B13C2B700D /* XMPPPresence+XBEquality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XMPPPresence+XBEquality.m"; sourceTree = "<group>"; };
 		75DCE2E5958345301F5FB5B6 /* XBAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccount.m; sourceTree = "<group>"; };
+		75DCE46563847633E289687F /* XBClassValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBClassValidator.h; sourceTree = "<group>"; };
 		75DCE48EA075773D65EA2DA2 /* XBXMPPConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBXMPPConnector.h; sourceTree = "<group>"; };
 		75DCE4A385E2C649E16EA677 /* XBXMPPConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBXMPPConnector.m; sourceTree = "<group>"; };
+		75DCE4E8E6A5E52515DFF361 /* XBTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBTypes.h; sourceTree = "<group>"; };
+		75DCE540A21D3E7DD4890EBE /* XBEmailValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBEmailValidator.m; sourceTree = "<group>"; };
 		75DCE5538A18D8CE3D0F00E6 /* XMPPFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
-		75DCE69B58F6D79FFACFB4CF /* XBAccountFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountFactory.h; sourceTree = "<group>"; };
+		75DCE6911215C0CAA27BD043 /* XBStringLengthValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBStringLengthValidator.h; sourceTree = "<group>"; };
+		75DCE6950CE1F00AE1310EFE /* XBContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBContact.m; sourceTree = "<group>"; };
 		75DCE73E0BE2D2A0FA4CD645 /* XMPPConnectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPConnectorTests.m; sourceTree = "<group>"; };
 		75DCE7BDBED11F4610A7D73E /* XBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBError.h; sourceTree = "<group>"; };
 		75DCE904070B7C93366CF1B9 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = file.yml; path = .travis.yml; sourceTree = "<group>"; };
 		75DCE9235B36DF8083D25ECA /* mogen.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = mogen.sh; sourceTree = "<group>"; };
-		75DCEA9DE81E1325F821F7FB /* XBConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBConnector.h; sourceTree = "<group>"; };
-		75DCEADDBFE9F030B66635EF /* XBAccountFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountFactory.m; sourceTree = "<group>"; };
+		75DCE943EDC5F6698DCE1547 /* XBStringLengthValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBStringLengthValidator.m; sourceTree = "<group>"; };
+		75DCE9A4DE3673AB789F615E /* XBContactList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBContactList.m; sourceTree = "<group>"; };
+		75DCE9ADA7CC1833B8D513F7 /* XBContactList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBContactList.h; sourceTree = "<group>"; };
+		75DCEA4ABA34835710E5A483 /* XBClassValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBClassValidator.m; sourceTree = "<group>"; };
+		75DCEA59D6BBB763F840005A /* XBMinValueValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBMinValueValidator.m; sourceTree = "<group>"; };
+		75DCEAA2F7C599948E74460D /* XBValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBValidator.h; sourceTree = "<group>"; };
+		75DCEAA6D0D70640CC681139 /* XBContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBContact.h; sourceTree = "<group>"; };
 		75DCEB2BD63DFA9BB5FA1A87 /* XBAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountManager.m; sourceTree = "<group>"; };
+		75DCEB5711EFD30FAAA386FA /* XBRequiredValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBRequiredValidator.m; sourceTree = "<group>"; };
 		75DCEBA4AB61EAD736243C5F /* XBAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountManager.h; sourceTree = "<group>"; };
 		75DCECC77ED2B754ED2DF249 /* AccountConnectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountConnectorTests.m; sourceTree = "<group>"; };
+		75DCED2989A8CF77616FB53B /* XBRequiredValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBRequiredValidator.h; sourceTree = "<group>"; };
 		75DCED47E6E3DC91302E4215 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		75DCED516A2BF3745537CB36 /* XBAuthTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAuthTest.m; sourceTree = "<group>"; };
 		75DCED66D62ECECB1000DBB5 /* XBAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccount.h; sourceTree = "<group>"; };
 		75DCED6B494282AAA76811B9 /* XMPPPresence+XBEquality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XMPPPresence+XBEquality.h"; sourceTree = "<group>"; };
+		75DCED9701ACF8BEA21AE48C /* XBMaxValueValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBMaxValueValidator.m; sourceTree = "<group>"; };
+		75DCEE36640E2458CC519DF1 /* XBEmailValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBEmailValidator.h; sourceTree = "<group>"; };
 		75DCEEA7F17D23658AF445DB /* AccountTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountTests.m; sourceTree = "<group>"; };
+		75DCEEBD0523FB54D0B1D6DE /* ValidatorsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidatorsTests.m; sourceTree = "<group>"; };
+		75DCEF4BA703C79DB6750770 /* XBMinValueValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBMinValueValidator.h; sourceTree = "<group>"; };
 		8F8CDA0B349E4FB68FC4D371 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		944A0A7921684A89A96C5394 /* libPods-xabberTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-xabberTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4189FF319A370B00017C5C6 /* xabber 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "xabber 2.xcdatamodel"; sourceTree = "<group>"; };
@@ -122,15 +148,21 @@
 		A421DBE5199E02D000F857E2 /* XBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XBAppDelegate.m; sourceTree = "<group>"; };
 		A421DBE8199E02D000F857E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		A421DBEB199E02D000F857E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		A421DBF0199E02D000F857E2 /* XBMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XBMasterViewController.h; sourceTree = "<group>"; };
-		A421DBF1199E02D000F857E2 /* XBMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XBMasterViewController.m; sourceTree = "<group>"; };
-		A421DBF3199E02D000F857E2 /* XBDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XBDetailViewController.h; sourceTree = "<group>"; };
-		A421DBF4199E02D000F857E2 /* XBDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XBDetailViewController.m; sourceTree = "<group>"; };
 		A421DBF6199E02D000F857E2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A421DBFC199E02D000F857E2 /* xabberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = xabberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A421DBFD199E02D000F857E2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A421DC06199E02D000F857E2 /* xabberTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "xabberTests-Info.plist"; sourceTree = "<group>"; };
 		A421DC08199E02D000F857E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A43500F119BDA95C00485EE4 /* XBAccountEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountEditController.h; sourceTree = "<group>"; };
+		A43500F219BDA95C00485EE4 /* XBAccountEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountEditController.m; sourceTree = "<group>"; };
+		A43500F419BDC92700485EE4 /* XBAccountsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountsController.h; sourceTree = "<group>"; };
+		A43500F519BDC92700485EE4 /* XBAccountsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountsController.m; sourceTree = "<group>"; };
+		A48BFF9519C0277200CB502C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
+		A48BFF9619C0277200CB502C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main_iPad.strings; sourceTree = "<group>"; };
+		A48BFF9819C0277200CB502C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A48BFFA119C02B7F00CB502C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A48BFFA319C02BB400CB502C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A48BFFA519C06EA500CB502C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA53C965164949F69C2EA7E8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC98CB24FF864D288EE32C38 /* Pods-xabberTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xabberTests.xcconfig"; path = "Pods/Pods-xabberTests.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -184,6 +216,17 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		75DCE72545F2E40CACD069B5 /* ContactList */ = {
+			isa = PBXGroup;
+			children = (
+				75DCE9A4DE3673AB789F615E /* XBContactList.m */,
+				75DCE9ADA7CC1833B8D513F7 /* XBContactList.h */,
+				75DCE6950CE1F00AE1310EFE /* XBContact.m */,
+				75DCEAA6D0D70640CC681139 /* XBContact.h */,
+			);
+			path = ContactList;
+			sourceTree = "<group>";
+		};
 		75DCE9417E5796027D592E98 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +234,26 @@
 				75DCE13BBDB715407F1B73AA /* mogend.sh */,
 			);
 			path = Scripts;
+			sourceTree = "<group>";
+		};
+		75DCE96D77E155A0DFC1CD69 /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				75DCEAA2F7C599948E74460D /* XBValidator.h */,
+				75DCEB5711EFD30FAAA386FA /* XBRequiredValidator.m */,
+				75DCED2989A8CF77616FB53B /* XBRequiredValidator.h */,
+				75DCE943EDC5F6698DCE1547 /* XBStringLengthValidator.m */,
+				75DCE6911215C0CAA27BD043 /* XBStringLengthValidator.h */,
+				75DCEA4ABA34835710E5A483 /* XBClassValidator.m */,
+				75DCE46563847633E289687F /* XBClassValidator.h */,
+				75DCE540A21D3E7DD4890EBE /* XBEmailValidator.m */,
+				75DCEE36640E2458CC519DF1 /* XBEmailValidator.h */,
+				75DCEA59D6BBB763F840005A /* XBMinValueValidator.m */,
+				75DCEF4BA703C79DB6750770 /* XBMinValueValidator.h */,
+				75DCED9701ACF8BEA21AE48C /* XBMaxValueValidator.m */,
+				75DCE0901054B52E74BDBC07 /* XBMaxValueValidator.h */,
+			);
+			path = Validators;
 			sourceTree = "<group>";
 		};
 		75DCEBA5202F56CDDDA0E0E9 /* Test Categories */ = {
@@ -207,9 +270,19 @@
 			children = (
 				75DCE4A385E2C649E16EA677 /* XBXMPPConnector.m */,
 				75DCE48EA075773D65EA2DA2 /* XBXMPPConnector.h */,
-				75DCEA9DE81E1325F821F7FB /* XBConnector.h */,
 			);
 			path = Connector;
+			sourceTree = "<group>";
+		};
+		75DCEC60E3E7819FA27AD9C9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A43500F119BDA95C00485EE4 /* XBAccountEditController.h */,
+				A43500F219BDA95C00485EE4 /* XBAccountEditController.m */,
+				A43500F419BDC92700485EE4 /* XBAccountsController.h */,
+				A43500F519BDC92700485EE4 /* XBAccountsController.m */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		75DCED989299E47B17AEB78D /* Auth */ = {
@@ -219,8 +292,6 @@
 				75DCEBA4AB61EAD736243C5F /* XBAccountManager.h */,
 				75DCE2E5958345301F5FB5B6 /* XBAccount.m */,
 				75DCED66D62ECECB1000DBB5 /* XBAccount.h */,
-				75DCEADDBFE9F030B66635EF /* XBAccountFactory.m */,
-				75DCE69B58F6D79FFACFB4CF /* XBAccountFactory.h */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -279,16 +350,16 @@
 				A421DBE5199E02D000F857E2 /* XBAppDelegate.m */,
 				A421DBE7199E02D000F857E2 /* Main_iPhone.storyboard */,
 				A421DBEA199E02D000F857E2 /* Main_iPad.storyboard */,
-				A421DBF0199E02D000F857E2 /* XBMasterViewController.h */,
-				A421DBF1199E02D000F857E2 /* XBMasterViewController.m */,
-				A421DBF3199E02D000F857E2 /* XBDetailViewController.h */,
-				A421DBF4199E02D000F857E2 /* XBDetailViewController.m */,
 				A421DBF6199E02D000F857E2 /* Images.xcassets */,
 				A421DBDC199E02D000F857E2 /* Supporting Files */,
 				75DCED989299E47B17AEB78D /* Auth */,
 				75DCE52C7223F0D399B20C35 /* CoreData */,
 				75DCEC5FA353F5424C46CC00 /* Connector */,
 				75DCE7BDBED11F4610A7D73E /* XBError.h */,
+				75DCE72545F2E40CACD069B5 /* ContactList */,
+				75DCEC60E3E7819FA27AD9C9 /* ViewControllers */,
+				75DCE96D77E155A0DFC1CD69 /* Validators */,
+				75DCE4E8E6A5E52515DFF361 /* XBTypes.h */,
 			);
 			path = xabber;
 			sourceTree = "<group>";
@@ -300,6 +371,7 @@
 				A421DBDE199E02D000F857E2 /* InfoPlist.strings */,
 				A421DBE1199E02D000F857E2 /* main.m */,
 				A421DBE3199E02D000F857E2 /* xabber-Prefix.pch */,
+				A48BFFA219C02B7F00CB502C /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -313,6 +385,7 @@
 				75DCECC77ED2B754ED2DF249 /* AccountConnectorTests.m */,
 				75DCE73E0BE2D2A0FA4CD645 /* XMPPConnectorTests.m */,
 				75DCEBA5202F56CDDDA0E0E9 /* Test Categories */,
+				75DCEEBD0523FB54D0B1D6DE /* ValidatorsTests.m */,
 			);
 			path = xabberTests;
 			sourceTree = "<group>";
@@ -392,6 +465,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = A421DBC7199E02D000F857E2;
 			productRefGroup = A421DBD1199E02D000F857E2 /* Products */;
@@ -409,6 +483,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A48BFFA619C06EB200CB502C /* Localizable.strings in Resources */,
 				A421DBEC199E02D000F857E2 /* Main_iPad.storyboard in Resources */,
 				A421DBF7199E02D000F857E2 /* Images.xcassets in Resources */,
 				A421DBE9199E02D000F857E2 /* Main_iPhone.storyboard in Resources */,
@@ -417,6 +492,7 @@
 				75DCE79E43BD92C9AB570663 /* mogen.sh in Resources */,
 				75DCEE627A4AEA9076A55EE8 /* mogend.sh in Resources */,
 				75DCE9A2CACC2E1827D6CBE6 /* .travis.yml in Resources */,
+				75DCEA5B4FA15D8980989C38 /* XBTypes.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,18 +574,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A421DBF2199E02D000F857E2 /* XBMasterViewController.m in Sources */,
 				A41DB9F719A218F500B3AB93 /* XBXMPPCoreDataAccount.m in Sources */,
 				A41DB9F119A2168A00B3AB93 /* xabber.xcdatamodeld in Sources */,
 				A421DBE6199E02D000F857E2 /* XBAppDelegate.m in Sources */,
 				A421DBE2199E02D000F857E2 /* main.m in Sources */,
 				A41DB9FE19A2190200B3AB93 /* _XBXMPPCoreDataAccount.m in Sources */,
-				A421DBF5199E02D000F857E2 /* XBDetailViewController.m in Sources */,
 				75DCE5E059A0113482DA39CC /* XBAccountManager.m in Sources */,
+				A43500F619BDC92700485EE4 /* XBAccountsController.m in Sources */,
 				75DCE93BD1E1D88C84714D60 /* XBAccount.m in Sources */,
 				75DCE48C14BBBBDA5642E52F /* XBXMPPConnector.m in Sources */,
 				75DCE9DB4183ABEB2BD980FD /* XMPPPresence+XBEquality.m in Sources */,
-				75DCE1FC1EF11EF8344633EB /* XBAccountFactory.m in Sources */,
+				A43500F319BDA95C00485EE4 /* XBAccountEditController.m in Sources */,
+				75DCEE2ED27D89898EA3F4B4 /* XBContactList.m in Sources */,
+				75DCE501A6AFCFC5583CE3E4 /* XBContact.m in Sources */,
+				75DCE23E07F00280D157045F /* XBRequiredValidator.m in Sources */,
+				75DCE0308BF8F84696E83FAA /* XBStringLengthValidator.m in Sources */,
+				75DCE5ABE93A4E98F45E4C1A /* XBClassValidator.m in Sources */,
+				75DCE213C93A60C708C2A02F /* XBEmailValidator.m in Sources */,
+				75DCE353CB594AF8EDEA7C3D /* XBMinValueValidator.m in Sources */,
+				75DCEC8A990C6D4A5573994E /* XBMaxValueValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,6 +604,7 @@
 				75DCE4B321E2B9D44627B51D /* AccountTests.m in Sources */,
 				75DCE8D8DF418719894E2084 /* AccountConnectorTests.m in Sources */,
 				75DCEB83DF5C824D7CE5B3A7 /* XMPPConnectorTests.m in Sources */,
+				75DCE4C79781FF1F5FCD34C7 /* ValidatorsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +623,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A421DBDF199E02D000F857E2 /* en */,
+				A48BFF9819C0277200CB502C /* ru */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -547,6 +632,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A421DBE8199E02D000F857E2 /* Base */,
+				A48BFF9519C0277200CB502C /* ru */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -555,6 +641,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A421DBEB199E02D000F857E2 /* Base */,
+				A48BFF9619C0277200CB502C /* ru */,
 			);
 			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
@@ -565,6 +652,16 @@
 				A421DC08199E02D000F857E2 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A48BFFA219C02B7F00CB502C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A48BFFA119C02B7F00CB502C /* Base */,
+				A48BFFA319C02BB400CB502C /* ru */,
+				A48BFFA519C06EA500CB502C /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -586,7 +683,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dmitry Sobolev (23E3KBMURF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmitry Sobolev (23E3KBMURF)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -604,6 +702,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "274397be-f0df-4901-a364-c80caebe68da";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -625,7 +724,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dmitry Sobolev (23E3KBMURF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmitry Sobolev (23E3KBMURF)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -636,6 +736,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PROVISIONING_PROFILE = "274397be-f0df-4901-a364-c80caebe68da";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

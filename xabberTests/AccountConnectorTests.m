@@ -9,7 +9,7 @@
 #import <XCTest/XCTest.h>
 #import <SSKeychain/SSKeychainQuery.h>
 #import "OCMock.h"
-#import "XBConnector.h"
+#import "XBXMPPConnector.h"
 #import "XBAccount.h"
 
 @interface AccountConnectorTests : XCTestCase {
@@ -25,7 +25,7 @@
 {
     [super setUp];
 
-    mockConnector = OCMProtocolMock(@protocol(XBConnector));
+    mockConnector = OCMClassMock([XBXMPPConnector class]);
     mockDelegate = OCMProtocolMock(@protocol(XBAccountDelegate));
 }
 
@@ -45,9 +45,9 @@
 - (void)testIsLoggedIn {
     XBAccount *account = [XBAccount accountWithConnector:mockConnector];
 
-    OCMStub([mockConnector isLoggedIn]).andReturn(YES);
+    OCMStub([mockConnector state]).andReturn(XBConnectionStateOnline);
 
-    XCTAssertTrue(account.isLoggedIn);
+    XCTAssertEqual(account.state, XBConnectionStateOnline);
 }
 
 - (void)testWillLoginDelegate {
@@ -112,7 +112,7 @@
     account.delegate = mockDelegate;
     NSError *e = [NSError errorWithDomain:@"xabberErrorDomain" code:1 userInfo:@{NSLocalizedDescriptionKey: @"Account already logged out"}];
 
-    OCMStub([mockConnector isLoggedIn]).andReturn(NO);
+    OCMStub([mockConnector state]).andReturn(XBConnectionStateOffline);
     OCMExpect([mockDelegate account:account didNotLogoutWithError:e]);
 
     [account logout];

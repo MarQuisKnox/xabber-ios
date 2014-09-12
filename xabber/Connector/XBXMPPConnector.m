@@ -3,10 +3,10 @@
 // Copyright (c) 2014 Redsolution LLC. All rights reserved.
 //
 
+#import "XBAccount.h"
 #import "XBXMPPConnector.h"
 #import "XMPPFramework.h"
 #import "XBError.h"
-#import "XMPPStream.h"
 
 @interface XBXMPPConnector () <XMPPStreamDelegate> {
     XMPPReconnect *_xmppReconnect;
@@ -18,7 +18,8 @@
 
     BOOL _allowSelfSignedCertificates;
     BOOL _allowSSLHostNameMismatch;
-    BOOL _isLoggedIn;
+
+    XBConnectionState _state;
 
     void (^_completionHandler)(NSError *error);
 }
@@ -36,14 +37,13 @@
 @end
 
 
-@implementation XBXMPPConnector {
-}
+@implementation XBXMPPConnector
 
 - (id)init {
     self = [super init];
     if (self) {
         [self setupStream];
-        _isLoggedIn = NO;
+        _state = XBConnectionStateOffline;
     }
 
     return self;
@@ -55,12 +55,13 @@
 
 #pragma mark Login/logout
 
-- (BOOL)isLoggedIn {
-    return _isLoggedIn;
+- (XBConnectionState)state {
+    return _state;
 }
 
 - (void)loginWithCompletion:(void (^)(NSError *error))completionHandler {
     _completionHandler = completionHandler;
+    _state = XBConnectionStateConnecting;
 
     if (![self.xmppStream isDisconnected]) {
         DDLogError(@"Stream already connected");
@@ -70,7 +71,7 @@
         return;
     }
 
-    if (self.account.accountID == nil || self.account.password == nil) {
+    if (self.account.accountJID == nil || self.account.password == nil) {
         DDLogError(@"Login or password are empty");
         [self completeWithError:[NSError errorWithDomain:XBXabberErrorDomain
                                                     code:XBLoginValidationError
@@ -80,7 +81,7 @@
 
     self.xmppStream.hostName = self.account.host;
     self.xmppStream.hostPort = (UInt16) self.account.port;
-    self.xmppStream.myJID = [XMPPJID jidWithString:self.account.accountID];
+    self.xmppStream.myJID = [XMPPJID jidWithString:self.account.accountJID];
 
     NSError *error = nil;
     if (![self.xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error])
@@ -93,6 +94,9 @@
 }
 
 - (void)logoutWithCompletion:(void (^)(NSError *error))completionHandler {
+    _completionHandler = completionHandler;
+    _state = XBConnectionStateDisconnecting;
+
     [self goOffline];
     [self.xmppStream disconnectAfterSending];
 }
@@ -159,7 +163,7 @@
     // or setup your own using raw SQLite, or create your own storage mechanism.
     // You can do it however you like! It's your application.
     // But you do need to provide the roster with some storage facility.
-    _xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
+    _xmppRosterStorage = [XMPPRosterCoreDataStorage sharedInstance];
     _xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:_xmppRosterStorage];
     _xmppRoster.autoFetchRoster = YES;
     _xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = YES;
@@ -207,6 +211,14 @@
 #pragma mark Private
 
 - (void)completeWithError:(NSError *)error {
+    if (self.xmppStream.isDisconnected) {
+        _state = XBConnectionStateOffline;
+    }
+
+    if (self.xmppStream.isAuthenticated) {
+        _state = XBConnectionStateOnline;
+    }
+
     _completionHandler(error);
     _completionHandler = nil;
 }
@@ -306,7 +318,6 @@
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
     [self goOnline];
 
-    _isLoggedIn = YES;
     [self completeWithError:nil];
 }
 
@@ -352,8 +363,6 @@
         return NO;
     if (_allowSSLHostNameMismatch != connector->_allowSSLHostNameMismatch)
         return NO;
-    if (_isLoggedIn != connector->_isLoggedIn)
-        return NO;
     if (_completionHandler != connector->_completionHandler)
         return NO;
     return YES;
@@ -369,10 +378,8 @@
     hash = hash * 31u + [_xmppVCardAvatarModule hash];
     hash = hash * 31u + _allowSelfSignedCertificates;
     hash = hash * 31u + _allowSSLHostNameMismatch;
-    hash = hash * 31u + _isLoggedIn;
     hash = hash * 31u + (NSUInteger) _completionHandler;
     return hash;
 }
-
 
 @end

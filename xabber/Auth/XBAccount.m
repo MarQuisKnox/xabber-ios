@@ -4,28 +4,116 @@
 //
 
 #import <SSKeychain/SSKeychain.h>
+#import <XMPPFramework/XMPPStream.h>
 #import "XBAccount.h"
 #import "XBXMPPCoreDataAccount.h"
-#import "XBConnector.h"
+#import "XBEmailValidator.h"
+#import "XBStringLengthValidator.h"
+#import "XBMinValueValidator.h"
+#import "XBMaxValueValidator.h"
+#import "XBXMPPConnector.h"
 
 
 static NSString *const XBKeychainServiceName = @"xabberService";
 
 @interface XBAccount() {
-    id<XBConnector> _connector;
+    XBXMPPConnector *_connector;
+
+    NSString *_accountJID;
+    NSString *_password;
+    BOOL _autoLogin;
+    XBAccountStatus _status;
+    NSString *_host;
+    NSUInteger _port;
+
 }
+- (BOOL)validateAccountJID:(id *)value error:(NSError *__autoreleasing *)error;
+
+- (BOOL)validatePassword:(id *)value error:(NSError *__autoreleasing *)error;
+
+- (BOOL)validateAutoLogin:(id *)value error:(NSError *__autoreleasing *)error;
+
+- (BOOL)validateStatus:(id *)value error:(NSError *__autoreleasing *)error;
+
+- (BOOL)validateHost:(id *)value error:(NSError *__autoreleasing *)error;
+
+- (BOOL)validatePort:(id *)value error:(NSError *__autoreleasing *)error;
 @end
 
 @implementation XBAccount
 
-- (instancetype)initWithConnector:(id <XBConnector>)connector coreDataAccount:(XBXMPPCoreDataAccount *)account {
+- (NSString *)accountJID {
+    return _accountJID;
+}
+
+- (void)setAccountJID:(NSString *)accountJID {
+    _accountJID = accountJID;
+
+    [self postNotificationWithName:XBAccountFieldValueChanged additionalInfo:@{@"fieldName" : @"accountJID"}];
+}
+
+- (NSString *)password {
+    return _password;
+}
+
+- (void)setPassword:(NSString *)password {
+    _password = password;
+
+    [self postNotificationWithName:XBAccountFieldValueChanged additionalInfo:@{@"fieldName" : @"password"}];
+}
+
+- (BOOL)autoLogin {
+    return _autoLogin;
+}
+
+- (void)setAutoLogin:(BOOL)autoLogin {
+    _autoLogin = autoLogin;
+
+    [self postNotificationWithName:XBAccountFieldValueChanged additionalInfo:@{@"fieldName" : @"autoLogin"}];
+}
+
+- (XBAccountStatus)status {
+    return _status;
+}
+
+- (void)setStatus:(XBAccountStatus)status {
+    _status = status;
+
+    [self postNotificationWithName:XBAccountFieldValueChanged additionalInfo:@{@"fieldName" : @"status"}];
+}
+
+- (NSString *)host {
+    return _host;
+}
+
+- (void)setHost:(NSString *)host {
+    _host = host;
+
+    [self postNotificationWithName:XBAccountFieldValueChanged additionalInfo:@{@"fieldName" : @"host"}];
+}
+
+- (NSUInteger)port {
+    return _port;
+}
+
+- (void)setPort:(NSUInteger)port {
+    _port = port;
+
+    [self postNotificationWithName:XBAccountFieldValueChanged additionalInfo:@{@"fieldName" : @"port"}];
+}
+
+- (XMPPStream *)stream {
+    return _connector.xmppStream;
+}
+
+- (instancetype)initWithConnector:(XBXMPPConnector *)connector coreDataAccount:(XBXMPPCoreDataAccount *)account {
     self = [super init];
     if (self) {
         _connector = connector;
         _connector.account = self;
         if (account) {
             [self loadFromCoreDataAccount:account];
-            [self loadPasswordWithAccountID:self.accountID];
+            [self loadPasswordWithAccountID:self.accountJID];
             _isNew = NO;
         }
         else {
@@ -38,15 +126,15 @@ static NSString *const XBKeychainServiceName = @"xabberService";
     return self;
 }
 
-+ (instancetype)accountWithConnector:(id <XBConnector>)connector coreDataAccount:(XBXMPPCoreDataAccount *)account {
++ (instancetype)accountWithConnector:(XBXMPPConnector *)connector coreDataAccount:(XBXMPPCoreDataAccount *)account {
     return [[self alloc] initWithConnector:connector coreDataAccount:account];
 }
 
-- (instancetype)initWithConnector:(id <XBConnector>)connector {
+- (instancetype)initWithConnector:(XBXMPPConnector *)connector {
     return [self initWithConnector:connector coreDataAccount:nil];
 }
 
-+ (instancetype)accountWithConnector:(id <XBConnector>)connector {
++ (instancetype)accountWithConnector:(XBXMPPConnector *)connector {
     return [[self alloc] initWithConnector:connector];
 }
 
@@ -63,6 +151,8 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 
     _isNew = NO;
 
+    [self postNotificationWithName:XBAccountSaved additionalInfo:nil];
+
     return YES;
 }
 
@@ -70,7 +160,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
     __block XBXMPPCoreDataAccount *account;
 
     if (_isNew) {
-        account = [XBXMPPCoreDataAccount MR_findFirstByAttribute:@"accountID" withValue:self.accountID];
+        account = [XBXMPPCoreDataAccount MR_findFirstByAttribute:@"accountID" withValue:self.accountJID];
 
         if (account) {
             return NO;
@@ -86,16 +176,16 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 
 - (BOOL)savePassword {
     if (!self.password) {
-        NSString *oldPassword = [SSKeychain passwordForService:XBKeychainServiceName account:self.accountID];
+        NSString *oldPassword = [SSKeychain passwordForService:XBKeychainServiceName account:self.accountJID];
 
         if (!oldPassword) {
             return YES;
         }
 
-        return [SSKeychain deletePasswordForService:XBKeychainServiceName account:self.accountID];
+        return [SSKeychain deletePasswordForService:XBKeychainServiceName account:self.accountJID];
     }
 
-    return [SSKeychain setPassword:self.password forService:XBKeychainServiceName account:self.accountID];
+    return [SSKeychain setPassword:self.password forService:XBKeychainServiceName account:self.accountJID];
 }
 
 #pragma mark Load
@@ -105,11 +195,11 @@ static NSString *const XBKeychainServiceName = @"xabberService";
         return NO;
     }
 
-    self.accountID = account.accountID;
+    self.accountJID = account.accountID;
     self.autoLogin = [account.autoLogin boolValue];
     self.status = (XBAccountStatus) [account.status integerValue];
     self.host = account.host;
-    self.port = (int16_t) [account.port integerValue];
+    self.port = (UInt16) [account.port integerValue];
 
     return YES;
 }
@@ -141,18 +231,22 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 }
 
 - (BOOL)deleteCoreData {
-    XBXMPPCoreDataAccount *account = [XBXMPPCoreDataAccount MR_findFirstByAttribute:@"accountID" withValue:self.accountID];
+    XBXMPPCoreDataAccount *account = [XBXMPPCoreDataAccount MR_findFirstByAttribute:@"accountID" withValue:self.accountJID];
+    BOOL success = NO;
 
     if (account) {
-        return [account MR_deleteEntity];
+        success = [account MR_deleteEntity];
+        if (success) {
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+        }
     }
 
-    return NO;
+    return success;
 }
 
 - (BOOL)deletePassword {
     if (self.password) {
-        return [SSKeychain deletePasswordForService:XBKeychainServiceName account:self.accountID];
+        return [SSKeychain deletePasswordForService:XBKeychainServiceName account:self.accountJID];
     }
 
     return YES;
@@ -185,7 +279,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
         [self.delegate accountWillLogout:self];
     }
 
-    if (!_connector.isLoggedIn) {
+    if (self.state != XBConnectionStateOnline) {
         [self.delegate account:self
          didNotLogoutWithError:[NSError errorWithDomain:@"xabberErrorDomain" code:1 userInfo:@{NSLocalizedDescriptionKey: @"Account already logged out"}]];
     }
@@ -205,24 +299,84 @@ static NSString *const XBKeychainServiceName = @"xabberService";
     }];
 }
 
-- (BOOL)isLoggedIn {
-    return _connector.isLoggedIn;
+#pragma mark Validation
+
+- (BOOL)isValid {
+    NSArray *validatingProperties = @[@"accountJID", @"password", @"autoLogin", @"status", @"host", @"port"];
+
+    NSError *error = nil;
+
+    for (NSString *propertyKeyPath in validatingProperties) {
+        id value = [self valueForKeyPath:propertyKeyPath];
+        if (![self validateValue:&value forKeyPath:propertyKeyPath error:&error]) {
+            return NO;
+        }
+    }
+
+    return YES;
 }
 
+- (XBConnectionState)state {
+    return _connector.state;
+}
+
+
+- (BOOL)validateAccountJID:(id *)value error:(NSError * __autoreleasing *)error {
+    XBEmailValidator *emailValidator = [[XBEmailValidator alloc] init];
+
+    return [emailValidator validateData:value error:error];
+}
+
+- (BOOL)validatePassword:(id *)value error:(NSError * __autoreleasing *)error {
+    XBStringLengthValidator *lengthValidator = [XBStringLengthValidator validatorWithMinLength:1];
+
+    return [lengthValidator validateData:value error:error];
+}
+
+- (BOOL)validateAutoLogin:(id *)value error:(NSError * __autoreleasing *)error {
+    return YES;
+}
+
+- (BOOL)validateStatus:(id *)value error:(NSError * __autoreleasing *)error {
+    return YES;
+}
+
+- (BOOL)validateHost:(id *)value error:(NSError * __autoreleasing *)error {
+    return YES;
+}
+
+- (BOOL)validatePort:(id *)value error:(NSError * __autoreleasing *)error {
+    if (*value == nil) {
+        *value = @0;
+    }
+
+    NSArray *validators = @[
+            [XBMinValueValidator validatorWithMinValue:1],
+            [XBMaxValueValidator validatorWithMaxValue:65536]
+    ];
+
+    for (id <XBValidator> validator in validators) {
+        if (![validator validateData:value error:error]) {
+            return NO;
+        }
+    }
+
+    return YES;
+}
 
 #pragma mark Private
 
 - (void)setDefaults {
-    self.status = XBAccountStatusAvailable;
-    self.autoLogin = YES;
-    self.port = 5222;
+    _status = XBAccountStatusAvailable;
+    _autoLogin = YES;
+    _port = 5222;
 }
 
 - (NSDictionary *)dumpToDictionary {
     NSMutableDictionary *data = [NSMutableDictionary dictionaryWithCapacity:5];
 
-    if (self.accountID) {
-        data[@"accountID"] = self.accountID;
+    if (self.accountJID) {
+        data[@"accountID"] = self.accountJID;
     }
 
     if (self.autoLogin) {
@@ -244,6 +398,16 @@ static NSString *const XBKeychainServiceName = @"xabberService";
     return data;
 }
 
+- (void)postNotificationWithName:(NSString *)name additionalInfo:(NSDictionary *)additionalInfo {
+    NSMutableDictionary *userInfo = [@{@"account" : self} mutableCopy];
+
+    if (additionalInfo) {
+        [userInfo addEntriesFromDictionary:additionalInfo];
+    }
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:name object:nil userInfo:userInfo];
+}
+
 #pragma mark Equality
 
 - (BOOL)isEqual:(id)other {
@@ -260,7 +424,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
         return YES;
     if (account == nil)
         return NO;
-    if (self.accountID != account.accountID && ![self.accountID isEqualToString:account.accountID])
+    if (self.accountJID != account.accountJID && ![self.accountJID isEqualToString:account.accountJID])
         return NO;
     if (self.password != account.password && ![self.password isEqualToString:account.password])
         return NO;
@@ -282,7 +446,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 }
 
 - (NSUInteger)hash {
-    NSUInteger hash = [self.accountID hash];
+    NSUInteger hash = [self.accountJID hash];
     hash = hash * 31u + [self.password hash];
     hash = hash * 31u + self.autoLogin;
     hash = hash * 31u + (NSUInteger) self.status;

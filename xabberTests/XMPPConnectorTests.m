@@ -13,6 +13,7 @@
 #import "XMPPModule.h"
 #import "XBError.h"
 #import "XMPPPresence+XBEquality.h"
+#import "XBAccount.h"
 
 @interface XMPPConnectorTests : XCTestCase {
     id mockXMPPStream;
@@ -67,7 +68,7 @@
 
 - (void)testCouldNotConnect {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
-    acc.accountID = @"test";
+    acc.accountJID = @"test";
     acc.password = @"password";
     NSError *testError = [NSError errorWithDomain:@""
                                              code:-1
@@ -85,7 +86,7 @@
 
 - (void)testStreamNotAuthenticate {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
-    acc.accountID = @"test";
+    acc.accountJID = @"test";
     acc.password = @"password";
     NSError *testError = [NSError errorWithDomain:@""
                                              code:-1
@@ -107,7 +108,7 @@
 
 - (void)testXMPPStreamDidAuthenticated {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
-    acc.accountID = @"test";
+    acc.accountJID = @"test";
     acc.password = @"password";
     acc.status = XBAccountStatusAvailable;
 
@@ -121,11 +122,14 @@
         XCTAssertNil(e);
     }];
 
-    XCTAssertFalse([mockConnector isLoggedIn]);
+    XCTAssertEqual([mockConnector state], XBConnectionStateConnecting);
+
+    OCMStub([mockXMPPStream isDisconnected]).andReturn(NO);
+    OCMStub([mockXMPPStream isAuthenticated]).andReturn(YES);
 
     [mockConnector xmppStreamDidAuthenticate:mockXMPPStream];
 
-    XCTAssertTrue([mockConnector isLoggedIn]);
+    XCTAssertEqual([mockConnector state], XBConnectionStateOnline);
 }
 
 - (void)testSetStatusAvailable {

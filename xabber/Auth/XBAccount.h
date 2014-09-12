@@ -4,41 +4,40 @@
 //
 
 #import <Foundation/Foundation.h>
+#include "XBTypes.h"
 
 @class XBXMPPCoreDataAccount;
 @protocol XBAccountDelegate;
-@protocol XBConnector;
+@class XBXMPPConnector;
+@class XMPPStream;
 
 
-typedef enum {
-    XBAccountStatusAvailable,
-    XBAccountStatusChat,
-    XBAccountStatusAway,
-    XBAccountStatusXA,
-    XBAccountStatusDnD
-} XBAccountStatus;
+static NSString *const XBAccountFieldValueChanged = @"XBAccountFieldValueChanged";
+static NSString *const XBAccountSaved = @"XBAccountSaved";
 
 @interface XBAccount : NSObject
 
-@property (nonatomic, strong) NSString *accountID;
+@property (nonatomic, strong) NSString *accountJID;
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, assign) BOOL autoLogin;
 @property (nonatomic, assign) XBAccountStatus status;
 @property (nonatomic, strong) NSString *host;
-@property (nonatomic, assign) UInt16 port;
+@property (nonatomic, assign) NSUInteger port;
 
 @property (nonatomic, readonly) BOOL isNew;
 @property (nonatomic, readonly) BOOL isDeleted;
 
-@property (nonatomic, strong) id<XBAccountDelegate> delegate;
+@property (nonatomic, readonly) XMPPStream *stream;
 
-- (instancetype)initWithConnector:(id <XBConnector>)connector coreDataAccount:(XBXMPPCoreDataAccount *)account;
+@property (nonatomic, weak) id<XBAccountDelegate> delegate;
 
-- (instancetype)initWithConnector:(id <XBConnector>)connector;
+- (instancetype)initWithConnector:(XBXMPPConnector *)connector coreDataAccount:(XBXMPPCoreDataAccount *)account;
 
-+ (instancetype)accountWithConnector:(id <XBConnector>)connector;
+- (instancetype)initWithConnector:(XBXMPPConnector *)connector;
 
-+ (instancetype)accountWithConnector:(id <XBConnector>)connector coreDataAccount:(XBXMPPCoreDataAccount *)account;
++ (instancetype)accountWithConnector:(XBXMPPConnector *)connector;
+
++ (instancetype)accountWithConnector:(XBXMPPConnector *)connector coreDataAccount:(XBXMPPCoreDataAccount *)account;
 
 - (BOOL)save;
 
@@ -48,7 +47,9 @@ typedef enum {
 
 - (void)logout;
 
-- (BOOL)isLoggedIn;
+- (BOOL)isValid;
+
+- (XBConnectionState)state;
 
 #pragma mark Equality
 
