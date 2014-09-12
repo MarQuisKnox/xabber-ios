@@ -122,14 +122,14 @@
         XCTAssertNil(e);
     }];
 
-    XCTAssertEqual([mockConnector state], XBConnectionStateConnecting);
+    XCTAssertEqual((XBConnectionState)[mockConnector state], XBConnectionStateConnecting);
 
     OCMStub([mockXMPPStream isDisconnected]).andReturn(NO);
     OCMStub([mockXMPPStream isAuthenticated]).andReturn(YES);
 
     [mockConnector xmppStreamDidAuthenticate:mockXMPPStream];
 
-    XCTAssertEqual([mockConnector state], XBConnectionStateOnline);
+    XCTAssertEqual((XBConnectionState)[mockConnector state], XBConnectionStateOnline);
 }
 
 - (void)testSetStatusAvailable {

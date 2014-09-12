@@ -47,7 +47,7 @@
 
     OCMStub([mockConnector state]).andReturn(XBConnectionStateOnline);
 
-    XCTAssertEqual(account.state, XBConnectionStateOnline);
+    XCTAssertEqual((XBConnectionState)account.state, XBConnectionStateOnline);
 }
 
 - (void)testWillLoginDelegate {
