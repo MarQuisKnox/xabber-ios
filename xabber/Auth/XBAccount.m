@@ -288,7 +288,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 }
 
 - (XBConnectionState)state {
-    return _connector.state;
+    return _connector.connectionState;
 }
 
 

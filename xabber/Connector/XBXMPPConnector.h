@@ -21,7 +21,7 @@
 
 - (void)setNewStatus:(XBAccountStatus)status;
 
-- (XBConnectionState)state;
+- (XBConnectionState)connectionState;
 
 - (BOOL)isEqual:(id)other;
 

@@ -52,7 +52,7 @@
 
 #pragma mark Login/logout
 
-- (XBConnectionState)state {
+- (XBConnectionState)connectionState {
     return _state;
 }
 

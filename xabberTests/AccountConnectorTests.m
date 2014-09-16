@@ -45,7 +45,7 @@
 - (void)testIsLoggedIn {
     XBAccount *account = [XBAccount accountWithConnector:mockConnector];
 
-    OCMStub([mockConnector state]).andReturn(XBConnectionStateOnline);
+    OCMStub([mockConnector connectionState]).andReturn(XBConnectionStateOnline);
 
     XCTAssertEqual((XBConnectionState)account.state, XBConnectionStateOnline);
 }
@@ -112,7 +112,7 @@
 //    account.delegate = mockDelegate;
     NSError *e = [NSError errorWithDomain:@"xabberErrorDomain" code:1 userInfo:@{NSLocalizedDescriptionKey: @"Account already logged out"}];
 
-    OCMStub([mockConnector state]).andReturn(XBConnectionStateOffline);
+    OCMStub([mockConnector connectionState]).andReturn(XBConnectionStateOffline);
 //    OCMExpect([mockDelegate account:account didNotLogoutWithError:e]);
 
     [account logout];
