@@ -7,7 +7,6 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "XBAccount.h"
 
-@class XBGroup;
 @class XMPPUserCoreDataStorageObject;
 
 typedef enum {
@@ -32,8 +31,6 @@ typedef enum {
 @property (nonatomic, readonly, weak) XBAccount *account;
 
 - (instancetype)initWithXMPPUser:(XMPPUserCoreDataStorageObject *)user;
-
-- (NSSet *)groups;
 
 - (void)updateContactWithXMPPUser:(XMPPUserCoreDataStorageObject *)user;
 

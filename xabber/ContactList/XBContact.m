@@ -10,13 +10,10 @@
 #import "XBAccountManager.h"
 
 @interface XBContact() {
-    NSMutableSet *_groups;
-
     __weak XBAccount *_account;
 }
 - (XBContactStatus)contactStatusByUser:(XMPPUserCoreDataStorageObject *)user;
 
-- (void)updateGroupsByUser:(XMPPUserCoreDataStorageObject *)user;
 @end
 
 
@@ -32,14 +29,10 @@
 }
 
 - (void)commonInit {
-    _groups = [NSMutableSet set];
+
 }
 
 #pragma mark Public
-
-- (NSSet *)groups {
-    return _groups;
-}
 
 - (void)updateContactWithXMPPUser:(XMPPUserCoreDataStorageObject *)user {
     _contactName = user.displayName;
@@ -48,8 +41,6 @@
     _statusText = user.primaryResource.status;
 
     _account = [[XBAccountManager sharedInstance] findAccountByJID:user.streamBareJidStr];
-
-    [self updateGroupsByUser:user];
 }
 
 #pragma mark Private
@@ -78,14 +69,6 @@
     return XBContactStatusAvailable;
 }
 
-- (void)updateGroupsByUser:(XMPPUserCoreDataStorageObject *)user {
-    [_groups removeAllObjects];
-
-    for (XMPPGroupCoreDataStorageObject *group in user.groups) {
-        [_groups addObject:group.name];
-    }
-}
-
 - (BOOL)isEqual:(id)other {
     if (other == self)
         return YES;
@@ -99,8 +82,6 @@
     if (self == contact)
         return YES;
     if (contact == nil)
-        return NO;
-    if (_groups != contact->_groups && ![_groups isEqualToSet:contact->_groups])
         return NO;
     if (self.contactName != contact.contactName && ![self.contactName isEqualToString:contact.contactName])
         return NO;
@@ -116,8 +97,7 @@
 }
 
 - (NSUInteger)hash {
-    NSUInteger hash = [_groups hash];
-    hash = hash * 31u + [self.contactName hash];
+    NSUInteger hash = [self.contactName hash];
     hash = hash * 31u + self.isOnline;
     hash = hash * 31u + (NSUInteger) self.status;
     hash = hash * 31u + [self.statusText hash];

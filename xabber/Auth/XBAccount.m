@@ -403,7 +403,9 @@ static NSString *const XBKeychainServiceName = @"xabberService";
         [userInfo addEntriesFromDictionary:additionalInfo];
     }
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:name object:nil userInfo:userInfo];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:name object:nil userInfo:userInfo];
+    });
 }
 
 #pragma mark Equality
