@@ -93,10 +93,17 @@
 }
 
 - (void)postNotificationWithName:(NSString *)notificationName account:(XBAccount *)account {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    void (^block)() = ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil
                                                           userInfo:@{@"account": account}];
-    });
+    };
+
+    if ([NSThread mainThread]) {
+        block();
+    }
+    else {
+        dispatch_async(dispatch_get_main_queue(), block);
+    }
 }
 
 @end
