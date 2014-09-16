@@ -68,7 +68,7 @@
             </objects>
             <point key="canvasLocation" x="459" y="64"/>
         </scene>
-        <!--Accounts Controller - Accounts-->
+        <!--Accounts View Controller - Accounts-->
         <scene sceneID="InT-M0-k7b">
             <objects>
                 <tableViewController id="A2c-JF-eB9" customClass="XBAccountsViewController" sceneMemberID="viewController">
@@ -77,29 +77,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="accountCell" editingAccessoryType="disclosureIndicator" textLabel="ObK-LG-doU" detailTextLabel="7Os-0n-1uV" style="IBUITableViewCellStyleSubtitle" id="7yn-wu-Jo0">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="accountCell" editingAccessoryType="disclosureIndicator" id="7yn-wu-Jo0" customClass="XBAccountViewCell">
                                 <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7yn-wu-Jo0" id="XnR-5u-Idg">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ObK-LG-doU">
-                                            <rect key="frame" x="15" y="3" width="34" height="22"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Account name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79c-vP-TKW">
+                                            <rect key="frame" x="15" y="2" width="233" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Os-0n-1uV">
-                                            <rect key="frame" x="15" y="25" width="43" height="15"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="account state" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FeT-DX-4EW">
+                                            <rect key="frame" x="15" y="25" width="233" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="FeT-DX-4EW" firstAttribute="leading" secondItem="XnR-5u-Idg" secondAttribute="leading" constant="15" id="DkG-Vm-ueA"/>
+                                        <constraint firstItem="FeT-DX-4EW" firstAttribute="top" secondItem="79c-vP-TKW" secondAttribute="bottom" constant="2" id="e8Z-XA-14H"/>
+                                        <constraint firstItem="79c-vP-TKW" firstAttribute="top" secondItem="XnR-5u-Idg" secondAttribute="top" constant="2" id="ouc-gh-1JF"/>
+                                        <constraint firstItem="79c-vP-TKW" firstAttribute="leading" secondItem="XnR-5u-Idg" secondAttribute="leading" constant="15" id="pRy-pv-guf"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="accountName" destination="79c-vP-TKW" id="wG6-YN-BPk"/>
+                                    <outlet property="accountState" destination="FeT-DX-4EW" id="FAL-50-IWM"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newAccountCell" textLabel="uPb-We-TRP" style="IBUITableViewCellStyleDefault" id="W3o-DJ-5MC">
                                 <rect key="frame" x="0.0" y="163" width="320" height="44"/>
@@ -142,7 +152,7 @@
             </objects>
             <point key="canvasLocation" x="902" y="-638"/>
         </scene>
-        <!--Account Edit Controller - Edit account-->
+        <!--Account Edit View Controller - Edit account-->
         <scene sceneID="j4U-QD-hQW">
             <objects>
                 <tableViewController id="9wa-XJ-h9I" customClass="XBAccountEditViewController" sceneMemberID="viewController">

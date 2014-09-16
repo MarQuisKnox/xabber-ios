@@ -12,6 +12,7 @@
 #import "XBXMPPConnector.h"
 #import "XBAccountManager.h"
 #import "XBAccountsController.h"
+#import "XBFillCellWithObject.h"
 
 @interface XBAccountsViewController () <XBAccountsControllerDelegate>
 
@@ -59,13 +60,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellReusableIdentifier:indexPath]
+    UITableViewCell <XBFillCellWithObject> *cell = [tableView dequeueReusableCellWithIdentifier:[self cellReusableIdentifier:indexPath]
                                                             forIndexPath:indexPath];
 
-    if ([self.accountsController isAccountIndexPath:indexPath]) {
-        XBAccount *account = [self.accountsController accountWithIndexPath:indexPath];
-        cell.textLabel.text = account.accountJID;
-        cell.detailTextLabel.text = [self stateLabelByAccount:account];
+    if ([self.accountsController isAccountIndexPath:indexPath] && [cell conformsToProtocol:@protocol(XBFillCellWithObject)]) {
+        [cell fillCellWithObject:[self.accountsController accountWithIndexPath:indexPath]];
     }
 
     return cell;

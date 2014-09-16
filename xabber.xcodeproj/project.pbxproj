@@ -49,6 +49,7 @@
 		A421DC00199E02D000F857E2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A421DBD7199E02D000F857E2 /* UIKit.framework */; };
 		A421DC01199E02D000F857E2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A421DBD9199E02D000F857E2 /* CoreData.framework */; };
 		A421DC09199E02D000F857E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A421DC07199E02D000F857E2 /* InfoPlist.strings */; };
+		A42E23E019C6C0000055CCF7 /* XBAccountViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A42E23DF19C6C0000055CCF7 /* XBAccountViewCell.m */; };
 		A43500F319BDA95C00485EE4 /* XBAccountEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A43500F219BDA95C00485EE4 /* XBAccountEditViewController.m */; };
 		A43500F619BDC92700485EE4 /* XBAccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A43500F519BDC92700485EE4 /* XBAccountsViewController.m */; };
 		A48BFFA619C06EB200CB502C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A48BFFA219C02B7F00CB502C /* Localizable.strings */; };
@@ -158,6 +159,9 @@
 		A421DBFD199E02D000F857E2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A421DC06199E02D000F857E2 /* xabberTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "xabberTests-Info.plist"; sourceTree = "<group>"; };
 		A421DC08199E02D000F857E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A42E23DE19C6C0000055CCF7 /* XBAccountViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountViewCell.h; sourceTree = "<group>"; };
+		A42E23DF19C6C0000055CCF7 /* XBAccountViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountViewCell.m; sourceTree = "<group>"; };
+		A42E23E119C6FA8C0055CCF7 /* XBFillCellWithObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XBFillCellWithObject.h; sourceTree = "<group>"; };
 		A43500F119BDA95C00485EE4 /* XBAccountEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountEditViewController.h; sourceTree = "<group>"; };
 		A43500F219BDA95C00485EE4 /* XBAccountEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountEditViewController.m; sourceTree = "<group>"; };
 		A43500F419BDC92700485EE4 /* XBAccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountsViewController.h; sourceTree = "<group>"; };
@@ -230,6 +234,16 @@
 				75DCEAA6D0D70640CC681139 /* XBContact.h */,
 			);
 			path = ContactList;
+			sourceTree = "<group>";
+		};
+		75DCE8C41543244E0B20E524 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A42E23DE19C6C0000055CCF7 /* XBAccountViewCell.h */,
+				A42E23DF19C6C0000055CCF7 /* XBAccountViewCell.m */,
+				A42E23E119C6FA8C0055CCF7 /* XBFillCellWithObject.h */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		75DCE9417E5796027D592E98 /* Scripts */ = {
@@ -375,6 +389,7 @@
 				75DCE96D77E155A0DFC1CD69 /* Validators */,
 				75DCE4E8E6A5E52515DFF361 /* XBTypes.h */,
 				75DCEBB2578AF92659C1FFB5 /* Controllers */,
+				75DCE8C41543244E0B20E524 /* Views */,
 			);
 			path = xabber;
 			sourceTree = "<group>";
@@ -606,6 +621,7 @@
 				75DCE23E07F00280D157045F /* XBRequiredValidator.m in Sources */,
 				75DCE0308BF8F84696E83FAA /* XBStringLengthValidator.m in Sources */,
 				75DCE5ABE93A4E98F45E4C1A /* XBClassValidator.m in Sources */,
+				A42E23E019C6C0000055CCF7 /* XBAccountViewCell.m in Sources */,
 				75DCE213C93A60C708C2A02F /* XBEmailValidator.m in Sources */,
 				75DCE353CB594AF8EDEA7C3D /* XBMinValueValidator.m in Sources */,
 				75DCEC8A990C6D4A5573994E /* XBMaxValueValidator.m in Sources */,
