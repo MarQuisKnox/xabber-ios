@@ -25,9 +25,11 @@
 		75DCE9D4F122C8E3BB07125F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 75DCED47E6E3DC91302E4215 /* .gitignore */; };
 		75DCE9DB4183ABEB2BD980FD /* XMPPPresence+XBEquality.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE1AE3570B5B13C2B700D /* XMPPPresence+XBEquality.m */; };
 		75DCEA5B4FA15D8980989C38 /* XBTypes.h in Resources */ = {isa = PBXBuildFile; fileRef = 75DCE4E8E6A5E52515DFF361 /* XBTypes.h */; };
+		75DCEA934D04CA3BDAC613FF /* XBAccountsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE240E9ACEF330E663B9E /* XBAccountsController.m */; };
 		75DCEB83DF5C824D7CE5B3A7 /* XMPPConnectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE73E0BE2D2A0FA4CD645 /* XMPPConnectorTests.m */; };
 		75DCEC8A990C6D4A5573994E /* XBMaxValueValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCED9701ACF8BEA21AE48C /* XBMaxValueValidator.m */; };
-		75DCEE2ED27D89898EA3F4B4 /* XBContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE9A4DE3673AB789F615E /* XBContactList.m */; };
+		75DCEC9A493466986B8E1B72 /* AccountsControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE71D034B89C766312B4F /* AccountsControllerTests.m */; };
+		75DCED0107BDE34EB5A6D180 /* XBContactListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCEC3B5B892D29592524C3 /* XBContactListController.m */; };
 		75DCEE627A4AEA9076A55EE8 /* mogend.sh in Resources */ = {isa = PBXBuildFile; fileRef = 75DCE13BBDB715407F1B73AA /* mogend.sh */; };
 		A41DB9F119A2168A00B3AB93 /* xabber.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A41DB9EF19A2168A00B3AB93 /* xabber.xcdatamodeld */; };
 		A41DB9F719A218F500B3AB93 /* XBXMPPCoreDataAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = A41DB9F419A218F500B3AB93 /* XBXMPPCoreDataAccount.m */; };
@@ -47,8 +49,10 @@
 		A421DC00199E02D000F857E2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A421DBD7199E02D000F857E2 /* UIKit.framework */; };
 		A421DC01199E02D000F857E2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A421DBD9199E02D000F857E2 /* CoreData.framework */; };
 		A421DC09199E02D000F857E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A421DC07199E02D000F857E2 /* InfoPlist.strings */; };
-		A43500F319BDA95C00485EE4 /* XBAccountEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = A43500F219BDA95C00485EE4 /* XBAccountEditController.m */; };
-		A43500F619BDC92700485EE4 /* XBAccountsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A43500F519BDC92700485EE4 /* XBAccountsController.m */; };
+		A42E23E019C6C0000055CCF7 /* XBAccountViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A42E23DF19C6C0000055CCF7 /* XBAccountViewCell.m */; };
+		A42E23E419C7F5B60055CCF7 /* XBContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A42E23E319C7F5B60055CCF7 /* XBContactsViewController.m */; };
+		A43500F319BDA95C00485EE4 /* XBAccountEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A43500F219BDA95C00485EE4 /* XBAccountEditViewController.m */; };
+		A43500F619BDC92700485EE4 /* XBAccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A43500F519BDC92700485EE4 /* XBAccountsViewController.m */; };
 		A48BFFA619C06EB200CB502C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A48BFFA219C02B7F00CB502C /* Localizable.strings */; };
 		B6543416F91040A5923464F8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA53C965164949F69C2EA7E8 /* libPods.a */; };
 		CC5E7FD9F980480B8952BDB6 /* libPods-xabberTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 944A0A7921684A89A96C5394 /* libPods-xabberTests.a */; };
@@ -88,9 +92,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		75DCE06F12B4DBE796EB50EA /* XBContactListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBContactListController.h; sourceTree = "<group>"; };
 		75DCE0901054B52E74BDBC07 /* XBMaxValueValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBMaxValueValidator.h; sourceTree = "<group>"; };
 		75DCE13BBDB715407F1B73AA /* mogend.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = mogend.sh; sourceTree = "<group>"; };
 		75DCE1AE3570B5B13C2B700D /* XMPPPresence+XBEquality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XMPPPresence+XBEquality.m"; sourceTree = "<group>"; };
+		75DCE240E9ACEF330E663B9E /* XBAccountsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountsController.m; sourceTree = "<group>"; };
 		75DCE2E5958345301F5FB5B6 /* XBAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccount.m; sourceTree = "<group>"; };
 		75DCE46563847633E289687F /* XBClassValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBClassValidator.h; sourceTree = "<group>"; };
 		75DCE48EA075773D65EA2DA2 /* XBXMPPConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBXMPPConnector.h; sourceTree = "<group>"; };
@@ -100,13 +106,13 @@
 		75DCE5538A18D8CE3D0F00E6 /* XMPPFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
 		75DCE6911215C0CAA27BD043 /* XBStringLengthValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBStringLengthValidator.h; sourceTree = "<group>"; };
 		75DCE6950CE1F00AE1310EFE /* XBContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBContact.m; sourceTree = "<group>"; };
+		75DCE71D034B89C766312B4F /* AccountsControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsControllerTests.m; sourceTree = "<group>"; };
 		75DCE73E0BE2D2A0FA4CD645 /* XMPPConnectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPConnectorTests.m; sourceTree = "<group>"; };
 		75DCE7BDBED11F4610A7D73E /* XBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBError.h; sourceTree = "<group>"; };
 		75DCE904070B7C93366CF1B9 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = file.yml; path = .travis.yml; sourceTree = "<group>"; };
 		75DCE9235B36DF8083D25ECA /* mogen.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = mogen.sh; sourceTree = "<group>"; };
 		75DCE943EDC5F6698DCE1547 /* XBStringLengthValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBStringLengthValidator.m; sourceTree = "<group>"; };
-		75DCE9A4DE3673AB789F615E /* XBContactList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBContactList.m; sourceTree = "<group>"; };
-		75DCE9ADA7CC1833B8D513F7 /* XBContactList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBContactList.h; sourceTree = "<group>"; };
+		75DCE996118C496E51FB8678 /* XBAccountsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountsController.h; sourceTree = "<group>"; };
 		75DCEA4ABA34835710E5A483 /* XBClassValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBClassValidator.m; sourceTree = "<group>"; };
 		75DCEA59D6BBB763F840005A /* XBMinValueValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBMinValueValidator.m; sourceTree = "<group>"; };
 		75DCEAA2F7C599948E74460D /* XBValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBValidator.h; sourceTree = "<group>"; };
@@ -114,6 +120,7 @@
 		75DCEB2BD63DFA9BB5FA1A87 /* XBAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountManager.m; sourceTree = "<group>"; };
 		75DCEB5711EFD30FAAA386FA /* XBRequiredValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBRequiredValidator.m; sourceTree = "<group>"; };
 		75DCEBA4AB61EAD736243C5F /* XBAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountManager.h; sourceTree = "<group>"; };
+		75DCEC3B5B892D29592524C3 /* XBContactListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBContactListController.m; sourceTree = "<group>"; };
 		75DCECC77ED2B754ED2DF249 /* AccountConnectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountConnectorTests.m; sourceTree = "<group>"; };
 		75DCED2989A8CF77616FB53B /* XBRequiredValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBRequiredValidator.h; sourceTree = "<group>"; };
 		75DCED47E6E3DC91302E4215 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
@@ -153,10 +160,15 @@
 		A421DBFD199E02D000F857E2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A421DC06199E02D000F857E2 /* xabberTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "xabberTests-Info.plist"; sourceTree = "<group>"; };
 		A421DC08199E02D000F857E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A43500F119BDA95C00485EE4 /* XBAccountEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountEditController.h; sourceTree = "<group>"; };
-		A43500F219BDA95C00485EE4 /* XBAccountEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountEditController.m; sourceTree = "<group>"; };
-		A43500F419BDC92700485EE4 /* XBAccountsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountsController.h; sourceTree = "<group>"; };
-		A43500F519BDC92700485EE4 /* XBAccountsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountsController.m; sourceTree = "<group>"; };
+		A42E23DE19C6C0000055CCF7 /* XBAccountViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountViewCell.h; sourceTree = "<group>"; };
+		A42E23DF19C6C0000055CCF7 /* XBAccountViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountViewCell.m; sourceTree = "<group>"; };
+		A42E23E119C6FA8C0055CCF7 /* XBFillCellWithObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XBFillCellWithObject.h; sourceTree = "<group>"; };
+		A42E23E219C7F5B60055CCF7 /* XBContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBContactsViewController.h; sourceTree = "<group>"; };
+		A42E23E319C7F5B60055CCF7 /* XBContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBContactsViewController.m; sourceTree = "<group>"; };
+		A43500F119BDA95C00485EE4 /* XBAccountEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountEditViewController.h; sourceTree = "<group>"; };
+		A43500F219BDA95C00485EE4 /* XBAccountEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountEditViewController.m; sourceTree = "<group>"; };
+		A43500F419BDC92700485EE4 /* XBAccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAccountsViewController.h; sourceTree = "<group>"; };
+		A43500F519BDC92700485EE4 /* XBAccountsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAccountsViewController.m; sourceTree = "<group>"; };
 		A48BFF9519C0277200CB502C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
 		A48BFF9619C0277200CB502C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main_iPad.strings; sourceTree = "<group>"; };
 		A48BFF9819C0277200CB502C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -219,12 +231,20 @@
 		75DCE72545F2E40CACD069B5 /* ContactList */ = {
 			isa = PBXGroup;
 			children = (
-				75DCE9A4DE3673AB789F615E /* XBContactList.m */,
-				75DCE9ADA7CC1833B8D513F7 /* XBContactList.h */,
 				75DCE6950CE1F00AE1310EFE /* XBContact.m */,
 				75DCEAA6D0D70640CC681139 /* XBContact.h */,
 			);
 			path = ContactList;
+			sourceTree = "<group>";
+		};
+		75DCE8C41543244E0B20E524 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A42E23DE19C6C0000055CCF7 /* XBAccountViewCell.h */,
+				A42E23DF19C6C0000055CCF7 /* XBAccountViewCell.m */,
+				A42E23E119C6FA8C0055CCF7 /* XBFillCellWithObject.h */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		75DCE9417E5796027D592E98 /* Scripts */ = {
@@ -265,6 +285,17 @@
 			path = "Test Categories";
 			sourceTree = "<group>";
 		};
+		75DCEBB2578AF92659C1FFB5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				75DCE240E9ACEF330E663B9E /* XBAccountsController.m */,
+				75DCE996118C496E51FB8678 /* XBAccountsController.h */,
+				75DCEC3B5B892D29592524C3 /* XBContactListController.m */,
+				75DCE06F12B4DBE796EB50EA /* XBContactListController.h */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		75DCEC5FA353F5424C46CC00 /* Connector */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,10 +308,12 @@
 		75DCEC60E3E7819FA27AD9C9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A43500F119BDA95C00485EE4 /* XBAccountEditController.h */,
-				A43500F219BDA95C00485EE4 /* XBAccountEditController.m */,
-				A43500F419BDC92700485EE4 /* XBAccountsController.h */,
-				A43500F519BDC92700485EE4 /* XBAccountsController.m */,
+				A43500F119BDA95C00485EE4 /* XBAccountEditViewController.h */,
+				A43500F219BDA95C00485EE4 /* XBAccountEditViewController.m */,
+				A43500F419BDC92700485EE4 /* XBAccountsViewController.h */,
+				A43500F519BDC92700485EE4 /* XBAccountsViewController.m */,
+				A42E23E219C7F5B60055CCF7 /* XBContactsViewController.h */,
+				A42E23E319C7F5B60055CCF7 /* XBContactsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -360,6 +393,8 @@
 				75DCEC60E3E7819FA27AD9C9 /* ViewControllers */,
 				75DCE96D77E155A0DFC1CD69 /* Validators */,
 				75DCE4E8E6A5E52515DFF361 /* XBTypes.h */,
+				75DCEBB2578AF92659C1FFB5 /* Controllers */,
+				75DCE8C41543244E0B20E524 /* Views */,
 			);
 			path = xabber;
 			sourceTree = "<group>";
@@ -386,6 +421,7 @@
 				75DCE73E0BE2D2A0FA4CD645 /* XMPPConnectorTests.m */,
 				75DCEBA5202F56CDDDA0E0E9 /* Test Categories */,
 				75DCEEBD0523FB54D0B1D6DE /* ValidatorsTests.m */,
+				75DCE71D034B89C766312B4F /* AccountsControllerTests.m */,
 			);
 			path = xabberTests;
 			sourceTree = "<group>";
@@ -580,19 +616,22 @@
 				A421DBE2199E02D000F857E2 /* main.m in Sources */,
 				A41DB9FE19A2190200B3AB93 /* _XBXMPPCoreDataAccount.m in Sources */,
 				75DCE5E059A0113482DA39CC /* XBAccountManager.m in Sources */,
-				A43500F619BDC92700485EE4 /* XBAccountsController.m in Sources */,
+				A43500F619BDC92700485EE4 /* XBAccountsViewController.m in Sources */,
 				75DCE93BD1E1D88C84714D60 /* XBAccount.m in Sources */,
 				75DCE48C14BBBBDA5642E52F /* XBXMPPConnector.m in Sources */,
 				75DCE9DB4183ABEB2BD980FD /* XMPPPresence+XBEquality.m in Sources */,
-				A43500F319BDA95C00485EE4 /* XBAccountEditController.m in Sources */,
-				75DCEE2ED27D89898EA3F4B4 /* XBContactList.m in Sources */,
+				A43500F319BDA95C00485EE4 /* XBAccountEditViewController.m in Sources */,
 				75DCE501A6AFCFC5583CE3E4 /* XBContact.m in Sources */,
 				75DCE23E07F00280D157045F /* XBRequiredValidator.m in Sources */,
 				75DCE0308BF8F84696E83FAA /* XBStringLengthValidator.m in Sources */,
 				75DCE5ABE93A4E98F45E4C1A /* XBClassValidator.m in Sources */,
+				A42E23E019C6C0000055CCF7 /* XBAccountViewCell.m in Sources */,
 				75DCE213C93A60C708C2A02F /* XBEmailValidator.m in Sources */,
 				75DCE353CB594AF8EDEA7C3D /* XBMinValueValidator.m in Sources */,
 				75DCEC8A990C6D4A5573994E /* XBMaxValueValidator.m in Sources */,
+				75DCEA934D04CA3BDAC613FF /* XBAccountsController.m in Sources */,
+				75DCED0107BDE34EB5A6D180 /* XBContactListController.m in Sources */,
+				A42E23E419C7F5B60055CCF7 /* XBContactsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +644,7 @@
 				75DCE8D8DF418719894E2084 /* AccountConnectorTests.m in Sources */,
 				75DCEB83DF5C824D7CE5B3A7 /* XMPPConnectorTests.m in Sources */,
 				75DCE4C79781FF1F5FCD34C7 /* ValidatorsTests.m in Sources */,
+				75DCEC9A493466986B8E1B72 /* AccountsControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,15 +7,17 @@
 #include "XBTypes.h"
 
 @class XBXMPPCoreDataAccount;
-@protocol XBAccountDelegate;
 @class XBXMPPConnector;
 @class XMPPStream;
+
+@protocol XBXMPPConnectorDelegate;
 
 
 static NSString *const XBAccountFieldValueChanged = @"XBAccountFieldValueChanged";
 static NSString *const XBAccountSaved = @"XBAccountSaved";
+static NSString *const XBAccountConnectionStateChanged = @"XBAccountConnectionStateChanged";
 
-@interface XBAccount : NSObject
+@interface XBAccount : NSObject <XBXMPPConnectorDelegate>
 
 @property (nonatomic, strong) NSString *accountJID;
 @property (nonatomic, strong) NSString *password;
@@ -28,8 +30,6 @@ static NSString *const XBAccountSaved = @"XBAccountSaved";
 @property (nonatomic, readonly) BOOL isDeleted;
 
 @property (nonatomic, readonly) XMPPStream *stream;
-
-@property (nonatomic, weak) id<XBAccountDelegate> delegate;
 
 - (instancetype)initWithConnector:(XBXMPPConnector *)connector coreDataAccount:(XBXMPPCoreDataAccount *)account;
 
@@ -58,22 +58,5 @@ static NSString *const XBAccountSaved = @"XBAccountSaved";
 - (BOOL)isEqualToAccount:(XBAccount *)account;
 
 - (NSUInteger)hash;
-
-@end
-
-
-@protocol XBAccountDelegate <NSObject>
-
-- (void)accountWillLogin:(XBAccount *)account;
-
-- (void)accountDidLoginSuccessfully:(XBAccount *)account;
-
-- (void)account:(XBAccount *)account didNotLoginWithError:(NSError *)error;
-
-- (void)accountWillLogout:(XBAccount *)account;
-
-- (void)accountDidLogoutSuccessfully:(XBAccount *)account;
-
-- (void)account:(XBAccount *)account didNotLogoutWithError:(NSError *)error;
 
 @end

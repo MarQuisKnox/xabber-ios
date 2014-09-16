@@ -5,8 +5,8 @@
 
 #import "XBAccountManager.h"
 #import "XBXMPPCoreDataAccount.h"
-#import "XBAccount.h"
 #import "XBXMPPConnector.h"
+#import "XBAccount.h"
 
 @interface XBAccountManager() {
     NSMutableArray *_accounts;
@@ -19,10 +19,6 @@
     if (self) {
         _accounts = [NSMutableArray array];
         [self loadCachedAccounts];
-
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(accountDidSaved:) name:XBAccountSaved
-                                                   object:nil];
     }
 
     return self;
@@ -96,17 +92,18 @@
     }];
 }
 
-- (void)accountDidSaved:(NSNotification *)notification {
-     XBAccount *account = notification.userInfo[@"account"];
-
-    if ([self.accounts containsObject:account]) {
-        [self postNotificationWithName:XBAccountManagerAccountChanged account:account];
-    }
-}
-
 - (void)postNotificationWithName:(NSString *)notificationName account:(XBAccount *)account {
-    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil
-                                                      userInfo:@{@"account": account}];
+    void (^block)() = ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil
+                                                          userInfo:@{@"account": account}];
+    };
+
+    if ([NSThread mainThread]) {
+        block();
+    }
+    else {
+        dispatch_async(dispatch_get_main_queue(), block);
+    }
 }
 
 @end

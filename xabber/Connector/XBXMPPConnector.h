@@ -8,23 +8,43 @@
 
 @class XBAccount;
 @class XMPPStream;
+@class XMPPJID;
+@protocol XBXMPPConnectorDelegate;
 
 @interface XBXMPPConnector : NSObject
 @property (nonatomic, readonly) XMPPStream *xmppStream;
-@property (nonatomic, weak) XBAccount* account;
+@property (nonatomic, weak) id <XBXMPPConnectorDelegate> delegate;
 
-- (void)loginWithCompletion:(void (^)(NSError *error))completionHandler;
+- (BOOL)loginToAccount:(XBAccount *)account error:(NSError **)error;
 
-- (void)logoutWithCompletion:(void(^)(NSError *error))completionHandler;
+- (BOOL)logout:(NSError **)error;
 
 - (void)setNewStatus:(XBAccountStatus)status;
 
-- (XBConnectionState)state;
+- (XBConnectionState)connectionState;
 
 - (BOOL)isEqual:(id)other;
 
 - (BOOL)isEqualToConnector:(XBXMPPConnector *)connector;
 
 - (NSUInteger)hash;
+
+@end
+
+@protocol XBXMPPConnectorDelegate <NSObject>
+
+@required
+- (void)connector:(XBXMPPConnector *)connector willAuthorizeWithPassword:(NSString **)password;
+
+@optional
+- (void)connectorWillLogin:(XBXMPPConnector *)connector;
+
+- (void)connector:(XBXMPPConnector *)connector willGoOnlineWithStatus:(XBAccountStatus *)status;
+
+- (void)connectorDidLoginSuccessfully:(XBXMPPConnector *)connector;
+
+- (void)connector:(XBXMPPConnector *)connector didNotLoginWithError:(NSError *)error;
+
+- (void)connector:(XBXMPPConnector *)connector didLogoutWithError:(NSError *)error;
 
 @end

@@ -3,8 +3,9 @@
 // Copyright (c) 2014 Redsolution LLC. All rights reserved.
 //
 
-#import "XBAccount.h"
+#import <XMPPFramework/XMPPJID.h>
 #import "XBXMPPConnector.h"
+#import "XBAccount.h"
 #import "XMPPFramework.h"
 #import "XBError.h"
 
@@ -20,8 +21,6 @@
     BOOL _allowSSLHostNameMismatch;
 
     XBConnectionState _state;
-
-    void (^_completionHandler)(NSError *error);
 }
 
 - (void)setupStream;
@@ -31,8 +30,6 @@
 - (void)goOnline;
 
 - (void)goOffline;
-
-- (void)completeWithError:(NSError *)error;
 
 @end
 
@@ -55,50 +52,67 @@
 
 #pragma mark Login/logout
 
-- (XBConnectionState)state {
+- (XBConnectionState)connectionState {
     return _state;
 }
 
-- (void)loginWithCompletion:(void (^)(NSError *error))completionHandler {
-    _completionHandler = completionHandler;
+- (BOOL)loginToAccount:(XBAccount *)account error:(NSError **)error {
+    if (!self.xmppStream.isDisconnected) {
+        DDLogError(@"Stream already connected");
+        *error = [NSError errorWithDomain:XBXabberErrorDomain
+                                     code:XBLoginValidationError
+                                 userInfo:@{NSLocalizedDescriptionKey : @"Stream already connected"}];
+        return NO;
+    }
+
+    if (!account) {
+        DDLogError(@"Account is nil");
+        *error = [NSError errorWithDomain:XBXabberErrorDomain
+                                     code:XBLoginValidationError
+                                 userInfo:@{NSLocalizedDescriptionKey : @"Account must not be nil"}];
+        return NO;
+    }
+
+    if (account.accountJID == nil || account.password == nil) {
+        DDLogError(@"Login or password are empty");
+        *error = [NSError errorWithDomain:XBXabberErrorDomain
+                                     code:XBLoginValidationError
+                                 userInfo:@{NSLocalizedDescriptionKey : @"Login or password are empty"}];
+        return NO;
+    }
+
+    if ([self.delegate respondsToSelector:@selector(connectorWillLogin:)]) {
+        [self.delegate connectorWillLogin:self];
+    }
+
+    self.xmppStream.hostName = account.host;
+    self.xmppStream.hostPort = (UInt16) account.port;
+    self.xmppStream.myJID = [XMPPJID jidWithString:account.accountJID];
+
+    if (![self.xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:error]) {
+        DDLogError(@"Error connecting: %@", *error);
+        return NO;
+    }
+
     _state = XBConnectionStateConnecting;
 
-    if (![self.xmppStream isDisconnected]) {
-        DDLogError(@"Stream already connected");
-        [self completeWithError:[NSError errorWithDomain:XBXabberErrorDomain
-                                                    code:XBLoginValidationError
-                                                userInfo:@{NSLocalizedDescriptionKey: @"Stream already connected"}]];
-        return;
-    }
-
-    if (self.account.accountJID == nil || self.account.password == nil) {
-        DDLogError(@"Login or password are empty");
-        [self completeWithError:[NSError errorWithDomain:XBXabberErrorDomain
-                                                    code:XBLoginValidationError
-                                                userInfo:@{NSLocalizedDescriptionKey: @"Login or password are empty"}]];
-        return;
-    }
-
-    self.xmppStream.hostName = self.account.host;
-    self.xmppStream.hostPort = (UInt16) self.account.port;
-    self.xmppStream.myJID = [XMPPJID jidWithString:self.account.accountJID];
-
-    NSError *error = nil;
-    if (![self.xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error])
-    {
-        DDLogError(@"Error connecting: %@", error);
-        [self completeWithError:error];
-        return;
-    }
-    return;
+    return YES;
 }
 
-- (void)logoutWithCompletion:(void (^)(NSError *error))completionHandler {
-    _completionHandler = completionHandler;
+- (BOOL)logout:(NSError **)error {
+    if (self.xmppStream.isDisconnected) {
+        *error = [NSError errorWithDomain:XBXabberErrorDomain
+                                     code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Connector already disconnected"}];
+
+        return NO;
+    }
+
     _state = XBConnectionStateDisconnecting;
 
     [self goOffline];
     [self.xmppStream disconnectAfterSending];
+
+    return YES;
 }
 
 - (void)setNewStatus:(XBAccountStatus)status {
@@ -210,21 +224,14 @@
 
 #pragma mark Private
 
-- (void)completeWithError:(NSError *)error {
-    if (self.xmppStream.isDisconnected) {
-        _state = XBConnectionStateOffline;
-    }
-
-    if (self.xmppStream.isAuthenticated) {
-        _state = XBConnectionStateOnline;
-    }
-
-    _completionHandler(error);
-    _completionHandler = nil;
-}
-
 - (void)goOnline {
-    [self setNewStatus:self.account.status];
+    XBAccountStatus status = XBAccountStatusAvailable;
+
+    if ([self.delegate respondsToSelector:@selector(connector:willGoOnlineWithStatus:)]) {
+        [self.delegate connector:self willGoOnlineWithStatus:&status];
+    }
+
+    [self setNewStatus:status];
 }
 
 - (void)goOffline {
@@ -308,25 +315,51 @@
 - (void)xmppStreamDidConnect:(XMPPStream *)sender {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     NSError *error = nil;
-    if (![self.xmppStream authenticateWithPassword:self.account.password error:&error])
+    NSString *password = nil;
+
+    if ([self.delegate respondsToSelector:@selector(connector:willAuthorizeWithPassword:)]) {
+        [self.delegate connector:self willAuthorizeWithPassword:&password];
+    }
+
+    if (![self.xmppStream authenticateWithPassword:password error:&error])
     {
         DDLogError(@"Error authenticating: %@", error);
-        [self completeWithError:error];
+
+        _state = XBConnectionStateOffline;
+
+        if ([self.delegate respondsToSelector:@selector(connector:didNotLoginWithError:)]) {
+            [self.delegate connector:self didNotLoginWithError:error];
+        }
     }
 }
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
     [self goOnline];
 
-    [self completeWithError:nil];
+    _state = XBConnectionStateOnline;
+
+    if ([self.delegate respondsToSelector:@selector(connectorDidLoginSuccessfully:)]) {
+        [self.delegate connectorDidLoginSuccessfully:self];
+    }
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error {
-    [self completeWithError:[NSError errorWithDomain:@"" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Stream didn't authenticate"}]];
+
+    NSError *e = [NSError errorWithDomain:XBXabberErrorDomain code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Stream didn't authenticate"}];
+
+    _state = XBConnectionStateOffline;
+
+    if ([self.delegate respondsToSelector:@selector(connector:didNotLoginWithError:)]) {
+        [self.delegate connector:self didNotLoginWithError:e];
+    }
 }
 
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error {
-    [self completeWithError:error];
+    _state = XBConnectionStateOffline;
+
+    if ([self.delegate respondsToSelector:@selector(connector:didLogoutWithError:)]) {
+        [self.delegate connector:self didLogoutWithError:error];
+    }
 }
 
 #pragma mark Equality
@@ -363,8 +396,6 @@
         return NO;
     if (_allowSSLHostNameMismatch != connector->_allowSSLHostNameMismatch)
         return NO;
-    if (_completionHandler != connector->_completionHandler)
-        return NO;
     return YES;
 }
 
@@ -378,7 +409,6 @@
     hash = hash * 31u + [_xmppVCardAvatarModule hash];
     hash = hash * 31u + _allowSelfSignedCertificates;
     hash = hash * 31u + _allowSSLHostNameMismatch;
-    hash = hash * 31u + (NSUInteger) _completionHandler;
     return hash;
 }
 

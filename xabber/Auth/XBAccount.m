@@ -110,7 +110,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
     self = [super init];
     if (self) {
         _connector = connector;
-        _connector.account = self;
+        _connector.delegate = self;
         if (account) {
             [self loadFromCoreDataAccount:account];
             [self loadPasswordWithAccountID:self.accountJID];
@@ -255,48 +255,19 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 #pragma mark Connection
 
 - (void)login {
-    if ([self.delegate respondsToSelector:@selector(accountWillLogin:)]) {
-        [self.delegate accountWillLogin:self];
+    NSError *error = nil;
+
+    if ([_connector loginToAccount:self error:&error]) {
+        DDLogError(@"Not logged in with error: %@", error);
     }
-
-    [_connector loginWithCompletion:^(NSError *error) {
-        if (error) {
-            if ([self.delegate respondsToSelector:@selector(account:didNotLoginWithError:)]) {
-                [self.delegate account:self didNotLoginWithError:error];
-            }
-
-            return;
-        }
-
-        if ([self.delegate respondsToSelector:@selector(accountDidLoginSuccessfully:)]) {
-            [self.delegate accountDidLoginSuccessfully:self];
-        }
-    }];
 }
 
 - (void)logout {
-    if ([self.delegate respondsToSelector:@selector(accountWillLogout:)]) {
-        [self.delegate accountWillLogout:self];
+
+    NSError *error = nil;
+    if (![_connector logout:&error]) {
+        DDLogError(@"Not logged out with error: %@", error);
     }
-
-    if (self.state != XBConnectionStateOnline) {
-        [self.delegate account:self
-         didNotLogoutWithError:[NSError errorWithDomain:@"xabberErrorDomain" code:1 userInfo:@{NSLocalizedDescriptionKey: @"Account already logged out"}]];
-    }
-
-    [_connector logoutWithCompletion:^(NSError *error) {
-        if (error) {
-            if ([self.delegate respondsToSelector:@selector(account:didNotLogoutWithError:)]) {
-                [self.delegate account:self didNotLogoutWithError:error];
-            }
-
-            return;
-        }
-
-        if ([self.delegate respondsToSelector:@selector(accountDidLogoutSuccessfully:)]) {
-            [self.delegate accountDidLogoutSuccessfully:self];
-        }
-    }];
 }
 
 #pragma mark Validation
@@ -317,7 +288,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 }
 
 - (XBConnectionState)state {
-    return _connector.state;
+    return _connector.connectionState;
 }
 
 
@@ -364,6 +335,33 @@ static NSString *const XBKeychainServiceName = @"xabberService";
     return YES;
 }
 
+#pragma mark XBXMPPConnectorDelegate
+
+- (void)connector:(XBXMPPConnector *)connector willGoOnlineWithStatus:(XBAccountStatus *)status {
+    if ([connector isEqualToConnector:_connector]) {
+        *status = self.status;
+    }
+}
+
+- (void)connectorDidLoginSuccessfully:(XBXMPPConnector *)connector {
+    [self postNotificationWithName:XBAccountConnectionStateChanged additionalInfo:nil];
+}
+
+- (void)connector:(XBXMPPConnector *)connector didNotLoginWithError:(NSError *)error {
+    [self postNotificationWithName:XBAccountConnectionStateChanged additionalInfo:nil];
+}
+
+- (void)connector:(XBXMPPConnector *)connector didLogoutWithError:(NSError *)error {
+    [self postNotificationWithName:XBAccountConnectionStateChanged additionalInfo:nil];
+}
+
+
+- (void)connector:(XBXMPPConnector *)connector willAuthorizeWithPassword:(NSString **)password {
+    if ([connector isEqualToConnector:_connector]) {
+        *password = self.password;
+    }
+}
+
 #pragma mark Private
 
 - (void)setDefaults {
@@ -405,7 +403,16 @@ static NSString *const XBKeychainServiceName = @"xabberService";
         [userInfo addEntriesFromDictionary:additionalInfo];
     }
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:name object:nil userInfo:userInfo];
+    dispatch_block_t block = ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:name object:nil userInfo:userInfo];
+    };
+
+    if ([NSThread isMainThread]) {
+        block();
+    }
+    else {
+        dispatch_async(dispatch_get_main_queue(), block);
+    }
 }
 
 #pragma mark Equality
@@ -454,6 +461,5 @@ static NSString *const XBKeychainServiceName = @"xabberService";
     hash = hash * 31u + self.port;
     return hash;
 }
-
 
 @end

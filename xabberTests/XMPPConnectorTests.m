@@ -42,68 +42,67 @@
 }
 
 - (void)testXMPPStreamIsConnected {
+    XBAccount *acc = [XBAccount accountWithConnector:nil];
     OCMStub([mockXMPPStream isDisconnected]).andReturn(NO);
+    NSError *e = nil;
+    NSError *testError = [NSError errorWithDomain:XBXabberErrorDomain
+                                             code:XBLoginValidationError
+                                         userInfo:@{NSLocalizedDescriptionKey: @"Stream already connected"}];
 
-    [mockConnector loginWithCompletion:^(NSError *e){
-        NSError *testError = [NSError errorWithDomain:XBXabberErrorDomain
-                                                 code:XBLoginValidationError
-                                             userInfo:@{NSLocalizedDescriptionKey: @"Stream already connected"}];
-        XCTAssertEqualObjects(e, testError);
-    }];
+    XCTAssertFalse([mockConnector loginToAccount:acc error:&e]);
+
+    XCTAssertEqualObjects(e, testError);
 }
 
 - (void)testAccountNotValid {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
+    NSError *testError = [NSError errorWithDomain:XBXabberErrorDomain
+                                             code:XBLoginValidationError
+                                         userInfo:@{NSLocalizedDescriptionKey: @"Login or password are empty"}];
+
+    NSError *e = nil;
 
     OCMStub([mockXMPPStream isDisconnected]).andReturn(YES);
-    OCMStub([mockConnector account]).andReturn(acc);
 
-    [mockConnector loginWithCompletion:^(NSError *e){
-        NSError *testError = [NSError errorWithDomain:XBXabberErrorDomain
-                                                 code:XBLoginValidationError
-                                             userInfo:@{NSLocalizedDescriptionKey: @"Login or password are empty"}];
-        XCTAssertEqualObjects(e, testError);
-    }];
+    XCTAssertFalse([mockConnector loginToAccount:acc error:&e]);
+
+    XCTAssertEqualObjects(e, testError);
 }
 
 - (void)testCouldNotConnect {
     XBAccount *acc = [XBAccount accountWithConnector:nil];
     acc.accountJID = @"test";
     acc.password = @"password";
+    NSError *e = nil;
     NSError *testError = [NSError errorWithDomain:@""
                                              code:-1
                                          userInfo:nil];
 
     OCMStub([mockXMPPStream isDisconnected]).andReturn(YES);
-    OCMStub([mockConnector account]).andReturn(acc);
     OCMStub([mockXMPPStream connectWithTimeout:XMPPStreamTimeoutNone
                                          error:(NSError __autoreleasing **)[OCMArg setTo:testError]]).andReturn(NO);
 
-    [mockConnector loginWithCompletion:^(NSError *e){
-        XCTAssertEqualObjects(e, testError);
-    }];
+    XCTAssertFalse([mockConnector loginToAccount:acc error:&e]);
+    XCTAssertEqualObjects(e, testError);
 }
 
 - (void)testStreamNotAuthenticate {
-    XBAccount *acc = [XBAccount accountWithConnector:nil];
-    acc.accountJID = @"test";
-    acc.password = @"password";
     NSError *testError = [NSError errorWithDomain:@""
                                              code:-1
                                          userInfo:nil];
+    id connectorDelegate = OCMProtocolMock(@protocol(XBXMPPConnectorDelegate));
 
-    OCMStub([mockXMPPStream isDisconnected]).andReturn(YES);
-    OCMStub([mockConnector account]).andReturn(acc);
-    OCMStub([mockXMPPStream connectWithTimeout:XMPPStreamTimeoutNone
-                                         error:[OCMArg anyObjectRef]]).andReturn(YES);
-    OCMStub([mockXMPPStream authenticateWithPassword:acc.password
+    [mockConnector setDelegate:connectorDelegate];
+
+    OCMStub([connectorDelegate connector:mockConnector willAuthorizeWithPassword:(NSError __autoreleasing **)[OCMArg setTo:@"123"]]);
+
+    OCMStub([mockXMPPStream authenticateWithPassword:@"123"
                                                error:(NSError __autoreleasing **)[OCMArg setTo:testError]]).andReturn(NO);
 
-    [mockConnector loginWithCompletion:^(NSError *e){
-        XCTAssertEqualObjects(e, testError);
-    }];
-
     [mockConnector xmppStreamDidConnect:mockXMPPStream];
+
+    XCTAssertEqual([mockConnector connectionState], XBConnectionStateOffline);
+
 }
 
 - (void)testXMPPStreamDidAuthenticated {
@@ -111,25 +110,23 @@
     acc.accountJID = @"test";
     acc.password = @"password";
     acc.status = XBAccountStatusAvailable;
+    NSError *e = nil;
 
     OCMStub([mockXMPPStream isDisconnected]).andReturn(YES);
-    OCMStub([mockConnector account]).andReturn(acc);
     OCMStub([mockXMPPStream connectWithTimeout:XMPPStreamTimeoutNone
                                          error:[OCMArg anyObjectRef]]).andReturn(YES);
     OCMStub([mockConnector setNewStatus:XBAccountStatusAvailable]);
 
-    [mockConnector loginWithCompletion:^(NSError *e){
-        XCTAssertNil(e);
-    }];
+    [mockConnector loginToAccount:acc error:&e];
 
-    XCTAssertEqual((XBConnectionState)[mockConnector state], XBConnectionStateConnecting);
+    XCTAssertEqual((XBConnectionState) [mockConnector connectionState], XBConnectionStateConnecting);
 
     OCMStub([mockXMPPStream isDisconnected]).andReturn(NO);
     OCMStub([mockXMPPStream isAuthenticated]).andReturn(YES);
 
     [mockConnector xmppStreamDidAuthenticate:mockXMPPStream];
 
-    XCTAssertEqual((XBConnectionState)[mockConnector state], XBConnectionStateOnline);
+    XCTAssertEqual((XBConnectionState) [mockConnector connectionState], XBConnectionStateOnline);
 }
 
 - (void)testSetStatusAvailable {
