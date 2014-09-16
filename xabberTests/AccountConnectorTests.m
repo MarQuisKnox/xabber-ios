@@ -35,8 +35,8 @@
     [super tearDown];
 }
 
-- (void)testSetAccountOfConnector {
-    OCMExpect([mockConnector setAccount:[OCMArg any]]);
+- (void)testSetDelegateOfConnector {
+    OCMExpect([mockConnector setDelegate:[OCMArg any]]);
     [XBAccount accountWithConnector:mockConnector];
 
     OCMVerifyAll(mockConnector);
