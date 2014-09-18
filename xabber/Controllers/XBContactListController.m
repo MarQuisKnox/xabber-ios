@@ -9,9 +9,15 @@
 #import "XBContact.h"
 
 @interface XBContactListController () <NSFetchedResultsControllerDelegate> {
-    NSFetchedResultsController *fetchedResultsController;
+    NSFetchedResultsController *usersFetchedResultsController;
+    NSFetchedResultsController *groupsFetchedResultsController;
 }
+- (NSFetchedResultsController *)usersFetchedResultsController;
+
+- (NSFetchedResultsController *)groupsFetchedResultsController;
 @end
+
+static NSString *const XBNotInGroupSectionName = @"Not in group";
 
 @implementation XBContactListController {
 
@@ -30,33 +36,92 @@
 }
 
 - (NSUInteger)numberOfSections {
-    return self.usersFetchedResultsController.sections.count;
+    return self.groupsFetchedResultsController.fetchedObjects.count + 1;
+}
+
+- (NSString *)titleOfSectionAtIndex:(NSUInteger)section {
+    if (![self isCorrectSection:section]) {
+        return nil;
+    }
+
+    if ([self isNotInGroupSection:section]) {
+        return XBNotInGroupSectionName;
+    }
+
+    return self.groupsFetchedResultsController.fetchedObjects[section];
 }
 
 - (NSUInteger)numberOfContactsInSection:(NSUInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = self.usersFetchedResultsController.sections[section];
+    if (![self isCorrectSection:section]) {
+        return 0;
+    }
 
-    return sectionInfo.numberOfObjects;
+    return [self usersInSection:section].count;
 }
 
 - (XBContact *)contactAtIndexPath:(NSIndexPath *)indexPath {
-    XMPPUserCoreDataStorageObject *user = [self.usersFetchedResultsController objectAtIndexPath:indexPath];
+    NSUInteger section = (NSUInteger) indexPath.section;
+    NSUInteger row = (NSUInteger) indexPath.row;
+
+    XMPPUserCoreDataStorageObject *user = [self usersInSection:section][row];
+
+    if (!user) {
+        return nil;
+    }
 
     return [[XBContact alloc] initWithXMPPUser:user];
 }
 
+#pragma mark Fetched Results Controllers
 
 - (NSFetchedResultsController *)usersFetchedResultsController {
-    if (!fetchedResultsController) {
-        fetchedResultsController = [XMPPUserCoreDataStorageObject MR_fetchAllGroupedBy:nil
+    if (!usersFetchedResultsController) {
+        usersFetchedResultsController = [XMPPUserCoreDataStorageObject MR_fetchAllGroupedBy:nil
                                                                          withPredicate:nil
                                                                               sortedBy:@"displayName"
                                                                              ascending:YES
                                                                              inContext:self.storage.mainThreadManagedObjectContext];
-        fetchedResultsController.delegate = self;
+        usersFetchedResultsController.delegate = self;
     }
 
-    return fetchedResultsController;
+    return usersFetchedResultsController;
+}
+
+- (NSFetchedResultsController *)groupsFetchedResultsController {
+    if (!groupsFetchedResultsController) {
+        groupsFetchedResultsController = [XMPPGroupCoreDataStorageObject MR_fetchAllGroupedBy:nil
+                                                                                withPredicate:nil
+                                                                                     sortedBy:@"name"
+                                                                                    ascending:YES
+                                                                                    inContext:self.storage.mainThreadManagedObjectContext];
+//        groupsFetchedResultsController.delegate = self;
+    }
+
+    return groupsFetchedResultsController;
+}
+
+#pragma mark Private
+
+- (NSArray *)usersInSection:(NSUInteger)section {
+    if (![self isCorrectSection:section]) {
+        return nil;
+    }
+
+    NSPredicate *sectionFilterPredicate = [NSPredicate predicateWithFormat:@"%@ IN groups", [self titleOfSectionAtIndex:section]];
+
+    if ([self isNotInGroupSection:section]) {
+        sectionFilterPredicate = [NSPredicate predicateWithFormat:@"groups.@count == 0"];
+    }
+
+    return [self.usersFetchedResultsController.fetchedObjects filteredArrayUsingPredicate:sectionFilterPredicate];
+}
+
+- (BOOL)isNotInGroupSection:(NSUInteger)section {
+    return section == self.numberOfSections - 1;
+}
+
+- (BOOL)isCorrectSection:(NSUInteger)section {
+    return section < self.numberOfSections;
 }
 
 #pragma mark NSFetchedResultsControllerDelegate

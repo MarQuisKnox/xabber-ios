@@ -22,6 +22,8 @@
 
 - (NSUInteger)numberOfSections;
 
+- (NSString *)titleOfSectionAtIndex:(NSUInteger)section;
+
 - (NSUInteger)numberOfContactsInSection:(NSUInteger)section;
 
 - (XBContact *)contactAtIndexPath:(NSIndexPath *)indexPath;
