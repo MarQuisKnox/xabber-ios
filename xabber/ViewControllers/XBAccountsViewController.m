@@ -8,8 +8,8 @@
 
 #import "XBAccountsViewController.h"
 #import "XBAccountEditViewController.h"
-#import "XBAccount.h"
 #import "XBXMPPConnector.h"
+#import "XBAccount.h"
 #import "XBAccountManager.h"
 #import "XBAccountsController.h"
 #import "XBFillCellWithObject.h"
@@ -123,15 +123,32 @@
 
 #pragma mark XBAccountControllerDelegate
 
+- (void)controllerWillChange:(XBAccountsController *)controller {
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(XBAccountsController *)controller didChangeAccountAtIndexPath:(NSIndexPath *)indexPath withType:(XBAccountChangeType)type {
+    switch (type) {
+        case XBAccountAdded:
+            [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        case XBAccountUpdated:
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        case XBAccountRemoved:
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+    }
+}
+
 - (void)controllerDidChange:(XBAccountsController *)controller {
-    [self.tableView reloadData];
+    [self.tableView endUpdates];
 }
 
 #pragma mark Private
 
 - (void)removeAccountFromTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
     [self.accountsController deleteAccountInIndexPath:indexPath];
-    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (NSString *)cellReusableIdentifier:(NSIndexPath *)indexPath {

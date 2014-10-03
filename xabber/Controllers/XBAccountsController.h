@@ -31,6 +31,17 @@
 
 @protocol XBAccountsControllerDelegate <NSObject>
 
+typedef enum {
+    XBAccountAdded,
+    XBAccountUpdated,
+    XBAccountRemoved,
+} XBAccountChangeType;
+
+@optional
+- (void)controllerWillChange:(XBAccountsController *)controller;
+
+- (void)controller:(XBAccountsController *)controller didChangeAccountAtIndexPath:(NSIndexPath *)indexPath withType:(XBAccountChangeType)type;
+
 - (void)controllerDidChange:(XBAccountsController *)controller;
 
 @end

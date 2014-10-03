@@ -53,9 +53,11 @@
 - (void)deleteAccount:(XBAccount *)account {
     if ([_accounts containsObject:account]) {
         [account delete];
+
+        NSUInteger idx = [_accounts indexOfObject:account];
         [_accounts removeObject:account];
 
-        [self postNotificationWithName:XBAccountManagerAccountDeleted account:account];
+        [self postNotificationWithName:XBAccountManagerAccountDeleted account:account userInfo:@{@"index": @(idx)}];
     }
 }
 
@@ -93,9 +95,19 @@
 }
 
 - (void)postNotificationWithName:(NSString *)notificationName account:(XBAccount *)account {
+    [self postNotificationWithName:notificationName account:account userInfo:nil];
+}
+
+- (void)postNotificationWithName:(NSString *)notificationName account:(XBAccount *)account userInfo:(NSDictionary *)userInfo {
     void (^block)() = ^{
+        NSMutableDictionary *userInfoToSend = [@{@"account": account} mutableCopy];
+
+        if (userInfo) {
+            [userInfoToSend addEntriesFromDictionary:userInfo];
+        }
+
         [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil
-                                                          userInfo:@{@"account": account}];
+                                                          userInfo:userInfoToSend];
     };
 
     if ([NSThread mainThread]) {
