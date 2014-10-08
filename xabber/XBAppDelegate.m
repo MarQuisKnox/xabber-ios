@@ -35,22 +35,23 @@
 
     [[XBAccountManager sharedInstance] loginToEnabledAccounts];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginToNewAccount:) name:XBAccountManagerAccountAdded object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutFromRemovedAccount:) name:XBAccountManagerAccountDeleted object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeConnectionStateIfChangedAuthLoginProperty:) name:XBAccountManagerAccountAdded object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeConnectionStateIfChangedAuthLoginProperty:) name:XBAccountManagerAccountDeleted object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeConnectionStateIfChangedAuthLoginProperty:) name:XBAccountSaved object:nil];
 
     return YES;
 }
 
-- (void)logoutFromRemovedAccount:(NSNotification *)notification {
+- (void)changeConnectionStateIfChangedAuthLoginProperty:(NSNotification *)notification {
     XBAccount *account = notification.userInfo[@"account"];
 
-    [account logout];
-}
+    if (account.autoLogin && account.state == XBConnectionStateOffline) {
+        [account login];
+    }
 
-- (void)loginToNewAccount:(NSNotification *)notification {
-    XBAccount *account = notification.userInfo[@"account"];
-
-    [account login];
+    if (!account.autoLogin && account.state == XBConnectionStateOnline) {
+        [account logout];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -102,9 +103,5 @@
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
-
-#pragma mark Login
-
-
 
 @end
