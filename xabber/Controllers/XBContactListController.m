@@ -48,7 +48,7 @@ static NSString *const XBNotInGroupSectionName = @"Not in group";
         return XBNotInGroupSectionName;
     }
 
-    return self.groupsFetchedResultsController.fetchedObjects[section];
+    return [self groupName:section];
 }
 
 - (NSUInteger)numberOfContactsInSection:(NSUInteger)section {
@@ -94,7 +94,7 @@ static NSString *const XBNotInGroupSectionName = @"Not in group";
                                                                                      sortedBy:@"name"
                                                                                     ascending:YES
                                                                                     inContext:self.storage.mainThreadManagedObjectContext];
-//        groupsFetchedResultsController.delegate = self;
+        groupsFetchedResultsController.delegate = self;
     }
 
     return groupsFetchedResultsController;
@@ -107,10 +107,13 @@ static NSString *const XBNotInGroupSectionName = @"Not in group";
         return nil;
     }
 
-    NSPredicate *sectionFilterPredicate = [NSPredicate predicateWithFormat:@"%@ IN groups", [self titleOfSectionAtIndex:section]];
+    NSPredicate *sectionFilterPredicate = nil;
 
     if ([self isNotInGroupSection:section]) {
         sectionFilterPredicate = [NSPredicate predicateWithFormat:@"groups.@count == 0"];
+    }
+    else {
+        sectionFilterPredicate = [NSPredicate predicateWithFormat:@"%@ IN groups", self.groupsFetchedResultsController.fetchedObjects[section]];
     }
 
     return [self.usersFetchedResultsController.fetchedObjects filteredArrayUsingPredicate:sectionFilterPredicate];
@@ -122,6 +125,11 @@ static NSString *const XBNotInGroupSectionName = @"Not in group";
 
 - (BOOL)isCorrectSection:(NSUInteger)section {
     return section < self.numberOfSections;
+}
+
+- (NSString *)groupName:(NSUInteger)section {
+    XMPPGroupCoreDataStorageObject *group = self.groupsFetchedResultsController.fetchedObjects[section];
+    return group.name;
 }
 
 #pragma mark NSFetchedResultsControllerDelegate
