@@ -110,7 +110,7 @@
     _state = XBConnectionStateDisconnecting;
 
     [self goOffline];
-    [self.xmppStream disconnectAfterSending];
+    [self.xmppStream disconnect];
 
     return YES;
 }
