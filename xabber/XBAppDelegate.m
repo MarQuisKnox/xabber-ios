@@ -11,6 +11,7 @@
 #import "SSKeychain.h"
 #import "XBAccountManager.h"
 #import "XBAccount.h"
+#import "DDASLLogger.h"
 
 @implementation XBAppDelegate
 
@@ -20,6 +21,9 @@
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:[MagicalRecord defaultStoreName]];
 
     [SSKeychain setAccessibilityType:kSecAttrAccessibleWhenUnlocked];
+
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
 
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
