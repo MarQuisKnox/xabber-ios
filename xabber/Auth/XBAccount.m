@@ -257,7 +257,7 @@ static NSString *const XBKeychainServiceName = @"xabberService";
 - (void)login {
     NSError *error = nil;
 
-    if ([_connector loginToAccount:self error:&error]) {
+    if (![_connector loginToAccount:self error:&error]) {
         DDLogError(@"Not logged in with error: %@", error);
     }
 }
