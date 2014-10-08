@@ -259,7 +259,11 @@
 #pragma mark XMPPStream delegate
 
 - (void)xmppStreamWillConnect:(XMPPStream *)sender {
+    DDLogVerbose(@"%@", THIS_METHOD);
+}
 
+- (void)xmppStreamWasToldToDisconnect:(XMPPStream *)sender {
+    DDLogVerbose(@"%@", THIS_METHOD);
 }
 
 - (void)xmppStream:(XMPPStream *)sender willSecureWithSettings:(NSMutableDictionary *)settings {
@@ -334,6 +338,8 @@
 }
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
+    DDLogVerbose(@"%@", THIS_METHOD);
+
     [self goOnline];
 
     _state = XBConnectionStateOnline;
@@ -344,6 +350,7 @@
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error {
+    DDLogVerbose(@"%@: %@", THIS_METHOD, error);
 
     NSError *e = [NSError errorWithDomain:XBXabberErrorDomain code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Stream didn't authenticate"}];
 
@@ -353,6 +360,25 @@
         [self.delegate connector:self didNotLoginWithError:e];
     }
 }
+
+- (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq {
+    DDLogVerbose(@"%@: %@", THIS_METHOD, iq);
+
+    return YES;
+}
+
+- (void)xmppStream:(XMPPStream *)sender didSendIQ:(XMPPIQ *)iq {
+    DDLogVerbose(@"%@: %@", THIS_METHOD, iq);
+}
+
+- (void)xmppStream:(XMPPStream *)sender didSendPresence:(XMPPPresence *)presence {
+    DDLogVerbose(@"%@: %@", THIS_METHOD, presence);
+}
+
+- (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence {
+    DDLogVerbose(@"%@: %@", THIS_METHOD, presence);
+}
+
 
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error {
     _state = XBConnectionStateOffline;
