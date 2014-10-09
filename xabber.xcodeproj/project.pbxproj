@@ -31,10 +31,10 @@
 		75DCEC9A493466986B8E1B72 /* AccountsControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCE71D034B89C766312B4F /* AccountsControllerTests.m */; };
 		75DCED0107BDE34EB5A6D180 /* XBContactListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DCEC3B5B892D29592524C3 /* XBContactListController.m */; };
 		75DCEE627A4AEA9076A55EE8 /* mogend.sh in Resources */ = {isa = PBXBuildFile; fileRef = 75DCE13BBDB715407F1B73AA /* mogend.sh */; };
-		A41DB9F119A2168A00B3AB93 /* xabber.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A41DB9EF19A2168A00B3AB93 /* xabber.xcdatamodeld */; };
 		A41DB9F719A218F500B3AB93 /* XBXMPPCoreDataAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = A41DB9F419A218F500B3AB93 /* XBXMPPCoreDataAccount.m */; };
 		A41DB9FE19A2190200B3AB93 /* _XBXMPPCoreDataAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = A41DB9FC19A2190200B3AB93 /* _XBXMPPCoreDataAccount.m */; };
 		A41FE20E19E66E260042CAB9 /* XBContactViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A41FE20D19E66E260042CAB9 /* XBContactViewCell.m */; };
+		A41FE21119E693A70042CAB9 /* XBChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A41FE21019E693A70042CAB9 /* XBChatViewController.m */; };
 		A421DBD4199E02D000F857E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A421DBD3199E02D000F857E2 /* Foundation.framework */; };
 		A421DBD6199E02D000F857E2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A421DBD5199E02D000F857E2 /* CoreGraphics.framework */; };
 		A421DBD8199E02D000F857E2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A421DBD7199E02D000F857E2 /* UIKit.framework */; };
@@ -55,6 +55,11 @@
 		A43500F319BDA95C00485EE4 /* XBAccountEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A43500F219BDA95C00485EE4 /* XBAccountEditViewController.m */; };
 		A43500F619BDC92700485EE4 /* XBAccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A43500F519BDC92700485EE4 /* XBAccountsViewController.m */; };
 		A48BFFA619C06EB200CB502C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A48BFFA219C02B7F00CB502C /* Localizable.strings */; };
+		A4BD2AA019E6B07E006BC60F /* xabber.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A41DB9EF19A2168A00B3AB93 /* xabber.xcdatamodeld */; };
+		A4BD2AA519E6B302006BC60F /* XBXMPPCoreDataChat.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BD2AA219E6B302006BC60F /* XBXMPPCoreDataChat.m */; };
+		A4BD2AA619E6B302006BC60F /* XBXMPPCoreDataChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BD2AA419E6B302006BC60F /* XBXMPPCoreDataChatMessage.m */; };
+		A4BD2AAB19E6B30D006BC60F /* _XBXMPPCoreDataChat.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BD2AA819E6B30D006BC60F /* _XBXMPPCoreDataChat.m */; };
+		A4BD2AAC19E6B30D006BC60F /* _XBXMPPCoreDataChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BD2AAA19E6B30D006BC60F /* _XBXMPPCoreDataChatMessage.m */; };
 		B6543416F91040A5923464F8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA53C965164949F69C2EA7E8 /* libPods.a */; };
 		CC5E7FD9F980480B8952BDB6 /* libPods-xabberTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 944A0A7921684A89A96C5394 /* libPods-xabberTests.a */; };
 /* End PBXBuildFile section */
@@ -145,6 +150,9 @@
 		A41DB9FC19A2190200B3AB93 /* _XBXMPPCoreDataAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _XBXMPPCoreDataAccount.m; sourceTree = "<group>"; };
 		A41FE20C19E66E260042CAB9 /* XBContactViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBContactViewCell.h; sourceTree = "<group>"; };
 		A41FE20D19E66E260042CAB9 /* XBContactViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBContactViewCell.m; sourceTree = "<group>"; };
+		A41FE20F19E693A70042CAB9 /* XBChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBChatViewController.h; sourceTree = "<group>"; };
+		A41FE21019E693A70042CAB9 /* XBChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBChatViewController.m; sourceTree = "<group>"; };
+		A41FE21219E6A5F00042CAB9 /* xabber 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "xabber 4.xcdatamodel"; sourceTree = "<group>"; };
 		A421DBD0199E02D000F857E2 /* xabber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = xabber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A421DBD3199E02D000F857E2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A421DBD5199E02D000F857E2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -178,6 +186,14 @@
 		A48BFFA119C02B7F00CB502C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A48BFFA319C02BB400CB502C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A48BFFA519C06EA500CB502C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A4BD2AA119E6B302006BC60F /* XBXMPPCoreDataChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBXMPPCoreDataChat.h; sourceTree = "<group>"; };
+		A4BD2AA219E6B302006BC60F /* XBXMPPCoreDataChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBXMPPCoreDataChat.m; sourceTree = "<group>"; };
+		A4BD2AA319E6B302006BC60F /* XBXMPPCoreDataChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBXMPPCoreDataChatMessage.h; sourceTree = "<group>"; };
+		A4BD2AA419E6B302006BC60F /* XBXMPPCoreDataChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBXMPPCoreDataChatMessage.m; sourceTree = "<group>"; };
+		A4BD2AA719E6B30D006BC60F /* _XBXMPPCoreDataChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _XBXMPPCoreDataChat.h; sourceTree = "<group>"; };
+		A4BD2AA819E6B30D006BC60F /* _XBXMPPCoreDataChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _XBXMPPCoreDataChat.m; sourceTree = "<group>"; };
+		A4BD2AA919E6B30D006BC60F /* _XBXMPPCoreDataChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _XBXMPPCoreDataChatMessage.h; sourceTree = "<group>"; };
+		A4BD2AAA19E6B30D006BC60F /* _XBXMPPCoreDataChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _XBXMPPCoreDataChatMessage.m; sourceTree = "<group>"; };
 		AA53C965164949F69C2EA7E8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC98CB24FF864D288EE32C38 /* Pods-xabberTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xabberTests.xcconfig"; path = "Pods/Pods-xabberTests.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -213,6 +229,10 @@
 		75DCE2E0FA80A14A3FE7ED48 /* EntitiesMachine */ = {
 			isa = PBXGroup;
 			children = (
+				A4BD2AA719E6B30D006BC60F /* _XBXMPPCoreDataChat.h */,
+				A4BD2AA819E6B30D006BC60F /* _XBXMPPCoreDataChat.m */,
+				A4BD2AA919E6B30D006BC60F /* _XBXMPPCoreDataChatMessage.h */,
+				A4BD2AAA19E6B30D006BC60F /* _XBXMPPCoreDataChatMessage.m */,
 				A41DB9FB19A2190200B3AB93 /* _XBXMPPCoreDataAccount.h */,
 				A41DB9FC19A2190200B3AB93 /* _XBXMPPCoreDataAccount.m */,
 			);
@@ -319,6 +339,8 @@
 				A43500F519BDC92700485EE4 /* XBAccountsViewController.m */,
 				A42E23E219C7F5B60055CCF7 /* XBContactsViewController.h */,
 				A42E23E319C7F5B60055CCF7 /* XBContactsViewController.m */,
+				A41FE20F19E693A70042CAB9 /* XBChatViewController.h */,
+				A41FE21019E693A70042CAB9 /* XBChatViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -337,6 +359,10 @@
 		75DCEFB19A67567C8A113846 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				A4BD2AA119E6B302006BC60F /* XBXMPPCoreDataChat.h */,
+				A4BD2AA219E6B302006BC60F /* XBXMPPCoreDataChat.m */,
+				A4BD2AA319E6B302006BC60F /* XBXMPPCoreDataChatMessage.h */,
+				A4BD2AA419E6B302006BC60F /* XBXMPPCoreDataChatMessage.m */,
 				A41DB9F319A218F500B3AB93 /* XBXMPPCoreDataAccount.h */,
 				A41DB9F419A218F500B3AB93 /* XBXMPPCoreDataAccount.m */,
 			);
@@ -615,18 +641,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4BD2AA019E6B07E006BC60F /* xabber.xcdatamodeld in Sources */,
 				A41DB9F719A218F500B3AB93 /* XBXMPPCoreDataAccount.m in Sources */,
-				A41DB9F119A2168A00B3AB93 /* xabber.xcdatamodeld in Sources */,
 				A421DBE6199E02D000F857E2 /* XBAppDelegate.m in Sources */,
 				A421DBE2199E02D000F857E2 /* main.m in Sources */,
 				A41DB9FE19A2190200B3AB93 /* _XBXMPPCoreDataAccount.m in Sources */,
 				75DCE5E059A0113482DA39CC /* XBAccountManager.m in Sources */,
 				A43500F619BDC92700485EE4 /* XBAccountsViewController.m in Sources */,
+				A4BD2AAB19E6B30D006BC60F /* _XBXMPPCoreDataChat.m in Sources */,
 				75DCE93BD1E1D88C84714D60 /* XBAccount.m in Sources */,
+				A4BD2AAC19E6B30D006BC60F /* _XBXMPPCoreDataChatMessage.m in Sources */,
 				75DCE48C14BBBBDA5642E52F /* XBXMPPConnector.m in Sources */,
+				A4BD2AA619E6B302006BC60F /* XBXMPPCoreDataChatMessage.m in Sources */,
 				75DCE9DB4183ABEB2BD980FD /* XMPPPresence+XBEquality.m in Sources */,
 				A43500F319BDA95C00485EE4 /* XBAccountEditViewController.m in Sources */,
 				75DCE501A6AFCFC5583CE3E4 /* XBContact.m in Sources */,
+				A4BD2AA519E6B302006BC60F /* XBXMPPCoreDataChat.m in Sources */,
 				75DCE23E07F00280D157045F /* XBRequiredValidator.m in Sources */,
 				75DCE0308BF8F84696E83FAA /* XBStringLengthValidator.m in Sources */,
 				75DCE5ABE93A4E98F45E4C1A /* XBClassValidator.m in Sources */,
@@ -634,6 +664,7 @@
 				75DCE213C93A60C708C2A02F /* XBEmailValidator.m in Sources */,
 				A41FE20E19E66E260042CAB9 /* XBContactViewCell.m in Sources */,
 				75DCE353CB594AF8EDEA7C3D /* XBMinValueValidator.m in Sources */,
+				A41FE21119E693A70042CAB9 /* XBChatViewController.m in Sources */,
 				75DCEC8A990C6D4A5573994E /* XBMaxValueValidator.m in Sources */,
 				75DCEA934D04CA3BDAC613FF /* XBAccountsController.m in Sources */,
 				75DCED0107BDE34EB5A6D180 /* XBContactListController.m in Sources */,
@@ -921,11 +952,12 @@
 		A41DB9EF19A2168A00B3AB93 /* xabber.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				A41FE21219E6A5F00042CAB9 /* xabber 4.xcdatamodel */,
 				A418F7ED19A5E64700786B8B /* xabber 3.xcdatamodel */,
 				A4189FF319A370B00017C5C6 /* xabber 2.xcdatamodel */,
 				A41DB9F019A2168A00B3AB93 /* xabber.xcdatamodel */,
 			);
-			currentVersion = A418F7ED19A5E64700786B8B /* xabber 3.xcdatamodel */;
+			currentVersion = A41FE21219E6A5F00042CAB9 /* xabber 4.xcdatamodel */;
 			path = xabber.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -12,6 +12,7 @@ const struct XBXMPPCoreDataAccountAttributes XBXMPPCoreDataAccountAttributes = {
 };
 
 const struct XBXMPPCoreDataAccountRelationships XBXMPPCoreDataAccountRelationships = {
+	.chats = @"chats",
 };
 
 const struct XBXMPPCoreDataAccountFetchedProperties XBXMPPCoreDataAccountFetchedProperties = {
@@ -157,8 +158,52 @@ const struct XBXMPPCoreDataAccountFetchedProperties XBXMPPCoreDataAccountFetched
 
 
 
+@dynamic chats;
+
+	
+- (NSMutableSet*)chatsSet {
+	[self willAccessValueForKey:@"chats"];
+  
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"chats"];
+  
+	[self didAccessValueForKey:@"chats"];
+	return result;
+}
+	
 
 
+
+
+
+
++ (NSArray*)fetchXBAutoLoginAccounts:(NSManagedObjectContext*)moc_ {
+	NSError *error = nil;
+	NSArray *result = [self fetchXBAutoLoginAccounts:moc_ error:&error];
+	if (error) {
+#ifdef NSAppKitVersionNumber10_0
+		[NSApp presentError:error];
+#else
+		NSLog(@"error: %@", error);
+#endif
+	}
+	return result;
+}
++ (NSArray*)fetchXBAutoLoginAccounts:(NSManagedObjectContext*)moc_ error:(NSError**)error_ {
+	NSParameterAssert(moc_);
+	NSError *error = nil;
+
+	NSManagedObjectModel *model = [[moc_ persistentStoreCoordinator] managedObjectModel];
+	
+	NSDictionary *substitutionVariables = [NSDictionary dictionary];
+	
+	NSFetchRequest *fetchRequest = [model fetchRequestFromTemplateWithName:@"XBAutoLoginAccounts"
+													 substitutionVariables:substitutionVariables];
+	NSAssert(fetchRequest, @"Can't find fetch request named \"XBAutoLoginAccounts\".");
+
+	NSArray *result = [moc_ executeFetchRequest:fetchRequest error:&error];
+	if (error_) *error_ = error;
+	return result;
+}
 
 
 

@@ -13,11 +13,13 @@ extern const struct XBXMPPCoreDataAccountAttributes {
 } XBXMPPCoreDataAccountAttributes;
 
 extern const struct XBXMPPCoreDataAccountRelationships {
+	__unsafe_unretained NSString *chats;
 } XBXMPPCoreDataAccountRelationships;
 
 extern const struct XBXMPPCoreDataAccountFetchedProperties {
 } XBXMPPCoreDataAccountFetchedProperties;
 
+@class XBXMPPCoreDataChat;
 
 
 
@@ -100,10 +102,27 @@ extern const struct XBXMPPCoreDataAccountFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSSet *chats;
+
+- (NSMutableSet*)chatsSet;
+
+
+
+
++ (NSArray*)fetchXBAutoLoginAccounts:(NSManagedObjectContext*)moc_ ;
++ (NSArray*)fetchXBAutoLoginAccounts:(NSManagedObjectContext*)moc_ error:(NSError**)error_;
+
+
+
 
 @end
 
 @interface _XBXMPPCoreDataAccount (CoreDataGeneratedAccessors)
+
+- (void)addChats:(NSSet*)value_;
+- (void)removeChats:(NSSet*)value_;
+- (void)addChatsObject:(XBXMPPCoreDataChat*)value_;
+- (void)removeChatsObject:(XBXMPPCoreDataChat*)value_;
 
 @end
 
@@ -147,6 +166,11 @@ extern const struct XBXMPPCoreDataAccountFetchedProperties {
 - (void)setPrimitiveStatusValue:(int16_t)value_;
 
 
+
+
+
+- (NSMutableSet*)primitiveChats;
+- (void)setPrimitiveChats:(NSMutableSet*)value;
 
 
 @end

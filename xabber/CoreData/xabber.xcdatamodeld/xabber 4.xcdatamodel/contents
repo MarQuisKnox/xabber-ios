@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="13F34" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="XBXMPPCoreDataAccount" representedClassName="XBXMPPCoreDataAccount" syncable="YES">
+        <attribute name="accountID" attributeType="String" indexed="YES" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="accountID"/>
+            </userInfo>
+        </attribute>
+        <attribute name="autoLogin" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="host" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="port" optional="YES" attributeType="Integer 32" minValueString="1" maxValueString="65536" defaultValueString="5222" syncable="YES"/>
+        <attribute name="status" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="chats" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="XBXMPPCoreDataChat" inverseName="account" inverseEntity="XBXMPPCoreDataChat" syncable="YES"/>
+        <userInfo>
+            <entry key="relatedByAttribute" value="accountID"/>
+        </userInfo>
+    </entity>
+    <entity name="XBXMPPCoreDataChat" representedClassName="XBXMPPCoreDataChat" syncable="YES">
+        <attribute name="negotiatorsName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="XBXMPPCoreDataAccount" inverseName="chats" inverseEntity="XBXMPPCoreDataAccount" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="XBXMPPCoreDataChatMessage" inverseName="chat" inverseEntity="XBXMPPCoreDataChatMessage" syncable="YES"/>
+    </entity>
+    <entity name="XBXMPPCoreDataChatMessage" representedClassName="XBXMPPCoreDataChatMessage" syncable="YES">
+        <attribute name="isIncoming" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isService" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="messageText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="messageTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="chat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="XBXMPPCoreDataChat" inverseName="messages" inverseEntity="XBXMPPCoreDataChat" syncable="YES"/>
+    </entity>
+    <fetchRequest name="XBAutoLoginAccounts" entity="XBXMPPCoreDataAccount" predicateString="autoLogin == 1"/>
+    <elements>
+        <element name="XBXMPPCoreDataAccount" positionX="-45" positionY="0" width="128" height="133"/>
+        <element name="XBXMPPCoreDataChat" positionX="-45" positionY="-9" width="128" height="88"/>
+        <element name="XBXMPPCoreDataChatMessage" positionX="-36" positionY="45" width="128" height="120"/>
+    </elements>
+</model>

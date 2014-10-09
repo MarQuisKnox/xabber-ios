@@ -12,6 +12,7 @@
 #import "XBXMPPConnector.h"
 #import "XBContact.h"
 #import "XBContactViewCell.h"
+#import "XBChatViewController.h"
 
 @interface XBContactsViewController () <XBContactListControllerDelegate> {
     XBContactListController *contactListController;
@@ -115,10 +116,16 @@
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showChat"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+
+        XBContact *contact = [self.contactListController contactAtIndexPath:indexPath];
+
+        XBChatViewController *chatViewController = segue.destinationViewController;
+
+        chatViewController.contact = contact;
+    }
 }
 
 #pragma mark Private
