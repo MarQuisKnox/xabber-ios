@@ -34,6 +34,7 @@
 		A41DB9F119A2168A00B3AB93 /* xabber.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A41DB9EF19A2168A00B3AB93 /* xabber.xcdatamodeld */; };
 		A41DB9F719A218F500B3AB93 /* XBXMPPCoreDataAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = A41DB9F419A218F500B3AB93 /* XBXMPPCoreDataAccount.m */; };
 		A41DB9FE19A2190200B3AB93 /* _XBXMPPCoreDataAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = A41DB9FC19A2190200B3AB93 /* _XBXMPPCoreDataAccount.m */; };
+		A41FE20E19E66E260042CAB9 /* XBContactViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A41FE20D19E66E260042CAB9 /* XBContactViewCell.m */; };
 		A421DBD4199E02D000F857E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A421DBD3199E02D000F857E2 /* Foundation.framework */; };
 		A421DBD6199E02D000F857E2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A421DBD5199E02D000F857E2 /* CoreGraphics.framework */; };
 		A421DBD8199E02D000F857E2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A421DBD7199E02D000F857E2 /* UIKit.framework */; };
@@ -142,6 +143,8 @@
 		A41DB9F419A218F500B3AB93 /* XBXMPPCoreDataAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBXMPPCoreDataAccount.m; sourceTree = "<group>"; };
 		A41DB9FB19A2190200B3AB93 /* _XBXMPPCoreDataAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _XBXMPPCoreDataAccount.h; sourceTree = "<group>"; };
 		A41DB9FC19A2190200B3AB93 /* _XBXMPPCoreDataAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _XBXMPPCoreDataAccount.m; sourceTree = "<group>"; };
+		A41FE20C19E66E260042CAB9 /* XBContactViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBContactViewCell.h; sourceTree = "<group>"; };
+		A41FE20D19E66E260042CAB9 /* XBContactViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBContactViewCell.m; sourceTree = "<group>"; };
 		A421DBD0199E02D000F857E2 /* xabber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = xabber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A421DBD3199E02D000F857E2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A421DBD5199E02D000F857E2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -243,6 +246,8 @@
 				A42E23DE19C6C0000055CCF7 /* XBAccountViewCell.h */,
 				A42E23DF19C6C0000055CCF7 /* XBAccountViewCell.m */,
 				A42E23E119C6FA8C0055CCF7 /* XBFillCellWithObject.h */,
+				A41FE20C19E66E260042CAB9 /* XBContactViewCell.h */,
+				A41FE20D19E66E260042CAB9 /* XBContactViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -627,6 +632,7 @@
 				75DCE5ABE93A4E98F45E4C1A /* XBClassValidator.m in Sources */,
 				A42E23E019C6C0000055CCF7 /* XBAccountViewCell.m in Sources */,
 				75DCE213C93A60C708C2A02F /* XBEmailValidator.m in Sources */,
+				A41FE20E19E66E260042CAB9 /* XBContactViewCell.m in Sources */,
 				75DCE353CB594AF8EDEA7C3D /* XBMinValueValidator.m in Sources */,
 				75DCEC8A990C6D4A5573994E /* XBMaxValueValidator.m in Sources */,
 				75DCEA934D04CA3BDAC613FF /* XBAccountsController.m in Sources */,
@@ -742,7 +748,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "274397be-f0df-4901-a364-c80caebe68da";
+				PROVISIONING_PROFILE = "2b366e59-1edf-44b7-9dce-f6bf9ffd6127";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -776,7 +782,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PROVISIONING_PROFILE = "274397be-f0df-4901-a364-c80caebe68da";
+				PROVISIONING_PROFILE = "2b366e59-1edf-44b7-9dce-f6bf9ffd6127";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
