@@ -11,6 +11,7 @@
 #import "XMPPRosterCoreDataStorage.h"
 #import "XBXMPPConnector.h"
 #import "XBContact.h"
+#import "XBContactViewCell.h"
 
 @interface XBContactsViewController () <XBContactListControllerDelegate> {
     XBContactListController *contactListController;
@@ -64,11 +65,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContactCell" forIndexPath:indexPath];
+    XBContactViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContactCell" forIndexPath:indexPath];
     
     XBContact *contact = [self.contactListController contactAtIndexPath:indexPath];
 
-    cell.textLabel.text = contact.contactName;
+    [cell fillCellWithObject:contact];
 
     return cell;
 }
@@ -111,7 +112,6 @@
 }
 */
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -120,7 +120,6 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
 
 #pragma mark Private
 
